@@ -39,3 +39,4 @@ export default async function handler(req,res){
   }catch(error){
     return res.status(500).json({ok:false,error:'Unable to reach ESPN from the server.',teams:[]});
   }
+}
