@@ -5,7 +5,6 @@ const menu = document.querySelector(".menu-toggle");
 
 function route() {
   const id = (location.hash || "#home").slice(1);
-
   const target =
     document.getElementById(id) ||
     document.getElementById("home");
@@ -30,7 +29,6 @@ function route() {
 }
 
 window.addEventListener("hashchange", route);
-
 route();
 
 menu?.addEventListener("click", () => {
@@ -91,18 +89,13 @@ function standingsTable(teams, limit) {
     .map(
       (team, index) => `
         <tr>
-
-          <td class="rank">
-            ${index + 1}
-          </td>
+          <td class="rank">${index + 1}</td>
 
           <td>
             <div class="team-cell">
-
               ${teamImage(team, "team-logo")}
 
               <div>
-
                 <div class="team-name">
                   ${esc(team.name)}
                 </div>
@@ -110,9 +103,7 @@ function standingsTable(teams, limit) {
                 <div class="team-owner">
                   ${esc(team.owner || "Manager")}
                 </div>
-
               </div>
-
             </div>
           </td>
 
@@ -127,7 +118,6 @@ function standingsTable(teams, limit) {
           <td>
             ${fmt(team.pointsAgainst)}
           </td>
-
         </tr>
       `
     )
@@ -135,7 +125,6 @@ function standingsTable(teams, limit) {
 
   return `
     <table class="standings-table">
-
       <thead>
         <tr>
           <th>#</th>
@@ -149,7 +138,6 @@ function standingsTable(teams, limit) {
       <tbody>
         ${rows}
       </tbody>
-
     </table>
   `;
 }
@@ -275,20 +263,14 @@ function renderSchedule(matches) {
 
               <h2>
                 ${esc(match.awayName)}
-
-                <span style="color:var(--muted)">
-                  vs
-                </span>
-
+                <span style="color:var(--muted)">vs</span>
                 ${esc(match.homeName)}
               </h2>
 
               <p>
                 ${
                   match.complete
-                    ? `${fmt(match.awayScore)} — ${fmt(
-                        match.homeScore
-                      )}`
+                    ? `${fmt(match.awayScore)} — ${fmt(match.homeScore)}`
                     : "Scheduled"
                 }
               </p>
@@ -323,9 +305,7 @@ function renderHome(data) {
     document.getElementById("home-matchup");
 
   const snapshot =
-    document.getElementById(
-      "home-league-snapshot"
-    );
+    document.getElementById("home-league-snapshot");
 
   const firstUpcoming =
     matches.find((match) => !match.complete) ||
@@ -347,11 +327,7 @@ function renderHome(data) {
         <p>
           ${
             firstUpcoming.complete
-              ? `${fmt(
-                  firstUpcoming.awayScore
-                )} — ${fmt(
-                  firstUpcoming.homeScore
-                )}`
+              ? `${fmt(firstUpcoming.awayScore)} — ${fmt(firstUpcoming.homeScore)}`
               : "Scheduled"
           }
         </p>
@@ -434,14 +410,10 @@ function renderLeague(data) {
   }
 
   const standingsPreview =
-    document.getElementById(
-      "standings-preview"
-    );
+    document.getElementById("standings-preview");
 
   const standingsFull =
-    document.getElementById(
-      "standings-full"
-    );
+    document.getElementById("standings-full");
 
   if (standingsPreview) {
     standingsPreview.innerHTML =
@@ -463,13 +435,11 @@ function renderOffline(message) {
     document.getElementById("data-status");
 
   if (status) {
-    status.textContent =
-      "Setup Needed";
+    status.textContent = "Setup Needed";
   }
 
   const html = `
     <div class="empty">
-
       <strong style="color:var(--gold2)">
         ESPN connection not configured yet.
       </strong>
@@ -480,19 +450,14 @@ function renderOffline(message) {
         message ||
           "Add the private ESPN credentials as Vercel environment variables to enable live data."
       )}
-
     </div>
   `;
 
   const standingsPreview =
-    document.getElementById(
-      "standings-preview"
-    );
+    document.getElementById("standings-preview");
 
   const standingsFull =
-    document.getElementById(
-      "standings-full"
-    );
+    document.getElementById("standings-full");
 
   if (standingsPreview) {
     standingsPreview.innerHTML = html;
@@ -502,10 +467,6 @@ function renderOffline(message) {
     standingsFull.innerHTML = html;
   }
 
-  /*
-    Palmer is stored manually, so his archive
-    should still appear even if ESPN is offline.
-  */
   renderManagers([]);
 }
 
@@ -518,8 +479,7 @@ fetch("/api/espn", {
 
     if (!response.ok || !data.ok) {
       throw new Error(
-        data.error ||
-          "Unable to connect"
+        data.error || "Unable to connect"
       );
     }
 
