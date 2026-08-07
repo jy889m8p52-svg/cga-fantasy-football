@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#090909" />
+  <meta name="description" content="Crippling Gambling Addicts fantasy football league headquarters." />
+  <title>Crippling Gambling Addicts | Fantasy Football</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="ticker"><div class="ticker-inner"><span>CGA NETWORK</span><b>•</b><span>2026 SEASON HQ</span><b>•</b><span>ESPN LEAGUE 1998048449</span><b>•</b><span>EST. 2021</span><b>•</b><span>$200 BUY-IN</span></div></div>
+  <header class="site-header">
+    <a class="brand" href="#home" data-route="home"><img src="/assets/cga-logo.png" alt="CGA crest"><div><strong>CGA</strong><span>Fantasy Football</span></div></a>
+    <button class="menu-toggle" aria-label="Open navigation">☰</button>
+    <nav class="nav">
+      <a href="#home" data-route="home">Home</a>
+      <a href="#standings" data-route="standings">Standings</a>
+      <a href="#schedule" data-route="schedule">Schedule</a>
+      <a href="#managers" data-route="managers">Managers</a>
+      <a href="#hall-of-fame" data-route="hall-of-fame">Hall of Fame</a>
+      <a href="#records" data-route="records">Records</a>
+      <a href="#rules" data-route="rules">Rules</a>
+      <a href="#history" data-route="history">History</a>
+      <a href="#memorial" data-route="memorial">Memorial</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page active" id="home">
+      <div class="hero shell">
+        <div class="hero-copy">
+          <div class="eyebrow">Official League Headquarters</div>
+          <h1>CRIPPLING<br><span>GAMBLING</span><br>ADDICTS</h1>
+          <p class="lede">Founded in 2021. Ten managers. A $200 buy-in. One trophy. A league history worthy of its own archive.</p>
+          <div class="hero-actions"><a href="#standings" class="button gold" data-route="standings">View Standings</a><a href="#history" class="button ghost" data-route="history">League History</a></div>
+          <div class="facts"><div><span>Founded</span><strong>2021</strong></div><div><span>Buy-In</span><strong>$200</strong></div><div><span>Platform</span><strong>ESPN</strong></div></div>
+        </div>
+        <div class="hero-art"><div class="halo"></div><img src="/assets/cga-logo.png" alt="Crippling Gambling Addicts league crest"></div>
+      </div>
+
+      <div class="shell dashboard-grid">
+        <article class="panel standings-card span-2"><div class="panel-head"><div><span class="eyebrow">Live ESPN Data</span><h2>2026 Standings</h2></div><span id="data-status" class="status">Connecting…</span></div><div id="standings-preview" class="table-wrap"><div class="empty">Loading league data…</div></div><a href="#standings" data-route="standings" class="text-link">Full standings →</a></article>
+        <article class="panel feature"><span class="eyebrow">League Archive</span><h2>Hall of Fame</h2><p>Championship history from the league's first season through today.</p><a href="#hall-of-fame" data-route="hall-of-fame" class="text-link">Enter trophy room →</a></article>
+        <article class="panel feature memorial-mini"><span class="eyebrow">Featured Archive</span><h2>Palmer Memorial</h2><p>A permanent memorial for a former league member who was removed in 2024 and is, for the record, alive.</p><a href="#memorial" data-route="memorial" class="text-link">Pay respects →</a></article>
+        <article class="panel feature"><span class="eyebrow">League Office</span><h2>Official Rulebook</h2><p>The custom rules, rivalry procedures, roster limits, awards, trades and commissioner rulings that govern CGA.</p><a href="#rules" data-route="rules" class="text-link">Read the rules →</a></article>
+      </div>
+    </section>
+
+    <section class="page shell" id="standings"><div class="page-title"><span class="eyebrow">2026 Season</span><h1>Standings</h1><p>Live from ESPN when the private league connection is configured.</p></div><div class="panel"><div id="standings-full" class="table-wrap"><div class="empty">Loading standings…</div></div></div></section>
+
+    <section class="page shell" id="schedule"><div class="page-title"><span class="eyebrow">Season Center</span><h1>Schedule</h1><p>Weekly matchups will populate from ESPN as the 2026 schedule becomes available.</p></div><div id="schedule-grid" class="schedule-grid"><div class="panel empty">Schedule data will appear here.</div></div></section>
+
+    <section class="page shell" id="managers"><div class="page-title"><span class="eyebrow">Front Offices</span><h1>Managers</h1><p>Every current franchise and the person behind it.</p></div><div id="manager-grid" class="card-grid"><div class="panel empty">Manager profiles will populate from ESPN.</div></div></section>
+
+    <section class="page shell" id="hall-of-fame"><div class="page-title"><span class="eyebrow">Trophy Room</span><h1>Hall of Fame</h1><p>The official champions archive, beginning with the league's founding in 2021.</p></div><div class="champion-grid"><article class="champ-card"><span>2021</span><strong>Champion TBD</strong><small>Add historical winner</small></article><article class="champ-card"><span>2022</span><strong>Champion TBD</strong><small>Add historical winner</small></article><article class="champ-card"><span>2023</span><strong>Champion TBD</strong><small>Add historical winner</small></article><article class="champ-card"><span>2024</span><strong>Champion TBD</strong><small>Add historical winner</small></article><article class="champ-card"><span>2025</span><strong>Champion TBD</strong><small>Add historical winner</small></article><article class="champ-card current"><span>2026</span><strong>Season In Progress</strong><small>The next name on the trophy</small></article></div></section>
+
+    <section class="page shell" id="records"><div class="page-title"><span class="eyebrow">League Book</span><h1>Records</h1><p>All-time achievements will be calculated as historical ESPN seasons are imported.</p></div><div class="record-grid"><article class="panel"><span class="eyebrow">Single Week</span><h2>Highest Score</h2><div class="record-value">—</div></article><article class="panel"><span class="eyebrow">Career</span><h2>Most Wins</h2><div class="record-value">—</div></article><article class="panel"><span class="eyebrow">Streak</span><h2>Longest Win Streak</h2><div class="record-value">—</div></article><article class="panel"><span class="eyebrow">History</span><h2>Most Championships</h2><div class="record-value">—</div></article></div></section>
+
+    <section class="page shell" id="rules"><div class="page-title"><span class="eyebrow">Commissioner's Office</span><h1>Rulebook</h1><p>The governing rules of Crippling Gambling Addicts.</p></div><div class="rules-layout"><aside class="panel rule-index"><a href="#rule-format">League Format</a><a href="#rule-qb">QB Roster Limit</a><a href="#rule-palmer">Palmer Rule</a><a href="#rule-trades">Trades</a><a href="#rule-waivers">Waivers</a><a href="#rule-rivalry">Rivalry Week</a><a href="#rule-awards">Awards</a><a href="#rule-hamlin">Damar Hamlin Rule</a></aside><div class="rule-stack"><article class="panel rule" id="rule-format"><span>01</span><div><h2>League Format</h2><p>10-team, 2-QB, full-PPR fantasy football league. Established 2021 with a $200 annual buy-in.</p></div></article><article class="panel rule" id="rule-qb"><span>02</span><div><h2>QB Roster Limit</h2><p>Maximum of three active quarterbacks. A fourth is allowed only while on IR. Once activated, the roster must return to three quarterbacks by game time.</p></div></article><article class="panel rule" id="rule-palmer"><span>03</span><div><h2>Palmer Rule</h2><p>If a player is ruled out within one hour before kickoff, the manager may be subject to a 10-point deduction unless an extenuating-circumstances vote passes. A manager can notify the commissioner before kickoff to request a swap to an eligible player who has not yet played.</p></div></article><article class="panel rule" id="rule-trades"><span>04</span><div><h2>Trades</h2><p>A trade is not final until accepted in the league app. Player loans are prohibited. Only next-year draft picks may be traded.</p></div></article><article class="panel rule" id="rule-waivers"><span>05</span><div><h2>Waiver Exception</h2><p>When standard waiver timing would prevent a legitimate post-game pickup, a bid can be submitted to the commissioners. Highest valid bid wins; the dropped player cannot have already played.</p></div></article><article class="panel rule" id="rule-rivalry"><span>06</span><div><h2>Rivalry Week</h2><p>Week 13 is reserved for designated league rivalries and carries its own place in CGA history.</p></div></article><article class="panel rule" id="rule-awards"><span>07</span><div><h2>Season Awards</h2><p>$50 superlatives include highest weekly team score, highest single-player weekly score from a starter, most season points, and Steal of the Draft for an eligible late-round selection.</p></div></article><article class="panel rule" id="rule-hamlin"><span>08</span><div><h2>Damar Hamlin Rule</h2><p>For loser-championship scenarios where a game is canceled or an extraordinary on-field event prevents a reasonable outcome, punishment can be split when the result is not otherwise obvious.</p></div></article></div></div></section>
+
+    <section class="page shell" id="history"><div class="page-title"><span class="eyebrow">Since 2021</span><h1>League History</h1><p>A living timeline of the league's defining seasons and moments.</p></div><div class="timeline"><article><span>2021</span><div><h2>The Beginning</h2><p>Crippling Gambling Addicts is founded.</p></div></article><article><span>2022</span><div><h2>Season II</h2><p>The league establishes its identity and rivalries.</p></div></article><article><span>2023</span><div><h2>Season III</h2><p>Another chapter is written in the trophy race.</p></div></article><article class="incident"><span>2024</span><div><h2>The Palmer Incident</h2><p>Palmer McCarthey is removed from league competition. He remains alive.</p></div></article><article><span>2025</span><div><h2>The New Era</h2><p>CGA continues without Palmer.</p></div></article><article class="current"><span>2026</span><div><h2>Current Season</h2><p>The league enters its sixth season.</p></div></article></div></section>
+
+    <section class="page shell memorial-page" id="memorial"><div class="memorial-hero"><span class="dove">🕊</span><span class="eyebrow">In Memoriam</span><h1>Palmer McCarthey</h1><p class="years">League Member · 2021–2024</p><div class="memorial-divider"></div><blockquote>Gone from the league. Not from this earth.</blockquote><p class="memorial-note">Palmer McCarthey was removed from Crippling Gambling Addicts in 2024. This memorial is a satirical league archive. Palmer did not die.</p></div><div class="memorial-grid"><article class="panel"><span class="eyebrow">Tenure</span><div class="memorial-stat">4</div><p>Seasons in the league</p></article><article class="panel"><span class="eyebrow">Final Season</span><div class="memorial-stat">2024</div><p>The end of an era</p></article><article class="panel"><span class="eyebrow">Status</span><div class="memorial-stat alive">ALIVE</div><p>Just no longer on the roster</p></article></div></section>
+  </main>
+
+  <footer><div class="shell footer-inner"><div><strong>CRIPPLING GAMBLING ADDICTS</strong><span>Official Fantasy Football League · Est. 2021</span></div><div>ESPN League 1998048449 · 2026</div></div></footer>
+  <script src="/app.js"></script>
+</body>
+</html>
