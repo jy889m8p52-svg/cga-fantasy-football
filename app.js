@@ -5,13 +5,21 @@ const menu = document.querySelector(".menu-toggle");
 
 function route() {
   const id = (location.hash || "#home").slice(1);
-  const target =
-    document.getElementById(id) || document.getElementById("home");
 
-  pages.forEach((p) => p.classList.toggle("active", p === target));
-  links.forEach((a) =>
-    a.classList.toggle("active", a.dataset.route === target.id)
-  );
+  const target =
+    document.getElementById(id) ||
+    document.getElementById("home");
+
+  pages.forEach((page) => {
+    page.classList.toggle("active", page === target);
+  });
+
+  links.forEach((link) => {
+    link.classList.toggle(
+      "active",
+      link.dataset.route === target.id
+    );
+  });
 
   nav?.classList.remove("open");
 
@@ -22,6 +30,7 @@ function route() {
 }
 
 window.addEventListener("hashchange", route);
+
 route();
 
 menu?.addEventListener("click", () => {
@@ -51,8 +60,10 @@ function esc(s = "") {
   });
 }
 
-function record(t) {
-  return `${t.wins}-${t.losses}${t.ties ? `-${t.ties}` : ""}`;
+function record(team) {
+  return `${team.wins}-${team.losses}${
+    team.ties ? `-${team.ties}` : ""
+  }`;
 }
 
 function teamImage(team, className) {
@@ -73,41 +84,50 @@ function teamImage(team, className) {
 }
 
 function standingsTable(teams, limit) {
-  const displayedTeams = limit ? teams.slice(0, limit) : teams;
+  const displayedTeams =
+    limit ? teams.slice(0, limit) : teams;
 
   const rows = displayedTeams
     .map(
-      (t, i) => `
+      (team, index) => `
         <tr>
-          <td class="rank">${i + 1}</td>
+
+          <td class="rank">
+            ${index + 1}
+          </td>
 
           <td>
             <div class="team-cell">
-              ${teamImage(t, "team-logo")}
+
+              ${teamImage(team, "team-logo")}
 
               <div>
+
                 <div class="team-name">
-                  ${esc(t.name)}
+                  ${esc(team.name)}
                 </div>
 
                 <div class="team-owner">
-                  ${esc(t.owner || "Manager")}
+                  ${esc(team.owner || "Manager")}
                 </div>
+
               </div>
+
             </div>
           </td>
 
           <td class="record">
-            ${record(t)}
+            ${record(team)}
           </td>
 
           <td class="pf">
-            ${fmt(t.pointsFor)}
+            ${fmt(team.pointsFor)}
           </td>
 
           <td>
-            ${fmt(t.pointsAgainst)}
+            ${fmt(team.pointsAgainst)}
           </td>
+
         </tr>
       `
     )
@@ -115,6 +135,7 @@ function standingsTable(teams, limit) {
 
   return `
     <table class="standings-table">
+
       <thead>
         <tr>
           <th>#</th>
@@ -128,60 +149,95 @@ function standingsTable(teams, limit) {
       <tbody>
         ${rows}
       </tbody>
+
     </table>
   `;
 }
 
 function renderManagers(teams) {
-  const managerGrid = document.getElementById("manager-grid");
+  const managerGrid =
+    document.getElementById("manager-grid");
 
   if (!managerGrid) {
     return;
   }
 
+  const currentManagerCards = teams
+    .map(
+      (team, index) => `
+        <article class="panel manager-card">
+
+          ${teamImage(team, "manager-avatar")}
+
+          <span class="eyebrow">
+            FRANCHISE ${String(index + 1).padStart(2, "0")}
+            ·
+            ${esc(team.abbrev || "CGA")}
+          </span>
+
+          <h2>
+            ${esc(team.owner || "Manager")}
+          </h2>
+
+          <strong>
+            ${esc(team.name)}
+          </strong>
+
+          <p>
+            ${record(team)}
+            ·
+            ${fmt(team.pointsFor)} PF
+            ·
+            ${fmt(team.pointsAgainst)} PA
+          </p>
+
+        </article>
+      `
+    )
+    .join("");
+
+  const palmerCard = `
+    <article class="panel manager-card palmer-manager-card">
+
+      <span class="eyebrow">
+        FRANCHISE 11 · ARCHIVE
+      </span>
+
+      <h2>
+        Palmer McCarthey
+      </h2>
+
+      <strong>
+        Former CGA Manager
+      </strong>
+
+      <p>
+        League Member · 2021–2024
+      </p>
+
+      <p>
+        Removed from league competition in 2024.
+        Currently alive.
+      </p>
+
+      <a
+        href="#palmer-profile"
+        data-route="palmer-profile"
+        class="text-link"
+      >
+        View manager archive →
+      </a>
+
+    </article>
+  `;
+
   managerGrid.innerHTML =
-    teams
-      .map(
-        (t, i) => `
-          <article class="panel manager-card">
-
-            ${teamImage(t, "manager-avatar")}
-
-            <span class="eyebrow">
-              FRANCHISE ${String(i + 1).padStart(2, "0")}
-              ·
-              ${esc(t.abbrev || "CGA")}
-            </span>
-
-            <h2>
-              ${esc(t.owner || "Manager")}
-            </h2>
-
-            <strong>
-              ${esc(t.name)}
-            </strong>
-
-            <p>
-              ${record(t)}
-              ·
-              ${fmt(t.pointsFor)} PF
-              ·
-              ${fmt(t.pointsAgainst)} PA
-            </p>
-
-          </article>
-        `
-      )
-      .join("") ||
-    `
-      <div class="panel empty">
-        No teams returned by ESPN.
-      </div>
-    `;
+    currentManagerCards + palmerCard;
 }
 
 function renderSchedule(matches) {
-  const grid = document.getElementById("schedule-grid");
+  const grid =
+    document.getElementById("schedule-grid");
 
   if (!grid) {
     return;
@@ -197,35 +253,42 @@ function renderSchedule(matches) {
     return;
   }
 
-  const weeks = [...new Set(matches.map((m) => m.week))].sort(
-    (a, b) => a - b
-  );
+  const weeks = [
+    ...new Set(matches.map((match) => match.week))
+  ].sort((a, b) => a - b);
 
   grid.innerHTML = weeks
     .map((week) => {
-      const games = matches.filter((m) => m.week === week);
+      const games =
+        matches.filter(
+          (match) => match.week === week
+        );
 
       const cards = games
         .map(
-          (m) => `
+          (match) => `
             <article class="panel">
 
               <span class="eyebrow">
-                Week ${m.week}
+                Week ${match.week}
               </span>
 
               <h2>
-                ${esc(m.awayName)}
+                ${esc(match.awayName)}
+
                 <span style="color:var(--muted)">
                   vs
                 </span>
-                ${esc(m.homeName)}
+
+                ${esc(match.homeName)}
               </h2>
 
               <p>
                 ${
-                  m.complete
-                    ? `${fmt(m.awayScore)} — ${fmt(m.homeScore)}`
+                  match.complete
+                    ? `${fmt(match.awayScore)} — ${fmt(
+                        match.homeScore
+                      )}`
                     : "Scheduled"
                 }
               </p>
@@ -256,11 +319,17 @@ function renderHome(data) {
   const teams = data.teams || [];
   const matches = data.matchups || [];
 
-  const matchup = document.getElementById("home-matchup");
-  const snapshot = document.getElementById("home-league-snapshot");
+  const matchup =
+    document.getElementById("home-matchup");
+
+  const snapshot =
+    document.getElementById(
+      "home-league-snapshot"
+    );
 
   const firstUpcoming =
-    matches.find((m) => !m.complete) || matches[0];
+    matches.find((match) => !match.complete) ||
+    matches[0];
 
   if (matchup) {
     if (firstUpcoming) {
@@ -278,7 +347,9 @@ function renderHome(data) {
         <p>
           ${
             firstUpcoming.complete
-              ? `${fmt(firstUpcoming.awayScore)} — ${fmt(
+              ? `${fmt(
+                  firstUpcoming.awayScore
+                )} — ${fmt(
                   firstUpcoming.homeScore
                 )}`
               : "Scheduled"
@@ -332,6 +403,11 @@ function renderHome(data) {
         }
       </p>
 
+      <p>
+        11 managers are preserved in the CGA archive,
+        including former manager Palmer McCarthey.
+      </p>
+
       <a
         href="#managers"
         data-route="managers"
@@ -349,17 +425,23 @@ function renderLeague(data) {
   const teams = data.teams || [];
   const matches = data.matchups || [];
 
-  const status = document.getElementById("data-status");
+  const status =
+    document.getElementById("data-status");
 
   if (status) {
-    status.textContent = `Live · ${data.season}`;
+    status.textContent =
+      `Live · ${data.season}`;
   }
 
   const standingsPreview =
-    document.getElementById("standings-preview");
+    document.getElementById(
+      "standings-preview"
+    );
 
   const standingsFull =
-    document.getElementById("standings-full");
+    document.getElementById(
+      "standings-full"
+    );
 
   if (standingsPreview) {
     standingsPreview.innerHTML =
@@ -377,10 +459,12 @@ function renderLeague(data) {
 }
 
 function renderOffline(message) {
-  const status = document.getElementById("data-status");
+  const status =
+    document.getElementById("data-status");
 
   if (status) {
-    status.textContent = "Setup Needed";
+    status.textContent =
+      "Setup Needed";
   }
 
   const html = `
@@ -401,10 +485,14 @@ function renderOffline(message) {
   `;
 
   const standingsPreview =
-    document.getElementById("standings-preview");
+    document.getElementById(
+      "standings-preview"
+    );
 
   const standingsFull =
-    document.getElementById("standings-full");
+    document.getElementById(
+      "standings-full"
+    );
 
   if (standingsPreview) {
     standingsPreview.innerHTML = html;
@@ -413,17 +501,25 @@ function renderOffline(message) {
   if (standingsFull) {
     standingsFull.innerHTML = html;
   }
+
+  /*
+    Palmer is stored manually, so his archive
+    should still appear even if ESPN is offline.
+  */
+  renderManagers([]);
 }
 
 fetch("/api/espn", {
   cache: "no-store"
 })
   .then(async (response) => {
-    const data = await response.json();
+    const data =
+      await response.json();
 
     if (!response.ok || !data.ok) {
       throw new Error(
-        data.error || "Unable to connect"
+        data.error ||
+          "Unable to connect"
       );
     }
 
