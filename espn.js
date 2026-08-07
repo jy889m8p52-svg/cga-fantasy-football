@@ -32,7 +32,7 @@ export default async function handler(req,res){
       awayName:byId[g.away?.teamId]||'TBD',
       homeScore:g.home?.totalPoints??0,
       awayScore:g.away?.totalPoints??0,
-      complete:Boolean(g.winner)||((g.home?.totalPoints??0)>0&&(g.away?.totalPoints??0)>0)
+      complete:Boolean(g.winner&&g.winner!=='UNDECIDED')
     }));
     res.setHeader('Cache-Control','s-maxage=60, stale-while-revalidate=300');
     return res.status(200).json({ok:true,leagueId,season,name:data.settings?.name||'Crippling Gambling Addicts',teams,matchups});
