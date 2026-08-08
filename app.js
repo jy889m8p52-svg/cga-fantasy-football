@@ -106,7 +106,6 @@ function record(team) {
   }`;
 }
 
-
 function totalGames(stats) {
   return (
     Number(stats?.wins || 0) +
@@ -923,7 +922,6 @@ function renderPalmerProfile() {
 
     </div>
 
-
     <div class="memorial-grid">
 
       <article class="panel">
@@ -942,7 +940,6 @@ function renderPalmerProfile() {
 
       </article>
 
-
       <article class="panel">
 
         <span class="eyebrow">
@@ -958,7 +955,6 @@ function renderPalmerProfile() {
         </p>
 
       </article>
-
 
       <article class="panel">
 
@@ -977,7 +973,6 @@ function renderPalmerProfile() {
       </article>
 
     </div>
-
 
     <div
       class="panel"
@@ -1014,7 +1009,6 @@ function renderPalmerProfile() {
       </a>
 
     </div>
-
 
     <div
       style="margin-top:24px"
@@ -1139,11 +1133,6 @@ function renderManagerProfile(
       managerName
     );
 
-
-  /* =========================
-     SEASON TABLE
-  ========================= */
-
   const seasonRows =
     seasonHistory.length
       ? seasonHistory
@@ -1209,11 +1198,6 @@ function renderManagerProfile(
           </tr>
         `;
 
-
-  /* =========================
-     HEAD TO HEAD TABLE
-  ========================= */
-
   const h2hRows =
     h2h.length
       ? h2h
@@ -1268,11 +1252,6 @@ function renderManagerProfile(
           </tr>
         `;
 
-
-  /* =========================
-     PROFILE HTML
-  ========================= */
-
   container.innerHTML = `
 
     <div class="page-title">
@@ -1296,9 +1275,6 @@ function renderManagerProfile(
       </p>
 
     </div>
-
-
-    <!-- PRIMARY CAREER STATS -->
 
     <div
       style="
@@ -1331,7 +1307,6 @@ function renderManagerProfile(
 
       </article>
 
-
       <article class="panel">
 
         <span class="eyebrow">
@@ -1350,7 +1325,6 @@ function renderManagerProfile(
         </p>
 
       </article>
-
 
       <article class="panel">
 
@@ -1372,7 +1346,6 @@ function renderManagerProfile(
         </p>
 
       </article>
-
 
       <article class="panel">
 
@@ -1396,9 +1369,6 @@ function renderManagerProfile(
       </article>
 
     </div>
-
-
-    <!-- MEDALS -->
 
     <div
       style="
@@ -1426,7 +1396,6 @@ function renderManagerProfile(
 
       </article>
 
-
       <article class="panel">
 
         <span class="eyebrow">
@@ -1442,7 +1411,6 @@ function renderManagerProfile(
         </p>
 
       </article>
-
 
       <article class="panel">
 
@@ -1460,7 +1428,6 @@ function renderManagerProfile(
 
       </article>
 
-
       <article class="panel">
 
         <span class="eyebrow">
@@ -1476,7 +1443,6 @@ function renderManagerProfile(
         </p>
 
       </article>
-
 
       <article class="panel">
 
@@ -1495,9 +1461,6 @@ function renderManagerProfile(
       </article>
 
     </div>
-
-
-    <!-- ADVANCED CAREER -->
 
     <div
       style="
@@ -1529,7 +1492,6 @@ function renderManagerProfile(
         </p>
 
       </article>
-
 
       <article class="panel">
 
@@ -1564,7 +1526,6 @@ function renderManagerProfile(
 
       </article>
 
-
       <article class="panel">
 
         <span class="eyebrow">
@@ -1598,7 +1559,6 @@ function renderManagerProfile(
 
       </article>
 
-
       <article class="panel">
 
         <span class="eyebrow">
@@ -1630,9 +1590,6 @@ function renderManagerProfile(
 
     </div>
 
-
-    <!-- STREAKS / GAME RECORDS -->
-
     <div
       style="
         display:grid;
@@ -1659,7 +1616,6 @@ function renderManagerProfile(
 
       </article>
 
-
       <article class="panel">
 
         <span class="eyebrow">
@@ -1675,7 +1631,6 @@ function renderManagerProfile(
         </p>
 
       </article>
-
 
       <article class="panel">
 
@@ -1715,7 +1670,6 @@ function renderManagerProfile(
         </p>
 
       </article>
-
 
       <article class="panel">
 
@@ -1758,12 +1712,9 @@ function renderManagerProfile(
 
     </div>
 
-
     ${
       currentTeam
         ? `
-          <!-- CURRENT TEAM -->
-
           <div
             class="panel"
             style="margin-bottom:24px"
@@ -1817,9 +1768,6 @@ function renderManagerProfile(
         : ""
     }
 
-
-    <!-- SEASON HISTORY -->
-
     <div
       class="panel"
       style="margin-bottom:24px"
@@ -1858,9 +1806,6 @@ function renderManagerProfile(
 
     </div>
 
-
-    <!-- HEAD TO HEAD -->
-
     <div class="panel">
 
       <span class="eyebrow">
@@ -1895,7 +1840,6 @@ function renderManagerProfile(
 
     </div>
 
-
     <div
       style="
         margin-top:24px;
@@ -1924,7 +1868,6 @@ function renderManagerProfile(
     </div>
   `;
 }
-
 
 
 /* =========================
@@ -2251,7 +2194,6 @@ function renderPremierRivalry(summary) {
         </p>
       </article>
 
-
       <article class="panel">
         <span class="eyebrow">
           Meetings
@@ -2265,7 +2207,6 @@ function renderPremierRivalry(summary) {
           Recorded head-to-head games
         </p>
       </article>
-
 
       <article class="panel">
         <span class="eyebrow">
@@ -2283,7 +2224,6 @@ function renderPremierRivalry(summary) {
           Current all-time edge
         </p>
       </article>
-
 
       <article class="panel">
         <span class="eyebrow">
@@ -2310,7 +2250,6 @@ function renderPremierRivalry(summary) {
 
     </div>
 
-
     <div class="rivalry-stat-grid rivalry-stat-grid-secondary">
 
       <article class="panel">
@@ -2335,7 +2274,6 @@ function renderPremierRivalry(summary) {
         </p>
       </article>
 
-
       <article class="panel">
         <span class="eyebrow">
           Avg. Combined Score
@@ -2352,7 +2290,6 @@ function renderPremierRivalry(summary) {
           Points per meeting
         </p>
       </article>
-
 
       <article class="panel">
         <span class="eyebrow">
@@ -2382,7 +2319,6 @@ function renderPremierRivalry(summary) {
           }
         </p>
       </article>
-
 
       <article class="panel">
         <span class="eyebrow">
@@ -2414,7 +2350,6 @@ function renderPremierRivalry(summary) {
       </article>
 
     </div>
-
 
     <div
       class="panel"
@@ -2655,7 +2590,6 @@ function renderRivalries() {
   );
 }
 
-
 document.addEventListener(
   "click",
   (event) => {
@@ -2759,6 +2693,22 @@ function archiveHallData(seasonYear) {
   return leagueData?.hallOfFame?.[seasonYear] || null;
 }
 
+function archiveManagerLink(managerName) {
+  if (!managerName || managerName === "—" || managerName === "TBD") {
+    return esc(managerName || "—");
+  }
+
+  return `
+    <a
+      href="#manager-profile"
+      class="manager-profile-link archive-manager-link"
+      data-manager="${esc(managerName)}"
+    >
+      ${esc(managerName)}
+    </a>
+  `;
+}
+
 function archiveStandingsTable(teams = []) {
   if (!teams.length) {
     return `
@@ -2789,11 +2739,15 @@ function archiveStandingsTable(teams = []) {
   const rows = sorted
     .map(
       (team, index) => `
-        <tr>
+        <tr class="${index === 0 ? "archive-first-place-row" : ""}">
           <td class="rank">${index + 1}</td>
           <td>
-            <strong>${esc(team.owner || "Manager")}</strong>
-            <div class="team-owner">${esc(team.name || "")}</div>
+            <strong>
+              ${archiveManagerLink(team.owner || "Manager")}
+            </strong>
+            <div class="team-owner">
+              ${esc(team.name || "")}
+            </div>
           </td>
           <td class="record">
             ${Number(team.wins || 0)}-${Number(team.losses || 0)}${
@@ -2808,8 +2762,8 @@ function archiveStandingsTable(teams = []) {
     .join("");
 
   return `
-    <div class="table-wrap">
-      <table class="standings-table">
+    <div class="table-wrap archive-table-wrap">
+      <table class="standings-table archive-table">
         <thead>
           <tr>
             <th>#</th>
@@ -2857,47 +2811,62 @@ function archiveMatchupsTable(matches = []) {
     `;
   }
 
-  const rows = realMatches
-    .map((game) => {
-      const homeScore = Number(game.homeScore || 0);
-      const awayScore = Number(game.awayScore || 0);
-      const winner =
-        homeScore > awayScore
-          ? game.homeOwner
-          : awayScore > homeScore
-            ? game.awayOwner
-            : "Tie";
-
-      return `
-        <tr>
-          <td>Week ${Number(game.week || 0)}</td>
-          <td>${esc(game.awayOwner)}</td>
-          <td class="pf">${fmt1(awayScore)}</td>
-          <td>${esc(game.homeOwner)}</td>
-          <td class="pf">${fmt1(homeScore)}</td>
-          <td>${esc(winner)}</td>
-        </tr>
-      `;
-    })
-    .join("");
+  const weeks = [
+    ...new Set(
+      realMatches.map(
+        (game) => Number(game.week || 0)
+      )
+    )
+  ].sort((a, b) => a - b);
 
   return `
-    <div class="table-wrap">
-      <table class="standings-table">
-        <thead>
-          <tr>
-            <th>Week</th>
-            <th>Away</th>
-            <th>Score</th>
-            <th>Home</th>
-            <th>Score</th>
-            <th>Winner</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${rows}
-        </tbody>
-      </table>
+    <div class="archive-week-stack">
+      ${weeks
+        .map((week) => {
+          const games = realMatches.filter(
+            (game) => Number(game.week || 0) === week
+          );
+
+          return `
+            <section class="archive-week">
+              <div class="archive-week-heading">
+                <span>Week ${week}</span>
+                <small>${games.length} Matchups</small>
+              </div>
+
+              <div class="archive-week-games">
+                ${games
+                  .map((game) => {
+                    const homeScore = Number(game.homeScore || 0);
+                    const awayScore = Number(game.awayScore || 0);
+
+                    const awayWon = awayScore > homeScore;
+                    const homeWon = homeScore > awayScore;
+
+                    return `
+                      <article class="archive-game">
+                        <div class="archive-game-team ${awayWon ? "winner" : ""}">
+                          <span>${archiveManagerLink(game.awayOwner)}</span>
+                          <strong>${fmt1(awayScore)}</strong>
+                        </div>
+
+                        <div class="archive-game-vs">
+                          VS
+                        </div>
+
+                        <div class="archive-game-team ${homeWon ? "winner" : ""}">
+                          <span>${archiveManagerLink(game.homeOwner)}</span>
+                          <strong>${fmt1(homeScore)}</strong>
+                        </div>
+                      </article>
+                    `;
+                  })
+                  .join("")}
+              </div>
+            </section>
+          `;
+        })
+        .join("")}
     </div>
   `;
 }
@@ -2922,101 +2891,233 @@ function renderArchiveSeason(seasonYear) {
     .querySelectorAll(".archive-season-button")
     .forEach((button) => {
       const active = Number(button.dataset.season) === year;
-      button.classList.toggle("gold", active);
-      button.classList.toggle("ghost", !active);
+
+      button.classList.toggle("active", active);
+      button.setAttribute(
+        "aria-pressed",
+        active ? "true" : "false"
+      );
     });
 
-  const champion = hall?.champion || (current ? "Season In Progress" : "—");
-  const runnerUp = hall?.runnerUp || (current ? "TBD" : "—");
-  const third = hall?.third || (current ? "TBD" : "—");
-  const last = Array.isArray(hall?.last)
-    ? hall.last.join(" & ")
-    : current
-      ? "TBD"
-      : "—";
+  const champion =
+    hall?.champion ||
+    (current ? "Season In Progress" : "—");
 
-  const highestScoring = teams.length
-    ? [...teams].sort(
-        (a, b) => Number(b.pointsFor || 0) - Number(a.pointsFor || 0)
-      )[0]
-    : null;
+  const runnerUp =
+    hall?.runnerUp ||
+    (current ? "TBD" : "—");
+
+  const third =
+    hall?.third ||
+    (current ? "TBD" : "—");
+
+  const last =
+    Array.isArray(hall?.last)
+      ? hall.last.join(" & ")
+      : current
+        ? "TBD"
+        : "—";
+
+  const highestScoring =
+    teams.length
+      ? [...teams].sort(
+          (a, b) =>
+            Number(b.pointsFor || 0) -
+            Number(a.pointsFor || 0)
+        )[0]
+      : null;
+
+  const totalGames =
+    matchups.filter((game) => {
+      const homeOwner = game.homeOwner;
+      const awayOwner = game.awayOwner;
+      const homeScore = Number(game.homeScore || 0);
+      const awayScore = Number(game.awayScore || 0);
+
+      return (
+        homeOwner &&
+        awayOwner &&
+        homeOwner !== "TBD" &&
+        awayOwner !== "TBD" &&
+        homeOwner !== awayOwner &&
+        (homeScore > 0 || awayScore > 0)
+      );
+    }).length;
 
   content.innerHTML = `
-    <div class="page-title" style="margin-top:38px">
-      <span class="eyebrow">
-        ${current ? "Current Season" : "Historical Season"}
-      </span>
-      <h1 style="font-size:clamp(54px,7vw,88px)">
-        ${year}
-      </h1>
-      <p>
-        ${current
-          ? "Live season data will continue updating as ESPN records new results."
-          : `Complete CGA archive for the ${year} season.`}
-      </p>
-    </div>
+    <section class="archive-season-hero ${current ? "current" : ""}">
 
-    <div
-      style="
-        display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-        gap:16px;
-        margin-bottom:24px;
-      "
-    >
-      <article class="panel">
-        <span class="eyebrow">Champion</span>
-        <h2>${esc(champion)}${hall?.championAsterisk ? "*" : ""}</h2>
-        <p>${current ? "To be decided" : "🥇 First Place"}</p>
+      <div class="archive-season-year-block">
+        <span class="eyebrow">
+          ${current ? "Live CGA Season" : "CGA Season File"}
+        </span>
+
+        <div class="archive-season-year">
+          ${year}
+        </div>
+
+        <p>
+          ${
+            current
+              ? "Season in progress · updates with ESPN results"
+              : `Official historical archive · ${totalGames} recorded matchups`
+          }
+        </p>
+      </div>
+
+      <div class="archive-season-stamp">
+        <span>
+          ${current ? "LIVE" : "ARCHIVED"}
+        </span>
+        <strong>
+          CGA
+        </strong>
+      </div>
+
+    </section>
+
+    <section class="archive-podium-grid">
+
+      <article class="archive-finish-card champion">
+        <span class="archive-medal">🥇</span>
+        <small>Champion</small>
+        <h2>
+          ${
+            current
+              ? esc(champion)
+              : archiveManagerLink(champion)
+          }${hall?.championAsterisk ? "*" : ""}
+        </h2>
+        <p>
+          ${current ? "To be decided" : `${year} CGA Champion`}
+        </p>
       </article>
 
-      <article class="panel">
-        <span class="eyebrow">Runner-Up</span>
-        <h2>${esc(runnerUp)}</h2>
-        <p>${current ? "To be decided" : "🥈 Second Place"}</p>
+      <article class="archive-finish-card runner-up">
+        <span class="archive-medal">🥈</span>
+        <small>Runner-Up</small>
+        <h2>
+          ${
+            current
+              ? esc(runnerUp)
+              : archiveManagerLink(runnerUp)
+          }
+        </h2>
+        <p>
+          ${current ? "To be decided" : "Second Place"}
+        </p>
       </article>
 
-      <article class="panel">
-        <span class="eyebrow">Third Place</span>
-        <h2>${esc(third)}</h2>
-        <p>${current ? "To be decided" : "🥉 Third Place"}</p>
+      <article class="archive-finish-card third">
+        <span class="archive-medal">🥉</span>
+        <small>Third Place</small>
+        <h2>
+          ${
+            current
+              ? esc(third)
+              : archiveManagerLink(third)
+          }
+        </h2>
+        <p>
+          ${current ? "To be decided" : "Final Podium Spot"}
+        </p>
       </article>
 
-      <article class="panel">
-        <span class="eyebrow">Last Place</span>
-        <h2>${esc(last)}</h2>
-        <p>${current ? "To be decided" : "💀 Bottom Finish"}</p>
+      <article class="archive-finish-card last">
+        <span class="archive-medal">💀</span>
+        <small>Last Place</small>
+        <h2>
+          ${esc(last)}
+        </h2>
+        <p>
+          ${current ? "To be decided" : "Bottom Finish"}
+        </p>
       </article>
-    </div>
+
+    </section>
 
     ${
       highestScoring
         ? `
-          <div class="panel" style="margin-bottom:24px">
-            <span class="eyebrow">Season Scoring Leader</span>
-            <h2>${esc(highestScoring.owner || "Manager")}</h2>
-            <div class="record-value" style="font-size:48px">
-              ${fmt(highestScoring.pointsFor)}
+          <section class="archive-scoring-leader">
+
+            <div>
+              <span class="eyebrow">
+                Season Scoring Leader
+              </span>
+
+              <h2>
+                ${archiveManagerLink(
+                  highestScoring.owner || "Manager"
+                )}
+              </h2>
+
+              <p>
+                ${esc(highestScoring.name || "")}
+              </p>
             </div>
-            <p>
-              ${esc(highestScoring.name || "")} · Total Points For
-            </p>
-          </div>
+
+            <div class="archive-scoring-number">
+              <strong>
+                ${fmt(highestScoring.pointsFor)}
+              </strong>
+              <span>
+                POINTS FOR
+              </span>
+            </div>
+
+          </section>
         `
         : ""
     }
 
-    <div class="panel" style="margin-bottom:24px">
-      <span class="eyebrow">${current ? "Current" : "Final"} Table</span>
-      <h2>${year} Standings</h2>
-      ${archiveStandingsTable(teams)}
-    </div>
+    <section class="panel archive-standings-panel">
 
-    <div class="panel">
-      <span class="eyebrow">Game Log</span>
-      <h2>${year} Matchup History</h2>
+      <div class="archive-section-heading">
+
+        <div>
+          <span class="eyebrow">
+            ${current ? "Current Table" : "Final Table"}
+          </span>
+
+          <h2>
+            ${year} Standings
+          </h2>
+        </div>
+
+        <span class="archive-section-count">
+          ${teams.length} Teams
+        </span>
+
+      </div>
+
+      ${archiveStandingsTable(teams)}
+
+    </section>
+
+    <section class="panel archive-matchups-panel">
+
+      <div class="archive-section-heading">
+
+        <div>
+          <span class="eyebrow">
+            Complete Season Log
+          </span>
+
+          <h2>
+            ${year} Matchup History
+          </h2>
+        </div>
+
+        <span class="archive-section-count">
+          ${totalGames} Games
+        </span>
+
+      </div>
+
       ${archiveMatchupsTable(matchups)}
-    </div>
+
+    </section>
   `;
 }
 
@@ -3025,7 +3126,10 @@ function renderSeasonArchive() {
     return;
   }
 
-  const buttons = document.getElementById("archive-season-buttons");
+  const buttons =
+    document.getElementById(
+      "archive-season-buttons"
+    );
 
   if (!buttons) {
     return;
@@ -3042,43 +3146,73 @@ function renderSeasonArchive() {
     return;
   }
 
-  if (!selectedArchiveSeason || !seasons.includes(selectedArchiveSeason)) {
+  if (
+    !selectedArchiveSeason ||
+    !seasons.includes(selectedArchiveSeason)
+  ) {
     selectedArchiveSeason = seasons[0];
   }
 
-  buttons.innerHTML = seasons
-    .map(
-      (year) => `
-        <button
-          type="button"
-          class="button ${year === selectedArchiveSeason ? "gold" : "ghost"} archive-season-button"
-          data-season="${year}"
-          style="width:auto"
-        >
-          ${year}
-        </button>
-      `
-    )
-    .join("");
+  buttons.innerHTML =
+    seasons
+      .map(
+        (year) => `
+          <button
+            type="button"
+            class="archive-season-button ${
+              year === selectedArchiveSeason
+                ? "active"
+                : ""
+            }"
+            data-season="${year}"
+            aria-pressed="${
+              year === selectedArchiveSeason
+                ? "true"
+                : "false"
+            }"
+          >
+            <span>${year}</span>
+            <small>
+              ${
+                year === Number(leagueData.season)
+                  ? "LIVE"
+                  : "SEASON"
+              }
+            </small>
+          </button>
+        `
+      )
+      .join("");
 
-  renderArchiveSeason(selectedArchiveSeason);
+  renderArchiveSeason(
+    selectedArchiveSeason
+  );
 }
 
-document.addEventListener("click", (event) => {
-  const button = event.target.closest(".archive-season-button");
+document.addEventListener(
+  "click",
+  (event) => {
+    const button =
+      event.target.closest(
+        ".archive-season-button"
+      );
 
-  if (!button) {
-    return;
+    if (!button) {
+      return;
+    }
+
+    const year =
+      Number(
+        button.dataset.season
+      );
+
+    if (!year) {
+      return;
+    }
+
+    renderArchiveSeason(year);
   }
-
-  const year = Number(button.dataset.season);
-
-  if (!year) {
-    return;
-  }
-
-  renderArchiveSeason(year);
-});
+);
 
 
 /* =========================
@@ -3338,11 +3472,6 @@ function renderRecords(data) {
       `Live · ${data.season}`;
   }
 
-
-  /* =========================
-     LEAGUE / MEDAL RECORDS
-  ========================= */
-
   const championships =
     medalLeaders(
       "championships"
@@ -3367,7 +3496,6 @@ function renderRecords(data) {
     medalLeaders(
       "lastPlaces"
     );
-
 
   setRecordCard(
     "record-most-championships",
@@ -3409,11 +3537,6 @@ function renderRecords(data) {
     )
   );
 
-
-  /* =========================
-     CAREER RECORDS
-  ========================= */
-
   const careerWins =
     records.careerWins;
 
@@ -3426,7 +3549,6 @@ function renderRecords(data) {
       ? `${careerWins.manager} · ${careerWins.wins}-${careerWins.losses}${careerWins.ties ? `-${careerWins.ties}` : ""}`
       : "No career data available."
   );
-
 
   const careerPoints =
     records.careerPoints;
@@ -3443,7 +3565,6 @@ function renderRecords(data) {
       : "No career data available."
   );
 
-
   const bestPct =
     records.bestWinningPercentage;
 
@@ -3459,11 +3580,6 @@ function renderRecords(data) {
       : "No career data available."
   );
 
-
-  /* =========================
-     SEASON RECORDS
-  ========================= */
-
   const mostWinsSeason =
     records.mostWinsSeason;
 
@@ -3476,7 +3592,6 @@ function renderRecords(data) {
       ? `${mostWinsSeason.manager} · ${mostWinsSeason.season} · ${mostWinsSeason.team}`
       : "No season data available."
   );
-
 
   const mostPointsSeason =
     records.mostPointsSeason;
@@ -3493,11 +3608,6 @@ function renderRecords(data) {
       : "No season data available."
   );
 
-
-  /* =========================
-     WEEKLY RECORDS
-  ========================= */
-
   const highWeek =
     records.highestWeeklyScore;
 
@@ -3512,7 +3622,6 @@ function renderRecords(data) {
       ? `${highWeek.manager} · Week ${highWeek.week}, ${highWeek.season}`
       : "No weekly data available."
   );
-
 
   const lowWeek =
     records.lowestWeeklyScore;
@@ -3529,7 +3638,6 @@ function renderRecords(data) {
       : "No weekly data available."
   );
 
-
   const blowout =
     biggestRealBlowout();
 
@@ -3545,7 +3653,6 @@ function renderRecords(data) {
       : "No matchup data available."
   );
 
-
   const closest =
     records.closestWin;
 
@@ -3560,11 +3667,6 @@ function renderRecords(data) {
       ? `${closest.winner} def. ${closest.loser} ${fmt1(closest.winnerScore)}-${fmt1(closest.loserScore)} · Week ${closest.week}, ${closest.season}`
       : "No matchup data available."
   );
-
-
-  /* =========================
-     STREAK RECORDS
-  ========================= */
 
   const streaks =
     globalStreakLeaders();
