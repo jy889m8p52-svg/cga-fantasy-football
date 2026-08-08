@@ -106,22 +106,6 @@ function record(team) {
   }`;
 }
 
-function teamImage(team, className) {
-  if (!team?.logo) {
-    return "";
-  }
-
-  return `
-    <img
-      class="${className}"
-      src="${esc(team.logo)}"
-      alt="${esc(team.owner || team.name)}"
-      loading="lazy"
-      referrerpolicy="no-referrer"
-      onerror="this.style.display='none'"
-    >
-  `;
-}
 
 function totalGames(stats) {
   return (
@@ -185,11 +169,6 @@ function standingsTable(teams, limit) {
 
           <td>
             <div class="team-cell">
-
-              ${teamImage(
-                team,
-                "team-logo"
-              )}
 
               <div>
 
