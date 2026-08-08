@@ -4,11 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#090909" />
-  <meta name="description" content="Crippling Gambling Addicts fantasy football league headquarters." />
-  <title>Crippling Gambling Addicts | Fantasy Football</title>
+  <meta
+    name="description"
+    content="Crippling Gambling Addicts fantasy football league headquarters."
+  />
+
+  <title>
+    Crippling Gambling Addicts | Fantasy Football
+  </title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
 
   <link
     href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
@@ -22,6 +32,7 @@
 
   <div class="noise"></div>
 
+  <!-- TOP TICKER -->
   <div class="ticker">
     <div class="ticker-inner">
       <span>CGA NETWORK</span>
@@ -36,10 +47,18 @@
     </div>
   </div>
 
+  <!-- HEADER -->
   <header class="site-header">
 
-    <a class="brand" href="#home" data-route="home">
-      <img src="/cga-logo.png" alt="CGA crest">
+    <a
+      class="brand"
+      href="#home"
+      data-route="home"
+    >
+      <img
+        src="/cga-logo.png"
+        alt="CGA crest"
+      >
 
       <div>
         <strong>CGA</strong>
@@ -47,20 +66,49 @@
       </div>
     </a>
 
-    <button class="menu-toggle" aria-label="Open navigation">
+    <button
+      class="menu-toggle"
+      aria-label="Open navigation"
+    >
       ☰
     </button>
 
     <nav class="nav">
-      <a href="#home" data-route="home">Home</a>
-      <a href="#standings" data-route="standings">Standings</a>
-      <a href="#schedule" data-route="schedule">Schedule</a>
-      <a href="#managers" data-route="managers">Managers</a>
-      <a href="#hall-of-fame" data-route="hall-of-fame">Hall of Fame</a>
-      <a href="#records" data-route="records">Records</a>
-      <a href="#rules" data-route="rules">Rules</a>
-      <a href="#history" data-route="history">History</a>
-      <a href="#memorial" data-route="memorial">Memorial</a>
+      <a href="#home" data-route="home">
+        Home
+      </a>
+
+      <a href="#standings" data-route="standings">
+        Standings
+      </a>
+
+      <a href="#schedule" data-route="schedule">
+        Schedule
+      </a>
+
+      <a href="#managers" data-route="managers">
+        Managers
+      </a>
+
+      <a href="#hall-of-fame" data-route="hall-of-fame">
+        Hall of Fame
+      </a>
+
+      <a href="#records" data-route="records">
+        Records
+      </a>
+
+      <a href="#rules" data-route="rules">
+        Rules
+      </a>
+
+      <a href="#history" data-route="history">
+        History
+      </a>
+
+      <a href="#memorial" data-route="memorial">
+        Memorial
+      </a>
     </nav>
 
   </header>
@@ -68,7 +116,10 @@
   <main>
 
     <!-- HOME -->
-    <section class="page active" id="home">
+    <section
+      class="page active"
+      id="home"
+    >
 
       <div class="hero shell">
 
@@ -85,8 +136,10 @@
           </h1>
 
           <p class="lede">
-            Founded in 2021. Ten active managers. Eleven managers in league history.
-            A $200 buy-in. One trophy. A league history worthy of its own archive.
+            Founded in 2021. Ten active managers.
+            Eleven managers in league history.
+            A $200 buy-in. One trophy.
+            A league history worthy of its own archive.
           </p>
 
           <div class="hero-actions">
@@ -131,28 +184,40 @@
         </div>
 
         <div class="hero-art">
+
           <div class="halo"></div>
 
           <img
             src="/cga-logo.png"
             alt="Crippling Gambling Addicts league crest"
           >
+
         </div>
 
       </div>
 
       <div class="shell dashboard-grid">
 
-        <article class="panel standings-card span-2">
+        <article
+          class="panel standings-card span-2"
+        >
 
           <div class="panel-head">
 
             <div>
-              <span class="eyebrow">Live ESPN Data</span>
-              <h2>2026 Standings</h2>
+              <span class="eyebrow">
+                Live ESPN Data
+              </span>
+
+              <h2>
+                2026 Standings
+              </h2>
             </div>
 
-            <span id="data-status" class="status">
+            <span
+              id="data-status"
+              class="status"
+            >
               Connecting…
             </span>
 
@@ -181,7 +246,6 @@
           class="panel feature"
           id="home-matchup"
         >
-
           <span class="eyebrow">
             Live Schedule
           </span>
@@ -193,14 +257,12 @@
           <p>
             Loading ESPN matchup…
           </p>
-
         </article>
 
         <article
           class="panel feature"
           id="home-league-snapshot"
         >
-
           <span class="eyebrow">
             League Snapshot
           </span>
@@ -212,7 +274,6 @@
           <p>
             Loading league data…
           </p>
-
         </article>
 
         <article class="panel feature">
@@ -226,7 +287,8 @@
           </h2>
 
           <p>
-            Championship history from the league's first season through today.
+            Championship history from the
+            league's first season through today.
           </p>
 
           <a
@@ -239,7 +301,9 @@
 
         </article>
 
-        <article class="panel feature memorial-mini">
+        <article
+          class="panel feature memorial-mini"
+        >
 
           <span class="eyebrow">
             Former Manager Archive
@@ -256,9 +320,9 @@
           </p>
 
           <a
-            href="#palmer-profile"
-            data-route="palmer-profile"
-            class="text-link"
+            href="#manager-profile"
+            class="text-link manager-profile-link"
+            data-manager="Palmer McCarthey"
           >
             View Palmer's profile →
           </a>
@@ -276,8 +340,9 @@
           </h2>
 
           <p>
-            The custom rules, rivalry procedures, roster limits,
-            awards, trades and commissioner rulings that govern CGA.
+            The custom rules, rivalry procedures,
+            roster limits, awards, trades and
+            commissioner rulings that govern CGA.
           </p>
 
           <a
@@ -312,7 +377,7 @@
         </h1>
 
         <p>
-          Live from ESPN when the private league connection is configured.
+          Live from the official CGA ESPN league.
         </p>
 
       </div>
@@ -350,7 +415,7 @@
         </h1>
 
         <p>
-          Weekly matchups will populate from ESPN as the 2026 schedule becomes available.
+          Weekly 2026 CGA matchups pulled from ESPN.
         </p>
 
       </div>
@@ -384,7 +449,9 @@
         </h1>
 
         <p>
-          Ten active franchises, plus Palmer McCarthey preserved as the 11th manager in CGA history.
+          Ten active franchises plus former manager
+          Palmer McCarthey. Click any manager to
+          view their CGA career profile.
         </p>
 
       </div>
@@ -394,8 +461,39 @@
         class="card-grid"
       >
         <div class="panel empty">
-          Manager profiles will populate from ESPN.
+          Loading manager profiles…
         </div>
+      </div>
+
+    </section>
+
+
+    <!-- MANAGER PROFILE -->
+    <section
+      class="page shell"
+      id="manager-profile"
+    >
+
+      <div
+        id="manager-profile-content"
+      >
+
+        <div class="page-title">
+
+          <span class="eyebrow">
+            CGA Manager Profile
+          </span>
+
+          <h1>
+            Manager
+          </h1>
+
+          <p>
+            Select a manager from the Managers page.
+          </p>
+
+        </div>
+
       </div>
 
     </section>
@@ -419,13 +517,14 @@
 
         <p>
           The official history of Crippling Gambling Addicts.
-          Champions, podium finishers, and the unfortunate last-place teams.
+          Champions, podium finishers, and the unfortunate
+          last-place teams.
         </p>
 
       </div>
 
 
-      <!-- ALL-TIME MEDAL LEADERBOARD -->
+      <!-- MEDAL LEADERBOARD -->
       <div class="all-time-medals">
 
         <div class="medal-board-header">
@@ -441,7 +540,8 @@
             </h2>
 
             <p>
-              Career podium finishes from the 2021–2025 CGA seasons.
+              Career podium finishes from
+              the 2021–2025 CGA seasons.
             </p>
 
           </div>
@@ -471,369 +571,138 @@
 
             </thead>
 
-
             <tbody>
 
               <tr class="medal-leader">
-
-                <td class="medal-rank">
-                  1
-                </td>
-
+                <td class="medal-rank">1</td>
                 <td class="medal-manager">
                   Porter Roberts
                 </td>
-
-                <td>
-                  0
-                </td>
-
-                <td>
-                  3
-                </td>
-
-                <td>
-                  1
-                </td>
-
-                <td class="podium-total">
-                  4
-                </td>
-
-                <td>
-                  0
-                </td>
-
+                <td>0</td>
+                <td>3</td>
+                <td>1</td>
+                <td class="podium-total">4</td>
+                <td>0</td>
               </tr>
 
-
               <tr>
-
-                <td class="medal-rank">
-                  2
-                </td>
-
+                <td class="medal-rank">2</td>
                 <td class="medal-manager">
                   Zander Briggs
                 </td>
-
-                <td class="gold-count">
-                  2
-                </td>
-
-                <td>
-                  0
-                </td>
-
-                <td>
-                  1
-                </td>
-
-                <td class="podium-total">
-                  3
-                </td>
-
-                <td class="last-count">
-                  1
-                </td>
-
+                <td class="gold-count">2</td>
+                <td>0</td>
+                <td>1</td>
+                <td class="podium-total">3</td>
+                <td class="last-count">1</td>
               </tr>
 
-
               <tr>
-
-                <td class="medal-rank">
-                  3
-                </td>
-
+                <td class="medal-rank">3</td>
                 <td class="medal-manager">
                   Lleyton Renner
                 </td>
-
-                <td class="gold-count">
-                  1
-                </td>
-
-                <td>
-                  1
-                </td>
-
-                <td>
-                  1
-                </td>
-
-                <td class="podium-total">
-                  3
-                </td>
-
-                <td>
-                  0
-                </td>
-
+                <td class="gold-count">1</td>
+                <td>1</td>
+                <td>1</td>
+                <td class="podium-total">3</td>
+                <td>0</td>
               </tr>
 
-
               <tr>
-
-                <td class="medal-rank">
-                  4
-                </td>
-
+                <td class="medal-rank">4</td>
                 <td class="medal-manager">
                   Jackson O'Bleness
                 </td>
-
-                <td class="gold-count">
-                  1
-                </td>
-
-                <td>
-                  1
-                </td>
-
-                <td>
-                  0
-                </td>
-
-                <td class="podium-total">
-                  2
-                </td>
-
-                <td>
-                  0
-                </td>
-
+                <td class="gold-count">1</td>
+                <td>1</td>
+                <td>0</td>
+                <td class="podium-total">2</td>
+                <td>0</td>
               </tr>
 
-
               <tr>
-
-                <td class="medal-rank">
-                  5
-                </td>
-
+                <td class="medal-rank">5</td>
                 <td class="medal-manager">
                   Brayden Mccuen
                 </td>
-
-                <td class="gold-count">
-                  1
-                </td>
-
-                <td>
-                  0
-                </td>
-
-                <td>
-                  1
-                </td>
-
-                <td class="podium-total">
-                  2
-                </td>
-
-                <td>
-                  0
-                </td>
-
+                <td class="gold-count">1</td>
+                <td>0</td>
+                <td>1</td>
+                <td class="podium-total">2</td>
+                <td>0</td>
               </tr>
 
-
               <tr>
-
-                <td class="medal-rank">
-                  6
-                </td>
-
+                <td class="medal-rank">6</td>
                 <td class="medal-manager">
                   Alex Ross
                 </td>
-
-                <td>
-                  0
-                </td>
-
-                <td>
-                  0
-                </td>
-
-                <td>
-                  1
-                </td>
-
-                <td class="podium-total">
-                  1
-                </td>
-
-                <td class="last-count">
-                  1
-                </td>
-
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td class="podium-total">1</td>
+                <td class="last-count">1</td>
               </tr>
 
-
               <tr>
-
-                <td class="medal-rank">
-                  7
-                </td>
-
+                <td class="medal-rank">7</td>
                 <td class="medal-manager">
                   Cado Keller
                 </td>
-
-                <td>
-                  0
-                </td>
-
-                <td>
-                  0
-                </td>
-
-                <td>
-                  0
-                </td>
-
-                <td class="podium-total">
-                  0
-                </td>
-
-                <td class="last-count">
-                  1
-                </td>
-
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="podium-total">0</td>
+                <td class="last-count">1</td>
               </tr>
 
-
               <tr>
-
-                <td class="medal-rank">
-                  8
-                </td>
-
+                <td class="medal-rank">8</td>
                 <td class="medal-manager">
                   Luka Draganic
                 </td>
-
-                <td>
-                  0
-                </td>
-
-                <td>
-                  0
-                </td>
-
-                <td>
-                  0
-                </td>
-
-                <td class="podium-total">
-                  0
-                </td>
-
-                <td class="last-count">
-                  1
-                </td>
-
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="podium-total">0</td>
+                <td class="last-count">1</td>
               </tr>
 
-
               <tr>
-
-                <td class="medal-rank">
-                  9
-                </td>
-
+                <td class="medal-rank">9</td>
                 <td class="medal-manager">
                   Sam Ransome
                 </td>
-
-                <td>
-                  0
-                </td>
-
-                <td>
-                  0
-                </td>
-
-                <td>
-                  0
-                </td>
-
-                <td class="podium-total">
-                  0
-                </td>
-
-                <td class="last-count">
-                  1
-                </td>
-
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="podium-total">0</td>
+                <td class="last-count">1</td>
               </tr>
 
-
               <tr>
-
-                <td class="medal-rank">
-                  10
-                </td>
-
+                <td class="medal-rank">10</td>
                 <td class="medal-manager">
                   Zack Middlebrooks
                 </td>
-
-                <td>
-                  0
-                </td>
-
-                <td>
-                  0
-                </td>
-
-                <td>
-                  0
-                </td>
-
-                <td class="podium-total">
-                  0
-                </td>
-
-                <td class="last-count">
-                  1
-                </td>
-
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="podium-total">0</td>
+                <td class="last-count">1</td>
               </tr>
 
-
               <tr>
-
-                <td class="medal-rank">
-                  11
-                </td>
-
+                <td class="medal-rank">11</td>
                 <td class="medal-manager">
                   Palmer McCarthey
                 </td>
-
-                <td>
-                  0
-                </td>
-
-                <td>
-                  0
-                </td>
-
-                <td>
-                  0
-                </td>
-
-                <td class="podium-total">
-                  0
-                </td>
-
-                <td>
-                  0
-                </td>
-
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="podium-total">0</td>
+                <td>0</td>
               </tr>
 
             </tbody>
@@ -844,33 +713,18 @@
 
 
         <div class="medal-legend">
-
-          <span>
-            🥇 Championships
-          </span>
-
-          <span>
-            🥈 Runner-Ups
-          </span>
-
-          <span>
-            🥉 Third Place
-          </span>
-
-          <span>
-            💀 Last Place
-          </span>
-
+          <span>🥇 Championships</span>
+          <span>🥈 Runner-Ups</span>
+          <span>🥉 Third Place</span>
+          <span>💀 Last Place</span>
         </div>
 
       </div>
 
 
-      <!-- SEASON HISTORY -->
+      <!-- 2025 -->
       <div class="hall-seasons">
 
-
-        <!-- 2025 -->
         <article class="panel hall-season">
 
           <div class="hall-year">
@@ -880,67 +734,28 @@
           <div class="hall-podium">
 
             <div class="hall-finish champion">
-
-              <span class="medal">
-                🥇
-              </span>
-
-              <small>
-                Champion
-              </small>
-
-              <h2>
-                Brayden Mccuen
-              </h2>
-
+              <span class="medal">🥇</span>
+              <small>Champion</small>
+              <h2>Brayden Mccuen</h2>
             </div>
-
 
             <div class="hall-finish second">
-
-              <span class="medal">
-                🥈
-              </span>
-
-              <small>
-                Runner-Up
-              </small>
-
-              <h2>
-                Lleyton Renner
-              </h2>
-
+              <span class="medal">🥈</span>
+              <small>Runner-Up</small>
+              <h2>Lleyton Renner</h2>
             </div>
 
-
             <div class="hall-finish third">
-
-              <span class="medal">
-                🥉
-              </span>
-
-              <small>
-                3rd Place
-              </small>
-
-              <h2>
-                Porter Roberts
-              </h2>
-
+              <span class="medal">🥉</span>
+              <small>3rd Place</small>
+              <h2>Porter Roberts</h2>
             </div>
 
           </div>
 
           <div class="hall-loser">
-
-            <span>
-              💀 LAST PLACE
-            </span>
-
-            <strong>
-              Alex Ross
-            </strong>
-
+            <span>💀 LAST PLACE</span>
+            <strong>Alex Ross</strong>
           </div>
 
         </article>
@@ -956,67 +771,28 @@
           <div class="hall-podium">
 
             <div class="hall-finish champion">
-
-              <span class="medal">
-                🥇
-              </span>
-
-              <small>
-                Champion
-              </small>
-
-              <h2>
-                Zander Briggs*
-              </h2>
-
+              <span class="medal">🥇</span>
+              <small>Champion</small>
+              <h2>Zander Briggs*</h2>
             </div>
-
 
             <div class="hall-finish second">
-
-              <span class="medal">
-                🥈
-              </span>
-
-              <small>
-                Runner-Up
-              </small>
-
-              <h2>
-                Porter Roberts
-              </h2>
-
+              <span class="medal">🥈</span>
+              <small>Runner-Up</small>
+              <h2>Porter Roberts</h2>
             </div>
 
-
             <div class="hall-finish third">
-
-              <span class="medal">
-                🥉
-              </span>
-
-              <small>
-                3rd Place
-              </small>
-
-              <h2>
-                Brayden Mccuen
-              </h2>
-
+              <span class="medal">🥉</span>
+              <small>3rd Place</small>
+              <h2>Brayden Mccuen</h2>
             </div>
 
           </div>
 
           <div class="hall-loser">
-
-            <span>
-              💀 LAST PLACE
-            </span>
-
-            <strong>
-              Luka Draganic
-            </strong>
-
+            <span>💀 LAST PLACE</span>
+            <strong>Luka Draganic</strong>
           </div>
 
         </article>
@@ -1032,67 +808,28 @@
           <div class="hall-podium">
 
             <div class="hall-finish champion">
-
-              <span class="medal">
-                🥇
-              </span>
-
-              <small>
-                Champion
-              </small>
-
-              <h2>
-                Lleyton Renner
-              </h2>
-
+              <span class="medal">🥇</span>
+              <small>Champion</small>
+              <h2>Lleyton Renner</h2>
             </div>
-
 
             <div class="hall-finish second">
-
-              <span class="medal">
-                🥈
-              </span>
-
-              <small>
-                Runner-Up
-              </small>
-
-              <h2>
-                Jackson O'Bleness
-              </h2>
-
+              <span class="medal">🥈</span>
+              <small>Runner-Up</small>
+              <h2>Jackson O'Bleness</h2>
             </div>
 
-
             <div class="hall-finish third">
-
-              <span class="medal">
-                🥉
-              </span>
-
-              <small>
-                3rd Place
-              </small>
-
-              <h2>
-                Zander Briggs
-              </h2>
-
+              <span class="medal">🥉</span>
+              <small>3rd Place</small>
+              <h2>Zander Briggs</h2>
             </div>
 
           </div>
 
           <div class="hall-loser">
-
-            <span>
-              💀 LAST PLACE
-            </span>
-
-            <strong>
-              Sam Ransome
-            </strong>
-
+            <span>💀 LAST PLACE</span>
+            <strong>Sam Ransome</strong>
           </div>
 
         </article>
@@ -1108,67 +845,30 @@
           <div class="hall-podium">
 
             <div class="hall-finish champion">
-
-              <span class="medal">
-                🥇
-              </span>
-
-              <small>
-                Champion
-              </small>
-
-              <h2>
-                Jackson O'Bleness
-              </h2>
-
+              <span class="medal">🥇</span>
+              <small>Champion</small>
+              <h2>Jackson O'Bleness</h2>
             </div>
-
 
             <div class="hall-finish second">
-
-              <span class="medal">
-                🥈
-              </span>
-
-              <small>
-                Runner-Up
-              </small>
-
-              <h2>
-                Porter Roberts
-              </h2>
-
+              <span class="medal">🥈</span>
+              <small>Runner-Up</small>
+              <h2>Porter Roberts</h2>
             </div>
 
-
             <div class="hall-finish third">
-
-              <span class="medal">
-                🥉
-              </span>
-
-              <small>
-                3rd Place
-              </small>
-
-              <h2>
-                Alex Ross
-              </h2>
-
+              <span class="medal">🥉</span>
+              <small>3rd Place</small>
+              <h2>Alex Ross</h2>
             </div>
 
           </div>
 
           <div class="hall-loser">
-
-            <span>
-              💀 CO-LAST PLACE
-            </span>
-
+            <span>💀 CO-LAST PLACE</span>
             <strong>
               Zander Briggs &amp; Zack Middlebrooks
             </strong>
-
           </div>
 
         </article>
@@ -1184,74 +884,37 @@
           <div class="hall-podium">
 
             <div class="hall-finish champion">
-
-              <span class="medal">
-                🥇
-              </span>
-
-              <small>
-                Champion
-              </small>
-
-              <h2>
-                Zander Briggs
-              </h2>
-
+              <span class="medal">🥇</span>
+              <small>Champion</small>
+              <h2>Zander Briggs</h2>
             </div>
-
 
             <div class="hall-finish second">
-
-              <span class="medal">
-                🥈
-              </span>
-
-              <small>
-                Runner-Up
-              </small>
-
-              <h2>
-                Porter Roberts
-              </h2>
-
+              <span class="medal">🥈</span>
+              <small>Runner-Up</small>
+              <h2>Porter Roberts</h2>
             </div>
 
-
             <div class="hall-finish third">
-
-              <span class="medal">
-                🥉
-              </span>
-
-              <small>
-                3rd Place
-              </small>
-
-              <h2>
-                Lleyton Renner
-              </h2>
-
+              <span class="medal">🥉</span>
+              <small>3rd Place</small>
+              <h2>Lleyton Renner</h2>
             </div>
 
           </div>
 
           <div class="hall-loser">
-
-            <span>
-              💀 LAST PLACE
-            </span>
-
-            <strong>
-              Cado Keller
-            </strong>
-
+            <span>💀 LAST PLACE</span>
+            <strong>Cado Keller</strong>
           </div>
 
         </article>
 
 
         <!-- 2026 -->
-        <article class="panel hall-season current-season">
+        <article
+          class="panel hall-season current-season"
+        >
 
           <div class="hall-year">
             2026
@@ -1260,19 +923,9 @@
           <div class="hall-podium">
 
             <div class="hall-finish champion">
-
-              <span class="medal">
-                🏆
-              </span>
-
-              <small>
-                Season In Progress
-              </small>
-
-              <h2>
-                Who Will Be Next?
-              </h2>
-
+              <span class="medal">🏆</span>
+              <small>Season In Progress</small>
+              <h2>Who Will Be Next?</h2>
             </div>
 
           </div>
@@ -1282,7 +935,6 @@
       </div>
 
 
-      <!-- HALL NOTES -->
       <div
         class="panel"
         style="margin-top:30px"
@@ -1297,19 +949,23 @@
         </h2>
 
         <p>
-          🏆 Champions are permanently recorded in CGA history.
+          🏆 Champions are permanently
+          recorded in CGA history.
         </p>
 
         <p>
-          🥈 Runner-ups and 🥉 third-place finishers are recognized as podium finishes.
+          🥈 Runner-ups and 🥉 third-place
+          finishers are recognized as podium finishes.
         </p>
 
         <p>
-          💀 Last-place finishes are also permanently remembered.
+          💀 Last-place finishes are also
+          permanently remembered.
         </p>
 
         <p>
-          * Zander Briggs' 2024 championship carries an official league asterisk.
+          * Zander Briggs' 2024 championship
+          carries an official league asterisk.
         </p>
 
       </div>
@@ -1334,16 +990,15 @@
         </h1>
 
         <p>
-          All-time achievements will be calculated as historical ESPN seasons are imported.
+          All-time achievements calculated
+          from CGA historical ESPN seasons.
         </p>
 
       </div>
 
-
       <div class="record-grid">
 
         <article class="panel">
-
           <span class="eyebrow">
             Single Week
           </span>
@@ -1355,12 +1010,9 @@
           <div class="record-value">
             —
           </div>
-
         </article>
 
-
         <article class="panel">
-
           <span class="eyebrow">
             Career
           </span>
@@ -1372,12 +1024,9 @@
           <div class="record-value">
             —
           </div>
-
         </article>
 
-
         <article class="panel">
-
           <span class="eyebrow">
             Streak
           </span>
@@ -1389,12 +1038,9 @@
           <div class="record-value">
             —
           </div>
-
         </article>
 
-
         <article class="panel">
-
           <span class="eyebrow">
             History
           </span>
@@ -1404,9 +1050,12 @@
           </h2>
 
           <div class="record-value">
-            —
+            2
           </div>
 
+          <p>
+            Zander Briggs
+          </p>
         </article>
 
       </div>
@@ -1431,14 +1080,13 @@
         </h1>
 
         <p>
-          The governing rules of Crippling Gambling Addicts.
+          The governing rules of
+          Crippling Gambling Addicts.
         </p>
 
       </div>
 
-
       <div class="rules-layout">
-
 
         <aside class="panel rule-index">
 
@@ -1476,46 +1124,37 @@
 
         </aside>
 
-
         <div class="rule-stack">
-
 
           <article
             class="panel rule"
             id="rule-format"
           >
 
-            <span>
-              01
-            </span>
+            <span>01</span>
 
             <div>
-
               <h2>
                 League Format
               </h2>
 
               <p>
-                10-team, 2-QB, full-PPR fantasy football league.
-                Established 2021 with a $200 annual buy-in.
+                10-team, 2-QB, full-PPR fantasy football
+                league. Established 2021 with a $200
+                annual buy-in.
               </p>
-
             </div>
 
           </article>
-
 
           <article
             class="panel rule"
             id="rule-qb"
           >
 
-            <span>
-              02
-            </span>
+            <span>02</span>
 
             <div>
-
               <h2>
                 QB Roster Limit
               </h2>
@@ -1523,166 +1162,149 @@
               <p>
                 Maximum of three active quarterbacks.
                 A fourth is allowed only while on IR.
-                Once activated, the roster must return to three quarterbacks by game time.
+                Once activated, the roster must return
+                to three quarterbacks by game time.
               </p>
-
             </div>
 
           </article>
-
 
           <article
             class="panel rule"
             id="rule-palmer"
           >
 
-            <span>
-              03
-            </span>
+            <span>03</span>
 
             <div>
-
               <h2>
                 Palmer Rule
               </h2>
 
               <p>
-                If a player is ruled out within one hour before kickoff,
-                the manager may be subject to a 10-point deduction unless an
+                If a player is ruled out within one hour
+                before kickoff, the manager may be subject
+                to a 10-point deduction unless an
                 extenuating-circumstances vote passes.
-                A manager can notify the commissioner before kickoff to request
-                a swap to an eligible player who has not yet played.
               </p>
 
+              <p>
+                A manager may notify the commissioner
+                before kickoff to request a swap to an
+                eligible player who has not yet played.
+              </p>
             </div>
 
           </article>
-
 
           <article
             class="panel rule"
             id="rule-trades"
           >
 
-            <span>
-              04
-            </span>
+            <span>04</span>
 
             <div>
-
               <h2>
                 Trades
               </h2>
 
               <p>
-                A trade is not final until accepted in the league app.
-                Player loans are prohibited.
-                Only next-year draft picks may be traded.
+                A trade is not final until accepted
+                in the league app. Player loans are
+                prohibited. Only next-year draft
+                picks may be traded.
               </p>
-
             </div>
 
           </article>
-
 
           <article
             class="panel rule"
             id="rule-waivers"
           >
 
-            <span>
-              05
-            </span>
+            <span>05</span>
 
             <div>
-
               <h2>
                 Waiver Exception
               </h2>
 
               <p>
-                When standard waiver timing would prevent a legitimate post-game pickup,
+                When standard waiver timing would
+                prevent a legitimate post-game pickup,
                 a bid can be submitted to the commissioners.
-                Highest valid bid wins; the dropped player cannot have already played.
+                Highest valid bid wins; the dropped player
+                cannot have already played.
               </p>
-
             </div>
 
           </article>
-
 
           <article
             class="panel rule"
             id="rule-rivalry"
           >
 
-            <span>
-              06
-            </span>
+            <span>06</span>
 
             <div>
-
               <h2>
                 Rivalry Week
               </h2>
 
               <p>
-                Week 13 is reserved for designated league rivalries
-                and carries its own place in CGA history.
+                Week 13 is reserved for designated
+                league rivalries and carries its own
+                place in CGA history.
               </p>
-
             </div>
 
           </article>
-
 
           <article
             class="panel rule"
             id="rule-awards"
           >
 
-            <span>
-              07
-            </span>
+            <span>07</span>
 
             <div>
-
               <h2>
                 Season Awards
               </h2>
 
               <p>
-                $50 superlatives include highest weekly team score,
-                highest single-player weekly score from a starter,
-                most season points, and Steal of the Draft for an eligible late-round selection.
+                $50 superlatives include highest weekly
+                team score, highest single-player weekly
+                score from a starter, most season points,
+                and Steal of the Draft for an eligible
+                late-round selection.
               </p>
-
             </div>
 
           </article>
-
 
           <article
             class="panel rule"
             id="rule-hamlin"
           >
 
-            <span>
-              08
-            </span>
+            <span>08</span>
 
             <div>
-
               <h2>
                 Damar Hamlin Rule
               </h2>
 
               <p>
-                For loser-championship scenarios where a game is canceled
-                or an extraordinary on-field event prevents a reasonable outcome,
-                punishment can be split when the result is not otherwise obvious.
+                For loser-championship scenarios where
+                a game is canceled or an extraordinary
+                on-field event prevents a reasonable
+                outcome, punishment can be split when
+                the result is not otherwise obvious.
               </p>
-
             </div>
 
           </article>
@@ -1711,129 +1333,91 @@
         </h1>
 
         <p>
-          A living timeline of the league's defining seasons and moments.
+          A living timeline of the league's
+          defining seasons and moments.
         </p>
 
       </div>
 
-
       <div class="timeline">
 
-
         <article>
-
-          <span>
-            2021
-          </span>
+          <span>2021</span>
 
           <div>
-
-            <h2>
-              The Beginning
-            </h2>
+            <h2>The Beginning</h2>
 
             <p>
               Crippling Gambling Addicts is founded.
+              Zander Briggs wins the first championship.
             </p>
-
           </div>
-
         </article>
-
 
         <article>
-
-          <span>
-            2022
-          </span>
+          <span>2022</span>
 
           <div>
-
-            <h2>
-              Season II
-            </h2>
+            <h2>Season II</h2>
 
             <p>
-              The league establishes its identity and rivalries.
+              Jackson O'Bleness becomes the second
+              champion in CGA history.
             </p>
-
           </div>
-
         </article>
-
 
         <article>
-
-          <span>
-            2023
-          </span>
+          <span>2023</span>
 
           <div>
-
-            <h2>
-              Season III
-            </h2>
+            <h2>Season III</h2>
 
             <p>
-              Another chapter is written in the trophy race.
+              Lleyton Renner captures the championship.
             </p>
-
           </div>
-
         </article>
-
 
         <article class="incident">
-
-          <span>
-            2024
-          </span>
+          <span>2024</span>
 
           <div>
-
             <h2>
               The Palmer Incident
             </h2>
 
             <p>
-              Palmer McCarthey is removed from league competition.
-              He remains alive.
+              Palmer McCarthey is removed from league
+              competition. He remains alive.
             </p>
 
+            <p>
+              Zander Briggs wins his second championship,
+              officially carrying an asterisk.
+            </p>
           </div>
-
         </article>
 
-
         <article>
-
-          <span>
-            2025
-          </span>
+          <span>2025</span>
 
           <div>
-
             <h2>
               The New Era
             </h2>
 
             <p>
               CGA continues without Palmer.
+              Brayden Mccuen captures his first championship.
             </p>
-
           </div>
-
         </article>
 
-
         <article class="current">
-
-          <span>
-            2026
-          </span>
+          <span>2026</span>
 
           <div>
-
             <h2>
               Current Season
             </h2>
@@ -1841,141 +1425,8 @@
             <p>
               The league enters its sixth season.
             </p>
-
           </div>
-
         </article>
-
-      </div>
-
-    </section>
-
-
-    <!-- PALMER MANAGER PROFILE -->
-    <section
-      class="page shell memorial-page"
-      id="palmer-profile"
-    >
-
-      <div class="memorial-hero">
-
-        <span class="dove">
-          🕊
-        </span>
-
-        <span class="eyebrow">
-          Manager Archive · Franchise 11
-        </span>
-
-        <h1>
-          Palmer McCarthey
-        </h1>
-
-        <p class="years">
-          Former CGA Manager · 2021–2024
-        </p>
-
-        <div class="memorial-divider"></div>
-
-        <blockquote>
-          Gone from the league. Not from this earth.
-        </blockquote>
-
-        <p class="memorial-note">
-          Palmer McCarthey is officially preserved as the 11th manager in CGA history.
-          He participated from 2021 through 2024 before being removed from league competition.
-          Palmer is alive.
-        </p>
-
-      </div>
-
-
-      <div class="memorial-grid">
-
-
-        <article class="panel">
-
-          <span class="eyebrow">
-            CGA Tenure
-          </span>
-
-          <div class="memorial-stat">
-            4
-          </div>
-
-          <p>
-            Seasons in the league
-          </p>
-
-        </article>
-
-
-        <article class="panel">
-
-          <span class="eyebrow">
-            Final Season
-          </span>
-
-          <div class="memorial-stat">
-            2024
-          </div>
-
-          <p>
-            Final year of league competition
-          </p>
-
-        </article>
-
-
-        <article class="panel">
-
-          <span class="eyebrow">
-            Current Status
-          </span>
-
-          <div class="memorial-stat alive">
-            ALIVE
-          </div>
-
-          <p>
-            Former manager
-          </p>
-
-        </article>
-
-
-      </div>
-
-
-      <div
-        class="panel"
-        style="margin-top:30px"
-      >
-
-        <span class="eyebrow">
-          League Legacy
-        </span>
-
-        <h2>
-          The Palmer Archive
-        </h2>
-
-        <p>
-          Palmer was part of CGA from its 2021 founding season through 2024.
-          His departure became one of the defining events in league history.
-        </p>
-
-        <p>
-          His name also lives on through the Palmer Rule in the official CGA rulebook.
-        </p>
-
-        <a
-          href="#memorial"
-          data-route="memorial"
-          class="text-link"
-        >
-          Visit the Palmer Memorial →
-        </a>
 
       </div>
 
@@ -2009,23 +1460,30 @@
         <div class="memorial-divider"></div>
 
         <blockquote>
-          Gone from the league. Not from this earth.
+          Gone from the league.
+          Not from this earth.
         </blockquote>
 
         <p class="memorial-note">
-          Palmer McCarthey was removed from Crippling Gambling Addicts in 2024.
+          Palmer McCarthey was removed from
+          Crippling Gambling Addicts in 2024.
           This memorial is a satirical league archive.
           Palmer did not die.
         </p>
 
-      </div>
+        <a
+          href="#manager-profile"
+          class="text-link manager-profile-link"
+          data-manager="Palmer McCarthey"
+        >
+          View Palmer's manager profile →
+        </a>
 
+      </div>
 
       <div class="memorial-grid">
 
-
         <article class="panel">
-
           <span class="eyebrow">
             Tenure
           </span>
@@ -2037,12 +1495,9 @@
           <p>
             Seasons in the league
           </p>
-
         </article>
 
-
         <article class="panel">
-
           <span class="eyebrow">
             Final Season
           </span>
@@ -2054,12 +1509,9 @@
           <p>
             The end of an era
           </p>
-
         </article>
 
-
         <article class="panel">
-
           <span class="eyebrow">
             Status
           </span>
@@ -2071,7 +1523,6 @@
           <p>
             Just no longer on the roster
           </p>
-
         </article>
 
       </div>
@@ -2081,12 +1532,12 @@
   </main>
 
 
+  <!-- FOOTER -->
   <footer>
 
     <div class="shell footer-inner">
 
       <div>
-
         <strong>
           CRIPPLING GAMBLING ADDICTS
         </strong>
@@ -2094,7 +1545,6 @@
         <span>
           Official Fantasy Football League · Est. 2021
         </span>
-
       </div>
 
       <div>
@@ -2104,7 +1554,6 @@
     </div>
 
   </footer>
-
 
   <script src="/app.js"></script>
 
