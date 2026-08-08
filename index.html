@@ -25,14 +25,13 @@
     rel="stylesheet"
   >
 
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
 
   <div class="noise"></div>
 
-  <!-- TOP TICKER -->
   <div class="ticker">
     <div class="ticker-inner">
       <span>CGA NETWORK</span>
@@ -47,7 +46,6 @@
     </div>
   </div>
 
-  <!-- HEADER -->
   <header class="site-header">
 
     <a
@@ -56,7 +54,7 @@
       data-route="home"
     >
       <img
-        src="/cga-logo.png"
+        src="cga-logo.png"
         alt="CGA crest"
       >
 
@@ -127,7 +125,6 @@
 
   <main>
 
-    <!-- HOME -->
     <section
       class="page active"
       id="home"
@@ -153,6 +150,10 @@
             A $200 buy-in. One trophy.
             A league history worthy of its own archive.
           </p>
+
+          <div class="home-season-line" id="home-season-line">
+            2026 SEASON · ESPN LIVE
+          </div>
 
           <div class="hero-actions">
 
@@ -200,7 +201,7 @@
           <div class="halo"></div>
 
           <img
-            src="/cga-logo.png"
+            src="cga-logo.png"
             alt="Crippling Gambling Addicts league crest"
           >
 
@@ -208,162 +209,186 @@
 
       </div>
 
-      <div class="shell dashboard-grid">
+      <div class="shell home-hq-grid">
 
-        <article
-          class="panel standings-card span-2"
-        >
-
+        <article class="panel home-featured-matchup" id="home-matchup">
           <div class="panel-head">
-
             <div>
               <span class="eyebrow">
-                Live ESPN Data
+                Featured Matchup
               </span>
 
               <h2>
-                2026 Standings
+                Loading this week's game…
               </h2>
             </div>
 
-            <span
-              id="data-status"
-              class="status"
-            >
-              Connecting…
+            <span class="status" id="home-week-status">
+              ESPN Live
             </span>
-
           </div>
 
-          <div
-            id="standings-preview"
-            class="table-wrap"
-          >
+          <p>
+            Pulling the best matchup from the current CGA week.
+          </p>
+        </article>
+
+        <section class="home-leader-strip" id="home-leader-strip">
+
+          <article class="panel home-leader-card">
+            <span class="eyebrow">
+              1st Place
+            </span>
+
+            <div class="home-leader-value">
+              —
+            </div>
+
+            <p>
+              Loading standings leader…
+            </p>
+          </article>
+
+          <article class="panel home-leader-card">
+            <span class="eyebrow">
+              Scoring Leader
+            </span>
+
+            <div class="home-leader-value">
+              —
+            </div>
+
+            <p>
+              Loading points leader…
+            </p>
+          </article>
+
+          <article class="panel home-leader-card">
+            <span class="eyebrow">
+              Highest Weekly Score
+            </span>
+
+            <div class="home-leader-value">
+              —
+            </div>
+
+            <p>
+              Loading weekly high…
+            </p>
+          </article>
+
+        </section>
+
+        <article class="panel home-playoff-race">
+
+          <div class="panel-head">
+            <div>
+              <span class="eyebrow">
+                Live Playoff Race
+              </span>
+
+              <h2>
+                Top 6 Qualify
+              </h2>
+            </div>
+
+            <a
+              href="#standings"
+              data-route="standings"
+              class="text-link"
+            >
+              Full Standings →
+            </a>
+          </div>
+
+          <div id="home-playoff-race">
             <div class="empty">
-              Loading league data…
+              Loading playoff race…
             </div>
           </div>
 
-          <a
-            href="#standings"
-            data-route="standings"
-            class="text-link"
-          >
-            Full standings →
-          </a>
+        </article>
+
+        <article class="panel home-latest-results">
+
+          <div class="panel-head">
+            <div>
+              <span class="eyebrow">
+                Around The League
+              </span>
+
+              <h2>
+                Latest Results
+              </h2>
+            </div>
+
+            <a
+              href="#schedule"
+              data-route="schedule"
+              class="text-link"
+            >
+              Full Schedule →
+            </a>
+          </div>
+
+          <div id="home-latest-results">
+            <div class="empty">
+              Loading latest results…
+            </div>
+          </div>
 
         </article>
 
-        <article
-          class="panel feature"
-          id="home-matchup"
-        >
+        <article class="panel home-quick-links">
+
           <span class="eyebrow">
-            Live Schedule
+            CGA Headquarters
           </span>
 
           <h2>
-            Featured Matchup
+            League Center
           </h2>
 
           <p>
-            Loading ESPN matchup…
-          </p>
-        </article>
-
-        <article
-          class="panel feature"
-          id="home-league-snapshot"
-        >
-          <span class="eyebrow">
-            League Snapshot
-          </span>
-
-          <h2>
-            2026 Season
-          </h2>
-
-          <p>
-            Loading league data…
-          </p>
-        </article>
-
-        <article class="panel feature">
-
-          <span class="eyebrow">
-            League Archive
-          </span>
-
-          <h2>
-            Hall of Fame
-          </h2>
-
-          <p>
-            Championship history from the
-            league's first season through today.
+            Jump straight into the live season, historical record book,
+            or the official CGA archive.
           </p>
 
-          <a
-            href="#hall-of-fame"
-            data-route="hall-of-fame"
-            class="text-link"
-          >
-            Enter trophy room →
-          </a>
+          <div class="home-quick-link-grid">
 
-        </article>
+            <a
+              href="#standings"
+              data-route="standings"
+              class="button gold"
+            >
+              Standings
+            </a>
 
-        <article
-          class="panel feature memorial-mini"
-        >
+            <a
+              href="#schedule"
+              data-route="schedule"
+              class="button ghost"
+            >
+              Schedule
+            </a>
 
-          <span class="eyebrow">
-            Former Manager Archive
-          </span>
+            <a
+              href="#records"
+              data-route="records"
+              class="button ghost"
+            >
+              Record Book
+            </a>
 
-          <h2>
-            Palmer McCarthey
-          </h2>
+            <a
+              href="#archive"
+              data-route="archive"
+              class="button ghost"
+            >
+              Season Archive
+            </a>
 
-          <p>
-            League member from 2021 through 2024.
-            Removed from league competition.
-            Still alive.
-          </p>
-
-          <a
-            href="#manager-profile"
-            class="text-link manager-profile-link"
-            data-manager="Palmer McCarthey"
-          >
-            View Palmer's profile →
-          </a>
-
-        </article>
-
-        <article class="panel feature">
-
-          <span class="eyebrow">
-            League Office
-          </span>
-
-          <h2>
-            Official Rulebook
-          </h2>
-
-          <p>
-            The custom rules, rivalry procedures,
-            roster limits, awards, trades and
-            commissioner rulings that govern CGA.
-          </p>
-
-          <a
-            href="#rules"
-            data-route="rules"
-            class="text-link"
-          >
-            Read the rules →
-          </a>
+          </div>
 
         </article>
 
@@ -371,8 +396,6 @@
 
     </section>
 
-
-    <!-- STANDINGS -->
     <section
       class="page shell"
       id="standings"
@@ -381,7 +404,7 @@
       <div class="page-title">
 
         <span class="eyebrow">
-          2026 Season
+          2026 Playoff Race
         </span>
 
         <h1>
@@ -389,12 +412,31 @@
         </h1>
 
         <p>
-          Live from the official CGA ESPN league.
+          The live CGA table with playoff positioning, games back,
+          current streaks and points-for rankings. The top six
+          qualify for the postseason.
         </p>
 
       </div>
 
-      <div class="panel">
+      <div class="standings-legend">
+        <div>
+          <span class="playoff-status in">IN</span>
+          <span>Current playoff position</span>
+        </div>
+
+        <div>
+          <span class="playoff-status out">OUT</span>
+          <span>Outside playoff field</span>
+        </div>
+
+        <div>
+          <strong>GB</strong>
+          <span>Games behind first place</span>
+        </div>
+      </div>
+
+      <div class="panel standings-main-panel">
 
         <div
           id="standings-full"
@@ -409,8 +451,6 @@
 
     </section>
 
-
-    <!-- SCHEDULE -->
     <section
       class="page shell"
       id="schedule"
@@ -443,8 +483,6 @@
 
     </section>
 
-
-    <!-- MANAGERS -->
     <section
       class="page shell"
       id="managers"
@@ -479,8 +517,6 @@
 
     </section>
 
-
-    <!-- MANAGER PROFILE -->
     <section
       class="page shell"
       id="manager-profile"
@@ -510,8 +546,6 @@
 
     </section>
 
-
-    <!-- RIVALRIES -->
     <section
       class="page shell"
       id="rivalries"
@@ -534,8 +568,6 @@
 
       </div>
 
-
-      <!-- PREMIER RIVALRY -->
       <div
         class="premier-rivalry"
         id="premier-rivalry"
@@ -590,8 +622,6 @@
 
       </div>
 
-
-      <!-- OTHER OFFICIAL RIVALRIES -->
       <div
         class="page-title"
         style="margin-top:55px"
@@ -641,7 +671,6 @@
           </div>
         </article>
 
-
         <article
           class="panel rivalry-card"
           data-rivalry-a="Sam Ransome"
@@ -665,7 +694,6 @@
           </div>
         </article>
 
-
         <article
           class="panel rivalry-card"
           data-rivalry-a="Cado Keller"
@@ -688,7 +716,6 @@
             <p>Loading rivalry data…</p>
           </div>
         </article>
-
 
         <article
           class="panel rivalry-card"
@@ -715,7 +742,6 @@
 
       </div>
 
-
       <div
         class="panel"
         style="margin-top:35px"
@@ -739,9 +765,6 @@
 
     </section>
 
-
-
-    <!-- COMMISSIONERS -->
     <section
       class="page shell"
       id="commissioners"
@@ -765,7 +788,6 @@
 
       </div>
 
-
       <div
         class="panel"
         style="margin-bottom:30px"
@@ -785,7 +807,6 @@
         </p>
 
       </div>
-
 
       <div
         class="commissioner-grid"
@@ -820,7 +841,6 @@
 
         </article>
 
-
         <article
           class="panel commissioner-card current-commissioner"
         >
@@ -845,7 +865,6 @@
         </article>
 
       </div>
-
 
       <div
         class="panel commissioner-card former-commissioner"
@@ -872,7 +891,6 @@
 
       </div>
 
-
       <div class="panel">
 
         <span class="eyebrow">
@@ -896,8 +914,6 @@
 
     </section>
 
-
-    <!-- HALL OF FAME -->
     <section
       class="page shell"
       id="hall-of-fame"
@@ -921,8 +937,6 @@
 
       </div>
 
-
-      <!-- MEDAL LEADERBOARD -->
       <div class="all-time-medals">
 
         <div class="medal-board-header">
@@ -949,7 +963,6 @@
           </div>
 
         </div>
-
 
         <div class="medal-table-wrap">
 
@@ -1109,7 +1122,6 @@
 
         </div>
 
-
         <div class="medal-legend">
           <span>🥇 Championships</span>
           <span>🥈 Runner-Ups</span>
@@ -1119,8 +1131,6 @@
 
       </div>
 
-
-      <!-- 2025 -->
       <div class="hall-seasons">
 
         <article class="panel hall-season">
@@ -1158,8 +1168,6 @@
 
         </article>
 
-
-        <!-- 2024 -->
         <article class="panel hall-season">
 
           <div class="hall-year">
@@ -1195,8 +1203,6 @@
 
         </article>
 
-
-        <!-- 2023 -->
         <article class="panel hall-season">
 
           <div class="hall-year">
@@ -1232,8 +1238,6 @@
 
         </article>
 
-
-        <!-- 2022 -->
         <article class="panel hall-season">
 
           <div class="hall-year">
@@ -1271,8 +1275,6 @@
 
         </article>
 
-
-        <!-- 2021 -->
         <article class="panel hall-season">
 
           <div class="hall-year">
@@ -1308,8 +1310,6 @@
 
         </article>
 
-
-        <!-- 2026 -->
         <article
           class="panel hall-season current-season"
         >
@@ -1331,7 +1331,6 @@
         </article>
 
       </div>
-
 
       <div
         class="panel"
@@ -1370,15 +1369,12 @@
 
     </section>
 
-
-
-    <!-- SEASON ARCHIVE -->
     <section
-      class="page shell"
+      class="page shell archive-page"
       id="archive"
     >
 
-      <div class="page-title">
+      <div class="page-title archive-page-title">
 
         <span class="eyebrow">
           CGA Historical Database
@@ -1389,29 +1385,34 @@
         </h1>
 
         <p>
-          Explore every CGA season from 2021 through the current year.
-          Standings, podiums, scoring and every recorded matchup are
-          pulled from the league's historical ESPN data.
+          Every CGA season in one place. Browse standings,
+          championship results, scoring leaders and the complete
+          matchup history pulled from the league archive.
         </p>
 
       </div>
 
-      <div
-        class="panel"
-        style="margin-bottom:22px"
-      >
+      <div class="archive-selector">
 
-        <span class="eyebrow">
-          Select Season
-        </span>
+        <div class="archive-selector-copy">
+
+          <span class="eyebrow">
+            Choose A Season
+          </span>
+
+          <h2>
+            Enter The Archive
+          </h2>
+
+          <p>
+            Select a year to open the complete CGA season file.
+          </p>
+
+        </div>
 
         <div
           id="archive-season-buttons"
-          style="
-            display:flex;
-            flex-wrap:wrap;
-            gap:10px;
-          "
+          class="archive-season-buttons"
         >
           <span class="status">
             Loading seasons…
@@ -1422,6 +1423,7 @@
 
       <div
         id="archive-season-content"
+        class="archive-season-content"
       >
 
         <div class="panel empty">
@@ -1432,8 +1434,6 @@
 
     </section>
 
-
-    <!-- RECORDS -->
     <section
       class="page shell"
       id="records"
@@ -1455,7 +1455,6 @@
         </p>
 
       </div>
-
 
       <div
         class="panel"
@@ -1493,7 +1492,6 @@
 
       </div>
 
-
       <div
         class="page-title"
         style="margin-top:45px"
@@ -1510,7 +1508,6 @@
         </h1>
 
       </div>
-
 
       <div class="record-grid">
 
@@ -1539,7 +1536,6 @@
 
         </article>
 
-
         <article class="panel">
 
           <span class="eyebrow">
@@ -1564,7 +1560,6 @@
           </p>
 
         </article>
-
 
         <article class="panel">
 
@@ -1591,7 +1586,6 @@
 
         </article>
 
-
         <article class="panel">
 
           <span class="eyebrow">
@@ -1616,7 +1610,6 @@
           </p>
 
         </article>
-
 
         <article class="panel">
 
@@ -1643,9 +1636,7 @@
 
         </article>
 
-
       </div>
-
 
       <div
         class="page-title"
@@ -1664,9 +1655,7 @@
 
       </div>
 
-
       <div class="record-grid">
-
 
         <article class="panel">
 
@@ -1692,7 +1681,6 @@
           </p>
 
         </article>
-
 
         <article class="panel">
 
@@ -1720,7 +1708,6 @@
 
         </article>
 
-
         <article class="panel">
 
           <span class="eyebrow">
@@ -1747,9 +1734,7 @@
 
         </article>
 
-
       </div>
-
 
       <div
         class="page-title"
@@ -1768,9 +1753,7 @@
 
       </div>
 
-
       <div class="record-grid">
-
 
         <article class="panel">
 
@@ -1796,7 +1779,6 @@
           </p>
 
         </article>
-
 
         <article class="panel">
 
@@ -1824,9 +1806,7 @@
 
         </article>
 
-
       </div>
-
 
       <div
         class="page-title"
@@ -1845,9 +1825,7 @@
 
       </div>
 
-
       <div class="record-grid">
-
 
         <article class="panel">
 
@@ -1875,7 +1853,6 @@
 
         </article>
 
-
         <article class="panel">
 
           <span class="eyebrow">
@@ -1901,7 +1878,6 @@
           </p>
 
         </article>
-
 
         <article class="panel">
 
@@ -1929,7 +1905,6 @@
 
         </article>
 
-
         <article class="panel">
 
           <span class="eyebrow">
@@ -1956,9 +1931,7 @@
 
         </article>
 
-
       </div>
-
 
       <div
         class="page-title"
@@ -1977,9 +1950,7 @@
 
       </div>
 
-
       <div class="record-grid">
-
 
         <article class="panel">
 
@@ -2006,7 +1977,6 @@
 
         </article>
 
-
         <article class="panel">
 
           <span class="eyebrow">
@@ -2032,9 +2002,7 @@
 
         </article>
 
-
       </div>
-
 
       <div
         class="panel"
@@ -2065,8 +2033,6 @@
 
     </section>
 
-
-    <!-- RULES -->
     <section
       class="page shell"
       id="rules"
@@ -2088,7 +2054,6 @@
         </p>
 
       </div>
-
 
       <div
         class="panel"
@@ -2118,7 +2083,6 @@
         </p>
 
       </div>
-
 
       <div class="rules-layout">
 
@@ -2174,11 +2138,8 @@
 
         </aside>
 
-
         <div class="rule-stack">
 
-
-          <!-- 01 DRAFT RULES -->
           <article
             class="panel rule"
             id="rule-draft"
@@ -2230,8 +2191,6 @@
 
           </article>
 
-
-          <!-- 02 ROSTER / TRADES -->
           <article
             class="panel rule"
             id="rule-roster-trades"
@@ -2301,8 +2260,6 @@
 
           </article>
 
-
-          <!-- 03 PALMER RULE -->
           <article
             class="panel rule"
             id="rule-palmer"
@@ -2358,8 +2315,6 @@
 
           </article>
 
-
-          <!-- 04 STRATEGIC BENCHING -->
           <article
             class="panel rule"
             id="rule-benching"
@@ -2395,8 +2350,6 @@
 
           </article>
 
-
-          <!-- 05 PLAYOFFS -->
           <article
             class="panel rule"
             id="rule-playoffs"
@@ -2433,20 +2386,14 @@
 
               <p>
                 The penalty may roll into a later playoff round
-                or even the following season. Examples in the
-                rulebook include a team with a bye taking the
-                deduction in Round 2, a seventh-place team taking
-                it in the following season's Week 1, or a loser-
-                bracket team taking it in the relevant punishment
-                matchup.
+                or even the following season.
               </p>
 
               <p>
                 A team is considered mathematically eliminated
                 if the required winning margin is greater than
                 the largest weekly point differential in league
-                history. The exact historical threshold is still
-                to be finalized with Alex.
+                history.
               </p>
 
               <p>
@@ -2458,8 +2405,6 @@
 
           </article>
 
-
-          <!-- 06 QB LIMIT -->
           <article
             class="panel rule"
             id="rule-qb"
@@ -2501,8 +2446,6 @@
 
           </article>
 
-
-          <!-- 07 MID-WEEK WAIVERS -->
           <article
             class="panel rule"
             id="rule-midweek-waivers"
@@ -2544,8 +2487,6 @@
 
           </article>
 
-
-          <!-- 08 DAMAR HAMLIN -->
           <article
             class="panel rule"
             id="rule-hamlin"
@@ -2581,8 +2522,6 @@
 
           </article>
 
-
-          <!-- 09 SEASON FORMAT -->
           <article
             class="panel rule"
             id="rule-season-format"
@@ -2628,8 +2567,6 @@
 
           </article>
 
-
-          <!-- 10 LAST PLACE -->
           <article
             class="panel rule"
             id="rule-last-place"
@@ -2659,8 +2596,6 @@
 
           </article>
 
-
-          <!-- 11 COMMISSIONER RULES -->
           <article
             class="panel rule"
             id="rule-commissioners"
@@ -2697,8 +2632,6 @@
 
           </article>
 
-
-          <!-- 12 POINT CHANGES -->
           <article
             class="panel rule"
             id="rule-point-changes"
@@ -2729,18 +2662,6 @@
               </p>
 
               <p>
-                Example: if Lamar fumbles and Derrick Henry
-                recovers it, D/ST gets +1, Lamar gets -1 and
-                Henry gets +1.
-              </p>
-
-              <p>
-                If Lamar muffs a snap and recovers it himself,
-                he receives -1 for the fumble and +1 for the
-                recovery, resulting in a net zero.
-              </p>
-
-              <p>
                 Defensive fourth-down stops receive
                 <strong>+1 point</strong>.
               </p>
@@ -2755,15 +2676,12 @@
 
           </article>
 
-
         </div>
 
       </div>
 
     </section>
 
-
-    <!-- HISTORY -->
     <section
       class="page shell"
       id="history"
@@ -2879,8 +2797,6 @@
 
     </section>
 
-
-    <!-- MEMORIAL -->
     <section
       class="page shell memorial-page"
       id="memorial"
@@ -2978,8 +2894,6 @@
 
   </main>
 
-
-  <!-- FOOTER -->
   <footer>
 
     <div class="shell footer-inner">
@@ -3002,7 +2916,7 @@
 
   </footer>
 
-  <script src="/app.js"></script>
+  <script src="app.js"></script>
 
 </body>
 </html>
