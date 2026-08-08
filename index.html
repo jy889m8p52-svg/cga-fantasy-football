@@ -25,13 +25,14 @@
     rel="stylesheet"
   >
 
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 
 <body>
 
   <div class="noise"></div>
 
+  <!-- TOP TICKER -->
   <div class="ticker">
     <div class="ticker-inner">
       <span>CGA NETWORK</span>
@@ -46,6 +47,7 @@
     </div>
   </div>
 
+  <!-- HEADER -->
   <header class="site-header">
 
     <a
@@ -54,7 +56,7 @@
       data-route="home"
     >
       <img
-        src="cga-logo.png"
+        src="/cga-logo.png"
         alt="CGA crest"
       >
 
@@ -129,6 +131,7 @@
 
   <main>
 
+    <!-- HOME -->
     <section
       class="page active"
       id="home"
@@ -205,7 +208,7 @@
           <div class="halo"></div>
 
           <img
-            src="cga-logo.png"
+            src="/cga-logo.png"
             alt="Crippling Gambling Addicts league crest"
           >
 
@@ -237,6 +240,7 @@
           </p>
         </article>
 
+
         <section class="home-leader-strip" id="home-leader-strip">
 
           <article class="panel home-leader-card">
@@ -248,9 +252,7 @@
               —
             </div>
 
-            <p>
-              Loading standings leader…
-            </p>
+            <p>Loading standings leader…</p>
           </article>
 
           <article class="panel home-leader-card">
@@ -262,9 +264,7 @@
               —
             </div>
 
-            <p>
-              Loading points leader…
-            </p>
+            <p>Loading points leader…</p>
           </article>
 
           <article class="panel home-leader-card">
@@ -276,12 +276,11 @@
               —
             </div>
 
-            <p>
-              Loading weekly high…
-            </p>
+            <p>Loading weekly high…</p>
           </article>
 
         </section>
+
 
         <article class="panel home-playoff-race">
 
@@ -313,6 +312,7 @@
 
         </article>
 
+
         <article class="panel home-latest-results">
 
           <div class="panel-head">
@@ -343,6 +343,7 @@
 
         </article>
 
+
         <article class="panel home-quick-links">
 
           <span class="eyebrow">
@@ -354,8 +355,8 @@
           </h2>
 
           <p>
-            Jump straight into the live season, weekly reports,
-            historical record book, or the official CGA archive.
+            Jump straight into the live season, historical record book,
+            or the official CGA archive.
           </p>
 
           <div class="home-quick-link-grid">
@@ -392,14 +393,6 @@
               Season Archive
             </a>
 
-            <a
-              href="#weekly"
-              data-route="weekly"
-              class="button ghost"
-            >
-              Weekly Report
-            </a>
-
           </div>
 
         </article>
@@ -409,6 +402,7 @@
     </section>
 
 
+    <!-- STANDINGS -->
     <section
       class="page shell"
       id="standings"
@@ -433,37 +427,20 @@
       </div>
 
       <div class="standings-legend">
-
         <div>
-          <span class="playoff-status in">
-            IN
-          </span>
-
-          <span>
-            Current playoff position
-          </span>
+          <span class="playoff-status in">IN</span>
+          <span>Current playoff position</span>
         </div>
 
         <div>
-          <span class="playoff-status out">
-            OUT
-          </span>
-
-          <span>
-            Outside playoff field
-          </span>
+          <span class="playoff-status out">OUT</span>
+          <span>Outside playoff field</span>
         </div>
 
         <div>
-          <strong>
-            GB
-          </strong>
-
-          <span>
-            Games behind first place
-          </span>
+          <strong>GB</strong>
+          <span>Games behind first place</span>
         </div>
-
       </div>
 
       <div class="panel standings-main-panel">
@@ -482,6 +459,7 @@
     </section>
 
 
+    <!-- SCHEDULE -->
     <section
       class="page shell"
       id="schedule"
@@ -513,6 +491,7 @@
       </div>
 
     </section>
+
 
 
     <!-- WEEKLY REPORT -->
@@ -577,6 +556,7 @@
     </section>
 
 
+    <!-- MANAGERS -->
     <section
       class="page shell"
       id="managers"
@@ -594,7 +574,7 @@
 
         <p>
           Ten active franchises plus former manager
-          Palmer McCarthey. Click any manager to
+          Palmer McCarthy. Click any manager to
           view their CGA career profile.
         </p>
 
@@ -612,6 +592,7 @@
     </section>
 
 
+    <!-- MANAGER PROFILE -->
     <section
       class="page shell"
       id="manager-profile"
@@ -642,6 +623,7 @@
     </section>
 
 
+    <!-- RIVALRIES -->
     <section
       class="page shell"
       id="rivalries"
@@ -664,6 +646,8 @@
 
       </div>
 
+
+      <!-- PREMIER RIVALRY -->
       <div
         class="premier-rivalry"
         id="premier-rivalry"
@@ -676,7 +660,6 @@
         <div class="premier-rivalry-matchup">
 
           <div class="premier-rivalry-manager">
-
             <span class="eyebrow">
               Side A
             </span>
@@ -684,7 +667,6 @@
             <h2>
               Alex Ross
             </h2>
-
           </div>
 
           <div class="premier-rivalry-vs">
@@ -692,7 +674,6 @@
           </div>
 
           <div class="premier-rivalry-manager">
-
             <span class="eyebrow">
               Side B
             </span>
@@ -700,7 +681,6 @@
             <h2>
               Porter Roberts
             </h2>
-
           </div>
 
         </div>
@@ -722,6 +702,8 @@
 
       </div>
 
+
+      <!-- OTHER OFFICIAL RIVALRIES -->
       <div
         class="page-title"
         style="margin-top:55px"
@@ -753,16 +735,13 @@
           data-rivalry-a="Lleyton Renner"
           data-rivalry-b="Zack Middlebrooks"
         >
-
           <span class="eyebrow">
             Official Rivalry
           </span>
 
           <h2>
             Lleyton Renner
-            <span class="rivalry-vs-small">
-              vs
-            </span>
+            <span class="rivalry-vs-small">vs</span>
             Zack Middlebrooks
           </h2>
 
@@ -770,28 +749,23 @@
             id="rivalry-lleyton-zack"
             class="rivalry-card-content"
           >
-            <p>
-              Loading rivalry data…
-            </p>
+            <p>Loading rivalry data…</p>
           </div>
-
         </article>
+
 
         <article
           class="panel rivalry-card"
           data-rivalry-a="Sam Ransome"
           data-rivalry-b="Zander Briggs"
         >
-
           <span class="eyebrow">
             Official Rivalry
           </span>
 
           <h2>
             Sam Ransome
-            <span class="rivalry-vs-small">
-              vs
-            </span>
+            <span class="rivalry-vs-small">vs</span>
             Zander Briggs
           </h2>
 
@@ -799,28 +773,23 @@
             id="rivalry-sam-zander"
             class="rivalry-card-content"
           >
-            <p>
-              Loading rivalry data…
-            </p>
+            <p>Loading rivalry data…</p>
           </div>
-
         </article>
+
 
         <article
           class="panel rivalry-card"
           data-rivalry-a="Cado Keller"
           data-rivalry-b="Jackson O'Bleness"
         >
-
           <span class="eyebrow">
             Official Rivalry
           </span>
 
           <h2>
             Cado Keller
-            <span class="rivalry-vs-small">
-              vs
-            </span>
+            <span class="rivalry-vs-small">vs</span>
             Jackson O'Bleness
           </h2>
 
@@ -828,28 +797,23 @@
             id="rivalry-cado-jackson"
             class="rivalry-card-content"
           >
-            <p>
-              Loading rivalry data…
-            </p>
+            <p>Loading rivalry data…</p>
           </div>
-
         </article>
+
 
         <article
           class="panel rivalry-card"
           data-rivalry-a="Brayden Mccuen"
           data-rivalry-b="Luka Draganic"
         >
-
           <span class="eyebrow">
             Official Rivalry
           </span>
 
           <h2>
             Brayden Mccuen
-            <span class="rivalry-vs-small">
-              vs
-            </span>
+            <span class="rivalry-vs-small">vs</span>
             Luka Draganic
           </h2>
 
@@ -857,18 +821,39 @@
             id="rivalry-brayden-luka"
             class="rivalry-card-content"
           >
-            <p>
-              Loading rivalry data…
-            </p>
+            <p>Loading rivalry data…</p>
           </div>
-
         </article>
+
+      </div>
+
+
+      <div
+        class="panel"
+        style="margin-top:35px"
+      >
+
+        <span class="eyebrow">
+          Official Rivalries
+        </span>
+
+        <h2>
+          Five Designated Matchups
+        </h2>
+
+        <p>
+          These five matchups are the official CGA rivalry pairings.
+          Historical rivalry stats are calculated only from real
+          manager-vs-manager games.
+        </p>
 
       </div>
 
     </section>
 
 
+
+    <!-- COMMISSIONERS -->
     <section
       class="page shell"
       id="commissioners"
@@ -886,9 +871,12 @@
 
         <p>
           The leadership history of Crippling Gambling Addicts.
+          One original commissioner era followed by the current
+          co-commissioner administration.
         </p>
 
       </div>
+
 
       <div
         class="panel"
@@ -909,6 +897,7 @@
         </p>
 
       </div>
+
 
       <div
         class="commissioner-grid"
@@ -936,7 +925,13 @@
             Current CGA co-commissioner.
           </p>
 
+          <p>
+            Serves alongside Zander Briggs beginning
+            with the 2025 season.
+          </p>
+
         </article>
+
 
         <article
           class="panel commissioner-card current-commissioner"
@@ -954,9 +949,15 @@
             Current CGA co-commissioner.
           </p>
 
+          <p>
+            Serves alongside Lleyton Renner beginning
+            with the 2025 season.
+          </p>
+
         </article>
 
       </div>
+
 
       <div
         class="panel commissioner-card former-commissioner"
@@ -976,11 +977,39 @@
           2021–2024 era.
         </p>
 
+        <p>
+          Alex led the commissioner's office from
+          the founding season through the end of 2024.
+        </p>
+
+      </div>
+
+
+      <div class="panel">
+
+        <span class="eyebrow">
+          Commissioner Rules
+        </span>
+
+        <h2>
+          How the Office Changes Hands
+        </h2>
+
+        <p>
+          A commissioner may be voted out by a 5/9 vote.
+        </p>
+
+        <p>
+          When a new commissioner is needed, coaches may
+          nominate themselves and the league then holds a vote.
+        </p>
+
       </div>
 
     </section>
 
 
+    <!-- HALL OF FAME -->
     <section
       class="page shell"
       id="hall-of-fame"
@@ -998,10 +1027,14 @@
 
         <p>
           The official history of Crippling Gambling Addicts.
+          Champions, podium finishers, and the unfortunate
+          last-place teams.
         </p>
 
       </div>
 
+
+      <!-- MEDAL LEADERBOARD -->
       <div class="all-time-medals">
 
         <div class="medal-board-header">
@@ -1029,11 +1062,13 @@
 
         </div>
 
+
         <div class="medal-table-wrap">
 
           <table class="medal-table">
 
             <thead>
+
               <tr>
                 <th>Rank</th>
                 <th>Manager</th>
@@ -1043,13 +1078,16 @@
                 <th>Podiums</th>
                 <th>💀</th>
               </tr>
+
             </thead>
 
             <tbody>
 
               <tr class="medal-leader">
                 <td class="medal-rank">1</td>
-                <td class="medal-manager">Porter Roberts</td>
+                <td class="medal-manager">
+                  Porter Roberts
+                </td>
                 <td>0</td>
                 <td>3</td>
                 <td>1</td>
@@ -1059,7 +1097,9 @@
 
               <tr>
                 <td class="medal-rank">2</td>
-                <td class="medal-manager">Zander Briggs</td>
+                <td class="medal-manager">
+                  Zander Briggs
+                </td>
                 <td class="gold-count">2</td>
                 <td>0</td>
                 <td>1</td>
@@ -1069,7 +1109,9 @@
 
               <tr>
                 <td class="medal-rank">3</td>
-                <td class="medal-manager">Lleyton Renner</td>
+                <td class="medal-manager">
+                  Lleyton Renner
+                </td>
                 <td class="gold-count">1</td>
                 <td>1</td>
                 <td>1</td>
@@ -1079,7 +1121,9 @@
 
               <tr>
                 <td class="medal-rank">4</td>
-                <td class="medal-manager">Jackson O'Bleness</td>
+                <td class="medal-manager">
+                  Jackson O'Bleness
+                </td>
                 <td class="gold-count">1</td>
                 <td>1</td>
                 <td>0</td>
@@ -1089,7 +1133,9 @@
 
               <tr>
                 <td class="medal-rank">5</td>
-                <td class="medal-manager">Brayden Mccuen</td>
+                <td class="medal-manager">
+                  Brayden Mccuen
+                </td>
                 <td class="gold-count">1</td>
                 <td>0</td>
                 <td>1</td>
@@ -1099,7 +1145,9 @@
 
               <tr>
                 <td class="medal-rank">6</td>
-                <td class="medal-manager">Alex Ross</td>
+                <td class="medal-manager">
+                  Alex Ross
+                </td>
                 <td>0</td>
                 <td>0</td>
                 <td>1</td>
@@ -1109,7 +1157,9 @@
 
               <tr>
                 <td class="medal-rank">7</td>
-                <td class="medal-manager">Cado Keller</td>
+                <td class="medal-manager">
+                  Cado Keller
+                </td>
                 <td>0</td>
                 <td>0</td>
                 <td>0</td>
@@ -1119,7 +1169,9 @@
 
               <tr>
                 <td class="medal-rank">8</td>
-                <td class="medal-manager">Luka Draganic</td>
+                <td class="medal-manager">
+                  Luka Draganic
+                </td>
                 <td>0</td>
                 <td>0</td>
                 <td>0</td>
@@ -1129,7 +1181,9 @@
 
               <tr>
                 <td class="medal-rank">9</td>
-                <td class="medal-manager">Sam Ransome</td>
+                <td class="medal-manager">
+                  Sam Ransome
+                </td>
                 <td>0</td>
                 <td>0</td>
                 <td>0</td>
@@ -1139,7 +1193,9 @@
 
               <tr>
                 <td class="medal-rank">10</td>
-                <td class="medal-manager">Zack Middlebrooks</td>
+                <td class="medal-manager">
+                  Zack Middlebrooks
+                </td>
                 <td>0</td>
                 <td>0</td>
                 <td>0</td>
@@ -1149,7 +1205,9 @@
 
               <tr>
                 <td class="medal-rank">11</td>
-                <td class="medal-manager">Palmer McCarthey</td>
+                <td class="medal-manager">
+                  Palmer McCarthy
+                </td>
                 <td>0</td>
                 <td>0</td>
                 <td>0</td>
@@ -1163,11 +1221,270 @@
 
         </div>
 
+
+        <div class="medal-legend">
+          <span>🥇 Championships</span>
+          <span>🥈 Runner-Ups</span>
+          <span>🥉 Third Place</span>
+          <span>💀 Last Place</span>
+        </div>
+
+      </div>
+
+
+      <!-- 2025 -->
+      <div class="hall-seasons">
+
+        <article class="panel hall-season">
+
+          <div class="hall-year">
+            2025
+          </div>
+
+          <div class="hall-podium">
+
+            <div class="hall-finish champion">
+              <span class="medal">🥇</span>
+              <small>Champion</small>
+              <h2>Brayden Mccuen</h2>
+            </div>
+
+            <div class="hall-finish second">
+              <span class="medal">🥈</span>
+              <small>Runner-Up</small>
+              <h2>Lleyton Renner</h2>
+            </div>
+
+            <div class="hall-finish third">
+              <span class="medal">🥉</span>
+              <small>3rd Place</small>
+              <h2>Porter Roberts</h2>
+            </div>
+
+          </div>
+
+          <div class="hall-loser">
+            <span>💀 LAST PLACE</span>
+            <strong>Alex Ross</strong>
+          </div>
+
+        </article>
+
+
+        <!-- 2024 -->
+        <article class="panel hall-season">
+
+          <div class="hall-year">
+            2024
+          </div>
+
+          <div class="hall-podium">
+
+            <div class="hall-finish champion">
+              <span class="medal">🥇</span>
+              <small>Champion</small>
+              <h2>Zander Briggs*</h2>
+            </div>
+
+            <div class="hall-finish second">
+              <span class="medal">🥈</span>
+              <small>Runner-Up</small>
+              <h2>Porter Roberts</h2>
+            </div>
+
+            <div class="hall-finish third">
+              <span class="medal">🥉</span>
+              <small>3rd Place</small>
+              <h2>Brayden Mccuen</h2>
+            </div>
+
+          </div>
+
+          <div class="hall-loser">
+            <span>💀 LAST PLACE</span>
+            <strong>Luka Draganic</strong>
+          </div>
+
+        </article>
+
+
+        <!-- 2023 -->
+        <article class="panel hall-season">
+
+          <div class="hall-year">
+            2023
+          </div>
+
+          <div class="hall-podium">
+
+            <div class="hall-finish champion">
+              <span class="medal">🥇</span>
+              <small>Champion</small>
+              <h2>Lleyton Renner</h2>
+            </div>
+
+            <div class="hall-finish second">
+              <span class="medal">🥈</span>
+              <small>Runner-Up</small>
+              <h2>Jackson O'Bleness</h2>
+            </div>
+
+            <div class="hall-finish third">
+              <span class="medal">🥉</span>
+              <small>3rd Place</small>
+              <h2>Zander Briggs</h2>
+            </div>
+
+          </div>
+
+          <div class="hall-loser">
+            <span>💀 LAST PLACE</span>
+            <strong>Sam Ransome</strong>
+          </div>
+
+        </article>
+
+
+        <!-- 2022 -->
+        <article class="panel hall-season">
+
+          <div class="hall-year">
+            2022
+          </div>
+
+          <div class="hall-podium">
+
+            <div class="hall-finish champion">
+              <span class="medal">🥇</span>
+              <small>Champion</small>
+              <h2>Jackson O'Bleness</h2>
+            </div>
+
+            <div class="hall-finish second">
+              <span class="medal">🥈</span>
+              <small>Runner-Up</small>
+              <h2>Porter Roberts</h2>
+            </div>
+
+            <div class="hall-finish third">
+              <span class="medal">🥉</span>
+              <small>3rd Place</small>
+              <h2>Alex Ross</h2>
+            </div>
+
+          </div>
+
+          <div class="hall-loser">
+            <span>💀 CO-LAST PLACE</span>
+            <strong>
+              Zander Briggs &amp; Zack Middlebrooks
+            </strong>
+          </div>
+
+        </article>
+
+
+        <!-- 2021 -->
+        <article class="panel hall-season">
+
+          <div class="hall-year">
+            2021
+          </div>
+
+          <div class="hall-podium">
+
+            <div class="hall-finish champion">
+              <span class="medal">🥇</span>
+              <small>Champion</small>
+              <h2>Zander Briggs</h2>
+            </div>
+
+            <div class="hall-finish second">
+              <span class="medal">🥈</span>
+              <small>Runner-Up</small>
+              <h2>Porter Roberts</h2>
+            </div>
+
+            <div class="hall-finish third">
+              <span class="medal">🥉</span>
+              <small>3rd Place</small>
+              <h2>Lleyton Renner</h2>
+            </div>
+
+          </div>
+
+          <div class="hall-loser">
+            <span>💀 LAST PLACE</span>
+            <strong>Cado Keller</strong>
+          </div>
+
+        </article>
+
+
+        <!-- 2026 -->
+        <article
+          class="panel hall-season current-season"
+        >
+
+          <div class="hall-year">
+            2026
+          </div>
+
+          <div class="hall-podium">
+
+            <div class="hall-finish champion">
+              <span class="medal">🏆</span>
+              <small>Season In Progress</small>
+              <h2>Who Will Be Next?</h2>
+            </div>
+
+          </div>
+
+        </article>
+
+      </div>
+
+
+      <div
+        class="panel"
+        style="margin-top:30px"
+      >
+
+        <span class="eyebrow">
+          Official Archive
+        </span>
+
+        <h2>
+          Hall of Fame Notes
+        </h2>
+
+        <p>
+          🏆 Champions are permanently
+          recorded in CGA history.
+        </p>
+
+        <p>
+          🥈 Runner-ups and 🥉 third-place
+          finishers are recognized as podium finishes.
+        </p>
+
+        <p>
+          💀 Last-place finishes are also
+          permanently remembered.
+        </p>
+
+        <p>
+          * Zander Briggs' 2024 championship
+          carries an official league asterisk.
+        </p>
+
       </div>
 
     </section>
 
 
+
+    <!-- SEASON ARCHIVE -->
     <section
       class="page shell archive-page"
       id="archive"
@@ -1184,7 +1501,9 @@
         </h1>
 
         <p>
-          Every CGA season in one place.
+          Every CGA season in one place. Browse standings,
+          championship results, scoring leaders and the complete
+          matchup history pulled from the league archive.
         </p>
 
       </div>
@@ -1232,6 +1551,7 @@
     </section>
 
 
+    <!-- RECORDS -->
     <section
       class="page shell"
       id="records"
@@ -1249,10 +1569,11 @@
 
         <p>
           The greatest, worst, closest and most dominant
-          performances in CGA history.
+          performances in Crippling Gambling Addicts history.
         </p>
 
       </div>
+
 
       <div
         class="panel"
@@ -1262,6 +1583,7 @@
         <div class="panel-head">
 
           <div>
+
             <span class="eyebrow">
               Historical ESPN Database
             </span>
@@ -1269,6 +1591,7 @@
             <h2>
               CGA All-Time Records
             </h2>
+
           </div>
 
           <span
@@ -1280,127 +1603,588 @@
 
         </div>
 
+        <p>
+          Statistical records are calculated from the league's
+          historical ESPN data. Trophy records use the official
+          CGA Hall of Fame results.
+        </p>
+
       </div>
+
+
+      <div
+        class="page-title"
+        style="margin-top:45px"
+      >
+
+        <span class="eyebrow">
+          Trophy Case
+        </span>
+
+        <h1
+          style="font-size:clamp(40px,5vw,68px)"
+        >
+          League Records
+        </h1>
+
+      </div>
+
 
       <div class="record-grid">
 
         <article class="panel">
-          <span class="eyebrow">Championships</span>
-          <h2>Most Championships</h2>
-          <div class="record-value" id="record-most-championships">—</div>
-          <p id="record-most-championships-detail">Loading…</p>
+
+          <span class="eyebrow">
+            Championships
+          </span>
+
+          <h2>
+            Most Championships
+          </h2>
+
+          <div
+            class="record-value"
+            id="record-most-championships"
+          >
+            —
+          </div>
+
+          <p
+            id="record-most-championships-detail"
+          >
+            Loading…
+          </p>
+
         </article>
 
-        <article class="panel">
-          <span class="eyebrow">Podiums</span>
-          <h2>Most Podium Finishes</h2>
-          <div class="record-value" id="record-most-podiums">—</div>
-          <p id="record-most-podiums-detail">Loading…</p>
-        </article>
 
         <article class="panel">
-          <span class="eyebrow">Second Place</span>
-          <h2>Most Runner-Ups</h2>
-          <div class="record-value" id="record-most-runnerups">—</div>
-          <p id="record-most-runnerups-detail">Loading…</p>
+
+          <span class="eyebrow">
+            Podiums
+          </span>
+
+          <h2>
+            Most Podium Finishes
+          </h2>
+
+          <div
+            class="record-value"
+            id="record-most-podiums"
+          >
+            —
+          </div>
+
+          <p
+            id="record-most-podiums-detail"
+          >
+            Loading…
+          </p>
+
         </article>
 
-        <article class="panel">
-          <span class="eyebrow">Third Place</span>
-          <h2>Most Third Places</h2>
-          <div class="record-value" id="record-most-thirds">—</div>
-          <p id="record-most-thirds-detail">Loading…</p>
-        </article>
 
         <article class="panel">
-          <span class="eyebrow">The Bottom</span>
-          <h2>Most Last Places</h2>
-          <div class="record-value" id="record-most-lastplaces">—</div>
-          <p id="record-most-lastplaces-detail">Loading…</p>
+
+          <span class="eyebrow">
+            Second Place
+          </span>
+
+          <h2>
+            Most Runner-Ups
+          </h2>
+
+          <div
+            class="record-value"
+            id="record-most-runnerups"
+          >
+            —
+          </div>
+
+          <p
+            id="record-most-runnerups-detail"
+          >
+            Loading…
+          </p>
+
         </article>
 
-        <article class="panel">
-          <span class="eyebrow">Career</span>
-          <h2>Most Wins</h2>
-          <div class="record-value" id="record-career-wins">—</div>
-          <p id="record-career-wins-detail">Loading…</p>
-        </article>
 
         <article class="panel">
-          <span class="eyebrow">Career</span>
-          <h2>Most Points</h2>
-          <div class="record-value" id="record-career-points">—</div>
-          <p id="record-career-points-detail">Loading…</p>
+
+          <span class="eyebrow">
+            Third Place
+          </span>
+
+          <h2>
+            Most Third Places
+          </h2>
+
+          <div
+            class="record-value"
+            id="record-most-thirds"
+          >
+            —
+          </div>
+
+          <p
+            id="record-most-thirds-detail"
+          >
+            Loading…
+          </p>
+
         </article>
 
-        <article class="panel">
-          <span class="eyebrow">Career</span>
-          <h2>Best Win Percentage</h2>
-          <div class="record-value" id="record-career-winpct">—</div>
-          <p id="record-career-winpct-detail">Loading…</p>
-        </article>
 
         <article class="panel">
-          <span class="eyebrow">Season</span>
-          <h2>Most Wins</h2>
-          <div class="record-value" id="record-season-wins">—</div>
-          <p id="record-season-wins-detail">Loading…</p>
+
+          <span class="eyebrow">
+            The Bottom
+          </span>
+
+          <h2>
+            Most Last Places
+          </h2>
+
+          <div
+            class="record-value"
+            id="record-most-lastplaces"
+          >
+            —
+          </div>
+
+          <p
+            id="record-most-lastplaces-detail"
+          >
+            Loading…
+          </p>
+
         </article>
 
-        <article class="panel">
-          <span class="eyebrow">Season</span>
-          <h2>Most Points</h2>
-          <div class="record-value" id="record-season-points">—</div>
-          <p id="record-season-points-detail">Loading…</p>
-        </article>
+
+      </div>
+
+
+      <div
+        class="page-title"
+        style="margin-top:55px"
+      >
+
+        <span class="eyebrow">
+          All-Time Leaders
+        </span>
+
+        <h1
+          style="font-size:clamp(40px,5vw,68px)"
+        >
+          Career Records
+        </h1>
+
+      </div>
+
+
+      <div class="record-grid">
+
 
         <article class="panel">
-          <span class="eyebrow">Single Week</span>
-          <h2>Highest Score</h2>
-          <div class="record-value" id="record-high-week">—</div>
-          <p id="record-high-week-detail">Loading…</p>
+
+          <span class="eyebrow">
+            Career
+          </span>
+
+          <h2>
+            Most Wins
+          </h2>
+
+          <div
+            class="record-value"
+            id="record-career-wins"
+          >
+            —
+          </div>
+
+          <p
+            id="record-career-wins-detail"
+          >
+            Loading…
+          </p>
+
         </article>
 
-        <article class="panel">
-          <span class="eyebrow">Single Week</span>
-          <h2>Lowest Score</h2>
-          <div class="record-value" id="record-low-week">—</div>
-          <p id="record-low-week-detail">Loading…</p>
-        </article>
 
         <article class="panel">
-          <span class="eyebrow">Margin</span>
-          <h2>Biggest Blowout</h2>
-          <div class="record-value" id="record-biggest-blowout">—</div>
-          <p id="record-biggest-blowout-detail">Loading…</p>
+
+          <span class="eyebrow">
+            Career
+          </span>
+
+          <h2>
+            Most Points
+          </h2>
+
+          <div
+            class="record-value"
+            id="record-career-points"
+            style="font-size:46px"
+          >
+            —
+          </div>
+
+          <p
+            id="record-career-points-detail"
+          >
+            Loading…
+          </p>
+
         </article>
 
-        <article class="panel">
-          <span class="eyebrow">Margin</span>
-          <h2>Closest Victory</h2>
-          <div class="record-value" id="record-closest-win">—</div>
-          <p id="record-closest-win-detail">Loading…</p>
-        </article>
 
         <article class="panel">
-          <span class="eyebrow">Winning</span>
-          <h2>Longest Win Streak</h2>
-          <div class="record-value" id="record-longest-win-streak">—</div>
-          <p id="record-longest-win-streak-detail">Loading…</p>
+
+          <span class="eyebrow">
+            Career
+          </span>
+
+          <h2>
+            Best Win Percentage
+          </h2>
+
+          <div
+            class="record-value"
+            id="record-career-winpct"
+            style="font-size:50px"
+          >
+            —
+          </div>
+
+          <p
+            id="record-career-winpct-detail"
+          >
+            Loading…
+          </p>
+
         </article>
 
+
+      </div>
+
+
+      <div
+        class="page-title"
+        style="margin-top:55px"
+      >
+
+        <span class="eyebrow">
+          Single Season
+        </span>
+
+        <h1
+          style="font-size:clamp(40px,5vw,68px)"
+        >
+          Season Records
+        </h1>
+
+      </div>
+
+
+      <div class="record-grid">
+
+
         <article class="panel">
-          <span class="eyebrow">Losing</span>
-          <h2>Longest Losing Streak</h2>
-          <div class="record-value" id="record-longest-loss-streak">—</div>
-          <p id="record-longest-loss-streak-detail">Loading…</p>
+
+          <span class="eyebrow">
+            Season
+          </span>
+
+          <h2>
+            Most Wins
+          </h2>
+
+          <div
+            class="record-value"
+            id="record-season-wins"
+          >
+            —
+          </div>
+
+          <p
+            id="record-season-wins-detail"
+          >
+            Loading…
+          </p>
+
         </article>
+
+
+        <article class="panel">
+
+          <span class="eyebrow">
+            Season
+          </span>
+
+          <h2>
+            Most Points
+          </h2>
+
+          <div
+            class="record-value"
+            id="record-season-points"
+            style="font-size:46px"
+          >
+            —
+          </div>
+
+          <p
+            id="record-season-points-detail"
+          >
+            Loading…
+          </p>
+
+        </article>
+
+
+      </div>
+
+
+      <div
+        class="page-title"
+        style="margin-top:55px"
+      >
+
+        <span class="eyebrow">
+          Any Given Week
+        </span>
+
+        <h1
+          style="font-size:clamp(40px,5vw,68px)"
+        >
+          Weekly Records
+        </h1>
+
+      </div>
+
+
+      <div class="record-grid">
+
+
+        <article class="panel">
+
+          <span class="eyebrow">
+            Single Week
+          </span>
+
+          <h2>
+            Highest Score
+          </h2>
+
+          <div
+            class="record-value"
+            id="record-high-week"
+            style="font-size:46px"
+          >
+            —
+          </div>
+
+          <p
+            id="record-high-week-detail"
+          >
+            Loading…
+          </p>
+
+        </article>
+
+
+        <article class="panel">
+
+          <span class="eyebrow">
+            Single Week
+          </span>
+
+          <h2>
+            Lowest Score
+          </h2>
+
+          <div
+            class="record-value"
+            id="record-low-week"
+            style="font-size:46px"
+          >
+            —
+          </div>
+
+          <p
+            id="record-low-week-detail"
+          >
+            Loading…
+          </p>
+
+        </article>
+
+
+        <article class="panel">
+
+          <span class="eyebrow">
+            Margin
+          </span>
+
+          <h2>
+            Biggest Blowout
+          </h2>
+
+          <div
+            class="record-value"
+            id="record-biggest-blowout"
+            style="font-size:46px"
+          >
+            —
+          </div>
+
+          <p
+            id="record-biggest-blowout-detail"
+          >
+            Loading…
+          </p>
+
+        </article>
+
+
+        <article class="panel">
+
+          <span class="eyebrow">
+            Margin
+          </span>
+
+          <h2>
+            Closest Victory
+          </h2>
+
+          <div
+            class="record-value"
+            id="record-closest-win"
+            style="font-size:46px"
+          >
+            —
+          </div>
+
+          <p
+            id="record-closest-win-detail"
+          >
+            Loading…
+          </p>
+
+        </article>
+
+
+      </div>
+
+
+      <div
+        class="page-title"
+        style="margin-top:55px"
+      >
+
+        <span class="eyebrow">
+          Momentum
+        </span>
+
+        <h1
+          style="font-size:clamp(40px,5vw,68px)"
+        >
+          Streak Records
+        </h1>
+
+      </div>
+
+
+      <div class="record-grid">
+
+
+        <article class="panel">
+
+          <span class="eyebrow">
+            Winning
+          </span>
+
+          <h2>
+            Longest Win Streak
+          </h2>
+
+          <div
+            class="record-value"
+            id="record-longest-win-streak"
+          >
+            —
+          </div>
+
+          <p
+            id="record-longest-win-streak-detail"
+          >
+            Loading…
+          </p>
+
+        </article>
+
+
+        <article class="panel">
+
+          <span class="eyebrow">
+            Losing
+          </span>
+
+          <h2>
+            Longest Losing Streak
+          </h2>
+
+          <div
+            class="record-value"
+            id="record-longest-loss-streak"
+          >
+            —
+          </div>
+
+          <p
+            id="record-longest-loss-streak-detail"
+          >
+            Loading…
+          </p>
+
+        </article>
+
+
+      </div>
+
+
+      <div
+        class="panel"
+        style="margin-top:35px"
+      >
+
+        <span class="eyebrow">
+          Living Record Book
+        </span>
+
+        <h2>
+          Records Update Automatically
+        </h2>
+
+        <p>
+          As new CGA matchups are completed,
+          eligible scoring, career and streak records
+          can change automatically.
+        </p>
+
+        <p>
+          Championship, runner-up, third-place and
+          last-place records follow the official
+          CGA Hall of Fame archive.
+        </p>
 
       </div>
 
     </section>
 
 
+    <!-- RULES -->
     <section
       class="page shell"
       id="rules"
@@ -1418,9 +2202,41 @@
 
         <p>
           The full governing rules of Crippling Gambling Addicts.
+          ESPN · 10 teams · PPR · 2QB · $200 entry fee.
         </p>
 
       </div>
+
+
+      <div
+        class="panel"
+        style="margin-bottom:28px"
+      >
+
+        <span class="eyebrow">
+          League Basics
+        </span>
+
+        <h2>
+          CGA Format
+        </h2>
+
+        <p>
+          Platform: ESPN · 10 Teams · PPR · 2QB.
+        </p>
+
+        <p>
+          Entry Fee: $200. First place receives 70% of
+          the prize pool and second place receives 30%.
+        </p>
+
+        <p>
+          Current Commissioners:
+          Lleyton Renner and Zander Briggs.
+        </p>
+
+      </div>
+
 
       <div class="rules-layout">
 
@@ -1476,125 +2292,587 @@
 
         </aside>
 
+
         <div class="rule-stack">
 
-          <article class="panel rule" id="rule-draft">
+
+          <!-- 01 DRAFT RULES -->
+          <article
+            class="panel rule"
+            id="rule-draft"
+          >
+
             <span>01</span>
+
             <div>
-              <h2>Draft Rules</h2>
-              <p>Snake draft.</p>
+
+              <h2>
+                Draft Rules
+              </h2>
+
+              <p>
+                <strong>Draft Type:</strong> Snake draft.
+              </p>
+
+              <p>
+                The top three finishers from the previous season
+                choose their draft positions. The remaining seven
+                draft spots are assigned randomly.
+              </p>
+
+              <p>
+                <strong>Roster:</strong>
+                QB, QB, RB, RB, WR, WR, TE,
+                FLEX (RB/WR/TE), FLEX (RB/WR/TE),
+                DEF, 6 bench spots and 2 IR spots.
+              </p>
+
+              <p>
+                Managers have 90 seconds per pick.
+              </p>
+
+              <p>
+                If a manager misses a draft pick,
+                that manager automatically goes to the end
+                of the round.
+              </p>
+
+              <p>
+                <strong>Beginning in 2027:</strong>
+                no technology may be used during the draft.
+                Paper only. A commissioner may use a computer
+                if needed strictly for draft-keeping purposes.
+              </p>
+
             </div>
+
           </article>
 
-          <article class="panel rule" id="rule-roster-trades">
+
+          <!-- 02 ROSTER / TRADES -->
+          <article
+            class="panel rule"
+            id="rule-roster-trades"
+          >
+
             <span>02</span>
+
             <div>
-              <h2>Roster Management & Trades</h2>
-              <p>Waivers use FAAB with a $1,000 budget.</p>
+
+              <h2>
+                Roster Management & Trades
+              </h2>
+
+              <p>
+                Players must be locked into the lineup before
+                their individual game starts.
+              </p>
+
+              <p>
+                Waivers use FAAB with a
+                <strong>$1,000 budget</strong>.
+              </p>
+
+              <p>
+                Teams may trade waiver spots and FAAB.
+              </p>
+
+              <p>
+                Draft picks may only be traded before the draft.
+                Future draft-pick trading is not allowed.
+              </p>
+
+              <p>
+                <strong>No Loans:</strong>
+                loans of players, FAAB or other assets are
+                strictly prohibited. If the league court finds
+                coaches guilty, the involved coaches receive
+                a 20-point deduction the following week.
+              </p>
+
+              <p>
+                Trades are not final until accepted in the app.
+                Verbal or offline agreements are not binding.
+              </p>
+
+              <p>
+                Trading is generally allowed at all times.
+                During the playoffs, teams may not trade with
+                teams that are out of the playoffs or with teams
+                in the loser bracket.
+              </p>
+
+              <p>
+                No collusion is allowed.
+              </p>
+
+              <p>
+                <strong>Fannin Rule:</strong>
+                waiver claims follow the fantasy app exactly.
+                A manager must have the exact waiver claim needed
+                for the transaction to process. The 2025 Fannin
+                situation involving Zander is the precedent and
+                everyone has been made aware of the rule.
+              </p>
+
             </div>
+
           </article>
 
-          <article class="panel rule" id="rule-palmer">
+
+          <!-- 03 PALMER RULE -->
+          <article
+            class="panel rule"
+            id="rule-palmer"
+          >
+
             <span>03</span>
+
             <div>
-              <h2>The Palmer Rule</h2>
+
+              <h2>
+                The Palmer Rule
+              </h2>
+
               <p>
-                Players ruled out one hour or earlier before kickoff
-                may trigger the Palmer Rule penalty.
+                If a player is ruled out one hour or earlier
+                before kickoff and remains in a manager's
+                starting lineup, that manager receives a
+                10-point deduction for the week.
               </p>
+
+              <p>
+                A manager may request an extenuating-circumstances
+                vote to overturn the deduction.
+              </p>
+
+              <p>
+                The affected manager and that manager's opponent
+                for the week may not vote.
+              </p>
+
+              <p>
+                A majority of
+                <strong>5 out of 8 votes</strong>
+                from the remaining league members is required
+                to overturn the penalty.
+              </p>
+
+              <p>
+                The vote must take place before the following
+                week's games.
+              </p>
+
+              <p>
+                A manager who knows they may be unable to adjust
+                a lineup because of travel, work or another issue
+                may notify the commissioner before kickoff.
+                The notification must identify the player in
+                question and a backup player from the bench who
+                has not yet played that week.
+              </p>
+
             </div>
+
           </article>
 
-          <article class="panel rule" id="rule-benching">
+
+          <!-- 04 STRATEGIC BENCHING -->
+          <article
+            class="panel rule"
+            id="rule-benching"
+          >
+
             <span>04</span>
+
             <div>
-              <h2>Strategic Benching</h2>
+
+              <h2>
+                Strategic Benching
+              </h2>
+
               <p>
-                Managers may bench players when doing so guarantees a win.
+                Managers may bench players when doing so
+                guarantees a weekly win.
               </p>
+
+              <p>
+                This applies to every position, including defense.
+                For example, if a manager leads 152-150 with only
+                a defense remaining on Monday night and the
+                opponent has no players left, the manager may
+                bench that defense to secure the victory.
+              </p>
+
+              <p>
+                No deduction or penalty is applied for legitimate
+                strategic benching.
+              </p>
+
             </div>
+
           </article>
 
-          <article class="panel rule" id="rule-playoffs">
+
+          <!-- 05 PLAYOFFS -->
+          <article
+            class="panel rule"
+            id="rule-playoffs"
+          >
+
             <span>05</span>
+
             <div>
-              <h2>Playoffs & Competitive Lineups</h2>
+
+              <h2>
+                Playoffs & Competitive Lineups
+              </h2>
+
               <p>
-                Managers must maintain competitive lineups when required.
+                When a team has an automatic bye, is automatically
+                in the loser bracket, is mathematically eliminated,
+                or otherwise has no position to gain or lose,
+                that manager must start the best players available
+                on the roster based on the highest projections.
               </p>
+
+              <p>
+                The starting lineup must be completely filled.
+                Bye-week players and players ruled out may not
+                occupy those required starting spots.
+              </p>
+
+              <p>
+                If a commissioner determines that a violation
+                is outrageous or malicious, the manager receives
+                a <strong>15-point deduction</strong> in the next
+                matchup that matters.
+              </p>
+
+              <p>
+                The penalty may roll into a later playoff round
+                or even the following season. Examples in the
+                rulebook include a team with a bye taking the
+                deduction in Round 2, a seventh-place team taking
+                it in the following season's Week 1, or a loser-
+                bracket team taking it in the relevant punishment
+                matchup.
+              </p>
+
+              <p>
+                A team is considered mathematically eliminated
+                if the required winning margin is greater than
+                the largest weekly point differential in league
+                history. The exact historical threshold is still
+                to be finalized with Alex.
+              </p>
+
+              <p>
+                Playoff trading is allowed, but playoff trades
+                must be completed by the Thursday night game.
+              </p>
+
             </div>
+
           </article>
 
-          <article class="panel rule" id="rule-qb">
+
+          <!-- 06 QB LIMIT -->
+          <article
+            class="panel rule"
+            id="rule-qb"
+          >
+
             <span>06</span>
+
             <div>
-              <h2>The QB Limit Rule</h2>
+
+              <h2>
+                The QB Limit Rule
+              </h2>
+
               <p>
-                Maximum of three active quarterbacks.
+                A roster may have a maximum of three quarterbacks
+                at a time, including starters and backups.
               </p>
+
+              <p>
+                A fourth quarterback is allowed if that player
+                is in an IR spot or if two of the four quarterbacks
+                are on bye.
+              </p>
+
+              <p>
+                Once the exception no longer applies, the manager
+                must return the roster to three quarterbacks by
+                the start of that week's games.
+              </p>
+
+              <p>
+                If the manager fails to drop a quarterback,
+                the third-best quarterback according to official
+                rankings or scoring is automatically dropped by
+                the commissioner and made available on waivers.
+              </p>
+
             </div>
+
           </article>
 
-          <article class="panel rule" id="rule-midweek-waivers">
+
+          <!-- 07 MID-WEEK WAIVERS -->
+          <article
+            class="panel rule"
+            id="rule-midweek-waivers"
+          >
+
             <span>07</span>
+
             <div>
-              <h2>Mid-Week Waiver Bidding Rule</h2>
+
+              <h2>
+                Mid-Week Waiver Bidding Rule
+              </h2>
+
               <p>
-                Special blind FAAB bidding may be used when needed.
+                If a player remains on waivers but cannot be
+                picked up because the official claim day falls
+                on Wednesday after games have already been played,
+                a coach may submit a bid through the commissioner's
+                office before the next waiver period.
               </p>
+
+              <p>
+                The process remains a blind FAAB bid.
+                All bids must be submitted before that player's
+                game time.
+              </p>
+
+              <p>
+                The highest bid wins. If bids are tied,
+                standard waiver priority is the tiebreaker.
+              </p>
+
+              <p>
+                The successful manager's dropped player must not
+                have already played during the current NFL week.
+              </p>
+
             </div>
+
           </article>
 
-          <article class="panel rule" id="rule-hamlin">
+
+          <!-- 08 DAMAR HAMLIN -->
+          <article
+            class="panel rule"
+            id="rule-hamlin"
+          >
+
             <span>08</span>
+
             <div>
-              <h2>The Damar Hamlin Rule</h2>
+
+              <h2>
+                The Damar Hamlin Rule
+              </h2>
+
               <p>
-                Special handling applies to canceled games or extraordinary events.
+                In Loser Championship games during the playoffs,
+                if a player dies on the field or a game is
+                completely canceled and the matchup's winner or
+                loser is not clear, this rule applies.
               </p>
+
+              <p>
+                If the outcome was obviously decided based on
+                points, players remaining or other clear indicators,
+                the punishment is assigned accordingly.
+              </p>
+
+              <p>
+                If the result is genuinely uncertain,
+                the punishment is divided between the two teams.
+              </p>
+
             </div>
+
           </article>
 
-          <article class="panel rule" id="rule-season-format">
+
+          <!-- 09 SEASON FORMAT -->
+          <article
+            class="panel rule"
+            id="rule-season-format"
+          >
+
             <span>09</span>
+
             <div>
-              <h2>Season Format</h2>
+
+              <h2>
+                Season Format
+              </h2>
+
               <p>
-                Regular season Weeks 1–14.
-                Playoffs Weeks 15–17.
+                Regular Season:
+                <strong>Weeks 1–14</strong>.
               </p>
+
+              <p>
+                Playoffs:
+                <strong>Weeks 15–17</strong>.
+              </p>
+
+              <p>
+                The top six teams qualify for the playoffs.
+              </p>
+
+              <p>
+                The highest-seeded managers get to choose
+                who they play in the playoffs.
+              </p>
+
+              <p>
+                Tiebreakers:
+                <strong>
+                  Total Points Scored → Head-to-Head Record →
+                  Points Against → Coin Flip
+                </strong>
+                if necessary.
+              </p>
+
             </div>
+
           </article>
 
-          <article class="panel rule" id="rule-last-place">
+
+          <!-- 10 LAST PLACE -->
+          <article
+            class="panel rule"
+            id="rule-last-place"
+          >
+
             <span>10</span>
+
             <div>
-              <h2>Punishment for Last Place</h2>
+
+              <h2>
+                Punishment for Last Place
+              </h2>
+
               <p>
-                Last-place punishment is selected by the league.
+                The coach who finishes last in the Loser's Bracket
+                is subject to the punishment selected by the league
+                before the season begins.
               </p>
+
+              <p>
+                If the punishment is not completed before the
+                following season's draft, the coach loses draft
+                picks as a consequence.
+              </p>
+
             </div>
+
           </article>
 
-          <article class="panel rule" id="rule-commissioners">
+
+          <!-- 11 COMMISSIONER RULES -->
+          <article
+            class="panel rule"
+            id="rule-commissioners"
+          >
+
             <span>11</span>
+
             <div>
-              <h2>Commissioner Rules</h2>
+
+              <h2>
+                Commissioner Rules
+              </h2>
+
               <p>
-                A commissioner may be voted out by a 5/9 vote.
+                A commissioner may be voted out by a
+                <strong>5/9 vote</strong>.
               </p>
+
+              <p>
+                When the league needs a new commissioner,
+                coaches may nominate themselves and the league
+                then holds a vote.
+              </p>
+
+              <a
+                href="#commissioners"
+                data-route="commissioners"
+                class="text-link"
+              >
+                View Commissioner History →
+              </a>
+
             </div>
+
           </article>
 
-          <article class="panel rule" id="rule-point-changes">
+
+          <!-- 12 POINT CHANGES -->
+          <article
+            class="panel rule"
+            id="rule-point-changes"
+          >
+
             <span>12</span>
+
             <div>
-              <h2>Point Changes</h2>
+
+              <h2>
+                Point Changes
+              </h2>
+
               <p>
-                Official CGA scoring adjustments apply.
+                Forced fumble:
+                <strong>+1 point</strong>.
+                Fumble recovery:
+                <strong>+1 point</strong>.
+                Fumble:
+                <strong>-1 point</strong>.
+                Fumble lost:
+                <strong>-1 point</strong>.
               </p>
+
+              <p>
+                These scoring rules apply to both D/ST and
+                normal offensive players.
+              </p>
+
+              <p>
+                Example: if Lamar fumbles and Derrick Henry
+                recovers it, D/ST gets +1, Lamar gets -1 and
+                Henry gets +1.
+              </p>
+
+              <p>
+                If Lamar muffs a snap and recovers it himself,
+                he receives -1 for the fumble and +1 for the
+                recovery, resulting in a net zero.
+              </p>
+
+              <p>
+                Defensive fourth-down stops receive
+                <strong>+1 point</strong>.
+              </p>
+
+              <p>
+                D/ST scoring is also adjusted for forcing and
+                recovering muffed punts using the same fumble
+                scoring framework above.
+              </p>
+
             </div>
+
           </article>
+
 
         </div>
 
@@ -1603,6 +2881,7 @@
     </section>
 
 
+    <!-- HISTORY -->
     <section
       class="page shell"
       id="history"
@@ -1629,8 +2908,10 @@
 
         <article>
           <span>2021</span>
+
           <div>
             <h2>The Beginning</h2>
+
             <p>
               Crippling Gambling Addicts is founded.
               Zander Briggs wins the first championship.
@@ -1640,18 +2921,23 @@
 
         <article>
           <span>2022</span>
+
           <div>
             <h2>Season II</h2>
+
             <p>
-              Jackson O'Bleness becomes the second champion.
+              Jackson O'Bleness becomes the second
+              champion in CGA history.
             </p>
           </div>
         </article>
 
         <article>
           <span>2023</span>
+
           <div>
             <h2>Season III</h2>
+
             <p>
               Lleyton Renner captures the championship.
             </p>
@@ -1660,21 +2946,34 @@
 
         <article class="incident">
           <span>2024</span>
+
           <div>
             <h2>
               The Palmer Incident
             </h2>
+
             <p>
-              Palmer McCarthey is removed from league competition.
+              Palmer McCarthy is removed from league
+              competition. He remains alive.
+            </p>
+
+            <p>
+              Zander Briggs wins his second championship,
+              officially carrying an asterisk.
             </p>
           </div>
         </article>
 
         <article>
           <span>2025</span>
+
           <div>
-            <h2>The New Era</h2>
+            <h2>
+              The New Era
+            </h2>
+
             <p>
+              CGA continues without Palmer.
               Brayden Mccuen captures his first championship.
             </p>
           </div>
@@ -1682,8 +2981,12 @@
 
         <article class="current">
           <span>2026</span>
+
           <div>
-            <h2>Current Season</h2>
+            <h2>
+              Current Season
+            </h2>
+
             <p>
               The league enters its sixth season.
             </p>
@@ -1695,6 +2998,7 @@
     </section>
 
 
+    <!-- MEMORIAL -->
     <section
       class="page shell memorial-page"
       id="memorial"
@@ -1711,7 +3015,7 @@
         </span>
 
         <h1>
-          Palmer McCarthey
+          Palmer McCarthy
         </h1>
 
         <p class="years">
@@ -1726,18 +3030,25 @@
         </blockquote>
 
         <p class="memorial-note">
-          Palmer McCarthey was removed from
+          Palmer McCarthy was removed from
           Crippling Gambling Addicts in 2024.
           This memorial is a satirical league archive.
           Palmer did not die.
         </p>
+
+        <a
+          href="#manager-profile"
+          class="text-link manager-profile-link"
+          data-manager="Palmer McCarthy"
+        >
+          View Palmer's manager profile →
+        </a>
 
       </div>
 
       <div class="memorial-grid">
 
         <article class="panel">
-
           <span class="eyebrow">
             Tenure
           </span>
@@ -1749,11 +3060,9 @@
           <p>
             Seasons in the league
           </p>
-
         </article>
 
         <article class="panel">
-
           <span class="eyebrow">
             Final Season
           </span>
@@ -1765,11 +3074,9 @@
           <p>
             The end of an era
           </p>
-
         </article>
 
         <article class="panel">
-
           <span class="eyebrow">
             Status
           </span>
@@ -1781,7 +3088,6 @@
           <p>
             Just no longer on the roster
           </p>
-
         </article>
 
       </div>
@@ -1790,12 +3096,13 @@
 
   </main>
 
+
+  <!-- FOOTER -->
   <footer>
 
     <div class="shell footer-inner">
 
       <div>
-
         <strong>
           CRIPPLING GAMBLING ADDICTS
         </strong>
@@ -1803,7 +3110,6 @@
         <span>
           Official Fantasy Football League · Est. 2021
         </span>
-
       </div>
 
       <div>
@@ -1814,7 +3120,7 @@
 
   </footer>
 
-  <script src="app.js"></script>
+  <script src="/app.js"></script>
 
 </body>
 </html>
