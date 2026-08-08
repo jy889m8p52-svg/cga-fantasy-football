@@ -106,6 +106,7 @@ function record(team) {
   }`;
 }
 
+
 function totalGames(stats) {
   return (
     Number(stats?.wins || 0) +
@@ -113,6 +114,153 @@ function totalGames(stats) {
     Number(stats?.ties || 0)
   );
 }
+
+
+/* =========================
+   LIVE STANDINGS HELPERS
+========================= */
+
+const PLAYOFF_TEAMS = 6;
+
+function currentSeasonCompletedGames() {
+  const season = Number(leagueData?.season);
+
+  return (leagueData?.matchups || [])
+    .filter((game) => {
+      const homeOwner = game.homeOwner;
+      const awayOwner = game.awayOwner;
+      const homeScore = Number(game.homeScore || 0);
+      const awayScore = Number(game.awayScore || 0);
+
+      return (
+        homeOwner &&
+        awayOwner &&
+        homeOwner !== "TBD" &&
+        awayOwner !== "TBD" &&
+        homeOwner !== awayOwner &&
+        (
+          game.complete ||
+          homeScore > 0 ||
+          awayScore > 0
+        )
+      );
+    })
+    .map((game) => ({
+      ...game,
+      season
+    }))
+    .sort(
+      (a, b) =>
+        Number(a.week || 0) -
+        Number(b.week || 0)
+    );
+}
+
+function currentTeamStreak(managerName) {
+  const games = currentSeasonCompletedGames()
+    .filter(
+      (game) =>
+        game.homeOwner === managerName ||
+        game.awayOwner === managerName
+    );
+
+  if (!games.length) {
+    return "—";
+  }
+
+  const results = games.map((game) => {
+    const isHome =
+      game.homeOwner === managerName;
+
+    const teamScore =
+      Number(
+        isHome
+          ? game.homeScore
+          : game.awayScore
+      );
+
+    const opponentScore =
+      Number(
+        isHome
+          ? game.awayScore
+          : game.homeScore
+      );
+
+    if (teamScore > opponentScore) {
+      return "W";
+    }
+
+    if (teamScore < opponentScore) {
+      return "L";
+    }
+
+    return "T";
+  });
+
+  const latest =
+    results[results.length - 1];
+
+  let count = 0;
+
+  for (
+    let i = results.length - 1;
+    i >= 0;
+    i -= 1
+  ) {
+    if (results[i] !== latest) {
+      break;
+    }
+
+    count += 1;
+  }
+
+  return `${latest}${count}`;
+}
+
+function standingsPoints(team) {
+  return (
+    Number(team?.wins || 0) +
+    Number(team?.ties || 0) * 0.5
+  );
+}
+
+function gamesBack(team, leader) {
+  if (!team || !leader) {
+    return "—";
+  }
+
+  const gb =
+    standingsPoints(leader) -
+    standingsPoints(team);
+
+  if (Math.abs(gb) < 0.001) {
+    return "—";
+  }
+
+  return Number.isInteger(gb)
+    ? String(gb)
+    : gb.toFixed(1);
+}
+
+function pointsForRanks(teams = []) {
+  const sorted = [...teams].sort(
+    (a, b) =>
+      Number(b.pointsFor || 0) -
+      Number(a.pointsFor || 0)
+  );
+
+  const ranks = new Map();
+
+  sorted.forEach((team, index) => {
+    ranks.set(
+      team.owner || team.name,
+      index + 1
+    );
+  });
+
+  return ranks;
+}
+
 
 
 /* =========================
@@ -157,14 +305,64 @@ function standingsTable(teams, limit) {
       ? teams.slice(0, limit)
       : teams;
 
+  if (!displayedTeams.length) {
+    return `
+      <div class="empty">
+        No standings data available yet.
+      </div>
+    `;
+  }
+
+  const leader = teams[0];
+  const pfRanks = pointsForRanks(teams);
+  const fullTable = !limit;
+
   const rows = displayedTeams
-    .map(
-      (team, index) => `
-        <tr>
+    .map((team, index) => {
+      const overallIndex =
+        teams.indexOf(team);
+
+      const playoffTeam =
+        overallIndex >= 0 &&
+        overallIndex < PLAYOFF_TEAMS;
+
+      const playoffLine =
+        fullTable &&
+        overallIndex === PLAYOFF_TEAMS - 1;
+
+      const pfRank =
+        pfRanks.get(
+          team.owner || team.name
+        ) || "—";
+
+      const streak =
+        currentTeamStreak(
+          team.owner
+        );
+
+      return `
+        <tr
+          class="
+            ${playoffTeam ? "playoff-position" : "outside-playoffs"}
+            ${playoffLine ? "playoff-line-row" : ""}
+          "
+        >
 
           <td class="rank">
-            ${index + 1}
+            ${overallIndex + 1}
           </td>
+
+          ${
+            fullTable
+              ? `
+                <td class="playoff-status-cell">
+                  <span class="playoff-status ${playoffTeam ? "in" : "out"}">
+                    ${playoffTeam ? "IN" : "OUT"}
+                  </span>
+                </td>
+              `
+              : ""
+          }
 
           <td>
             <div class="team-cell">
@@ -181,10 +379,6 @@ function standingsTable(teams, limit) {
                     href="#manager-profile"
                     class="manager-profile-link"
                     data-manager="${esc(team.owner)}"
-                    style="
-                      color:inherit;
-                      text-decoration:none;
-                    "
                   >
                     ${esc(team.owner || "Manager")}
                   </a>
@@ -200,8 +394,29 @@ function standingsTable(teams, limit) {
             ${record(team)}
           </td>
 
+          ${
+            fullTable
+              ? `
+                <td class="gb-cell">
+                  ${gamesBack(team, leader)}
+                </td>
+
+                <td class="streak-cell">
+                  <span class="streak-badge ${String(streak).startsWith("W") ? "win" : String(streak).startsWith("L") ? "loss" : ""}">
+                    ${streak}
+                  </span>
+                </td>
+              `
+              : ""
+          }
+
           <td class="pf">
             ${fmt(team.pointsFor)}
+            ${
+              fullTable
+                ? `<small class="pf-rank">#${pfRank} PF</small>`
+                : ""
+            }
           </td>
 
           <td>
@@ -209,18 +424,47 @@ function standingsTable(teams, limit) {
           </td>
 
         </tr>
-      `
-    )
+
+        ${
+          playoffLine
+            ? `
+              <tr class="playoff-cut-row">
+                <td colspan="8">
+                  <div class="playoff-cut">
+                    <span></span>
+                    <strong>PLAYOFF CUT LINE · TOP ${PLAYOFF_TEAMS} QUALIFY</strong>
+                    <span></span>
+                  </div>
+                </td>
+              </tr>
+            `
+            : ""
+        }
+      `;
+    })
     .join("");
 
   return `
-    <table class="standings-table">
+    <table class="standings-table ${fullTable ? "standings-table-full" : "standings-table-preview"}">
 
       <thead>
         <tr>
           <th>#</th>
+          ${
+            fullTable
+              ? "<th>Playoffs</th>"
+              : ""
+          }
           <th>Team</th>
           <th>Record</th>
+          ${
+            fullTable
+              ? `
+                <th>GB</th>
+                <th>Streak</th>
+              `
+              : ""
+          }
           <th>PF</th>
           <th>PA</th>
         </tr>
@@ -922,6 +1166,7 @@ function renderPalmerProfile() {
 
     </div>
 
+
     <div class="memorial-grid">
 
       <article class="panel">
@@ -940,6 +1185,7 @@ function renderPalmerProfile() {
 
       </article>
 
+
       <article class="panel">
 
         <span class="eyebrow">
@@ -955,6 +1201,7 @@ function renderPalmerProfile() {
         </p>
 
       </article>
+
 
       <article class="panel">
 
@@ -973,6 +1220,7 @@ function renderPalmerProfile() {
       </article>
 
     </div>
+
 
     <div
       class="panel"
@@ -1009,6 +1257,7 @@ function renderPalmerProfile() {
       </a>
 
     </div>
+
 
     <div
       style="margin-top:24px"
@@ -1133,6 +1382,11 @@ function renderManagerProfile(
       managerName
     );
 
+
+  /* =========================
+     SEASON TABLE
+  ========================= */
+
   const seasonRows =
     seasonHistory.length
       ? seasonHistory
@@ -1198,6 +1452,11 @@ function renderManagerProfile(
           </tr>
         `;
 
+
+  /* =========================
+     HEAD TO HEAD TABLE
+  ========================= */
+
   const h2hRows =
     h2h.length
       ? h2h
@@ -1252,6 +1511,11 @@ function renderManagerProfile(
           </tr>
         `;
 
+
+  /* =========================
+     PROFILE HTML
+  ========================= */
+
   container.innerHTML = `
 
     <div class="page-title">
@@ -1275,6 +1539,9 @@ function renderManagerProfile(
       </p>
 
     </div>
+
+
+    <!-- PRIMARY CAREER STATS -->
 
     <div
       style="
@@ -1307,6 +1574,7 @@ function renderManagerProfile(
 
       </article>
 
+
       <article class="panel">
 
         <span class="eyebrow">
@@ -1325,6 +1593,7 @@ function renderManagerProfile(
         </p>
 
       </article>
+
 
       <article class="panel">
 
@@ -1346,6 +1615,7 @@ function renderManagerProfile(
         </p>
 
       </article>
+
 
       <article class="panel">
 
@@ -1369,6 +1639,9 @@ function renderManagerProfile(
       </article>
 
     </div>
+
+
+    <!-- MEDALS -->
 
     <div
       style="
@@ -1396,6 +1669,7 @@ function renderManagerProfile(
 
       </article>
 
+
       <article class="panel">
 
         <span class="eyebrow">
@@ -1411,6 +1685,7 @@ function renderManagerProfile(
         </p>
 
       </article>
+
 
       <article class="panel">
 
@@ -1428,6 +1703,7 @@ function renderManagerProfile(
 
       </article>
 
+
       <article class="panel">
 
         <span class="eyebrow">
@@ -1443,6 +1719,7 @@ function renderManagerProfile(
         </p>
 
       </article>
+
 
       <article class="panel">
 
@@ -1461,6 +1738,9 @@ function renderManagerProfile(
       </article>
 
     </div>
+
+
+    <!-- ADVANCED CAREER -->
 
     <div
       style="
@@ -1492,6 +1772,7 @@ function renderManagerProfile(
         </p>
 
       </article>
+
 
       <article class="panel">
 
@@ -1526,6 +1807,7 @@ function renderManagerProfile(
 
       </article>
 
+
       <article class="panel">
 
         <span class="eyebrow">
@@ -1559,6 +1841,7 @@ function renderManagerProfile(
 
       </article>
 
+
       <article class="panel">
 
         <span class="eyebrow">
@@ -1590,6 +1873,9 @@ function renderManagerProfile(
 
     </div>
 
+
+    <!-- STREAKS / GAME RECORDS -->
+
     <div
       style="
         display:grid;
@@ -1616,6 +1902,7 @@ function renderManagerProfile(
 
       </article>
 
+
       <article class="panel">
 
         <span class="eyebrow">
@@ -1631,6 +1918,7 @@ function renderManagerProfile(
         </p>
 
       </article>
+
 
       <article class="panel">
 
@@ -1670,6 +1958,7 @@ function renderManagerProfile(
         </p>
 
       </article>
+
 
       <article class="panel">
 
@@ -1712,9 +2001,12 @@ function renderManagerProfile(
 
     </div>
 
+
     ${
       currentTeam
         ? `
+          <!-- CURRENT TEAM -->
+
           <div
             class="panel"
             style="margin-bottom:24px"
@@ -1768,6 +2060,9 @@ function renderManagerProfile(
         : ""
     }
 
+
+    <!-- SEASON HISTORY -->
+
     <div
       class="panel"
       style="margin-bottom:24px"
@@ -1806,6 +2101,9 @@ function renderManagerProfile(
 
     </div>
 
+
+    <!-- HEAD TO HEAD -->
+
     <div class="panel">
 
       <span class="eyebrow">
@@ -1840,6 +2138,7 @@ function renderManagerProfile(
 
     </div>
 
+
     <div
       style="
         margin-top:24px;
@@ -1868,6 +2167,7 @@ function renderManagerProfile(
     </div>
   `;
 }
+
 
 
 /* =========================
@@ -2194,6 +2494,7 @@ function renderPremierRivalry(summary) {
         </p>
       </article>
 
+
       <article class="panel">
         <span class="eyebrow">
           Meetings
@@ -2207,6 +2508,7 @@ function renderPremierRivalry(summary) {
           Recorded head-to-head games
         </p>
       </article>
+
 
       <article class="panel">
         <span class="eyebrow">
@@ -2224,6 +2526,7 @@ function renderPremierRivalry(summary) {
           Current all-time edge
         </p>
       </article>
+
 
       <article class="panel">
         <span class="eyebrow">
@@ -2250,6 +2553,7 @@ function renderPremierRivalry(summary) {
 
     </div>
 
+
     <div class="rivalry-stat-grid rivalry-stat-grid-secondary">
 
       <article class="panel">
@@ -2274,6 +2578,7 @@ function renderPremierRivalry(summary) {
         </p>
       </article>
 
+
       <article class="panel">
         <span class="eyebrow">
           Avg. Combined Score
@@ -2290,6 +2595,7 @@ function renderPremierRivalry(summary) {
           Points per meeting
         </p>
       </article>
+
 
       <article class="panel">
         <span class="eyebrow">
@@ -2319,6 +2625,7 @@ function renderPremierRivalry(summary) {
           }
         </p>
       </article>
+
 
       <article class="panel">
         <span class="eyebrow">
@@ -2350,6 +2657,7 @@ function renderPremierRivalry(summary) {
       </article>
 
     </div>
+
 
     <div
       class="panel"
@@ -2589,6 +2897,7 @@ function renderRivalries() {
     )
   );
 }
+
 
 document.addEventListener(
   "click",
@@ -2976,6 +3285,7 @@ function renderArchiveSeason(seasonYear) {
 
     </section>
 
+
     <section class="archive-podium-grid">
 
       <article class="archive-finish-card champion">
@@ -3036,6 +3346,7 @@ function renderArchiveSeason(seasonYear) {
 
     </section>
 
+
     ${
       highestScoring
         ? `
@@ -3071,6 +3382,7 @@ function renderArchiveSeason(seasonYear) {
         : ""
     }
 
+
     <section class="panel archive-standings-panel">
 
       <div class="archive-section-heading">
@@ -3094,6 +3406,7 @@ function renderArchiveSeason(seasonYear) {
       ${archiveStandingsTable(teams)}
 
     </section>
+
 
     <section class="panel archive-matchups-panel">
 
@@ -3472,6 +3785,11 @@ function renderRecords(data) {
       `Live · ${data.season}`;
   }
 
+
+  /* =========================
+     LEAGUE / MEDAL RECORDS
+  ========================= */
+
   const championships =
     medalLeaders(
       "championships"
@@ -3496,6 +3814,7 @@ function renderRecords(data) {
     medalLeaders(
       "lastPlaces"
     );
+
 
   setRecordCard(
     "record-most-championships",
@@ -3537,6 +3856,11 @@ function renderRecords(data) {
     )
   );
 
+
+  /* =========================
+     CAREER RECORDS
+  ========================= */
+
   const careerWins =
     records.careerWins;
 
@@ -3549,6 +3873,7 @@ function renderRecords(data) {
       ? `${careerWins.manager} · ${careerWins.wins}-${careerWins.losses}${careerWins.ties ? `-${careerWins.ties}` : ""}`
       : "No career data available."
   );
+
 
   const careerPoints =
     records.careerPoints;
@@ -3565,6 +3890,7 @@ function renderRecords(data) {
       : "No career data available."
   );
 
+
   const bestPct =
     records.bestWinningPercentage;
 
@@ -3580,6 +3906,11 @@ function renderRecords(data) {
       : "No career data available."
   );
 
+
+  /* =========================
+     SEASON RECORDS
+  ========================= */
+
   const mostWinsSeason =
     records.mostWinsSeason;
 
@@ -3592,6 +3923,7 @@ function renderRecords(data) {
       ? `${mostWinsSeason.manager} · ${mostWinsSeason.season} · ${mostWinsSeason.team}`
       : "No season data available."
   );
+
 
   const mostPointsSeason =
     records.mostPointsSeason;
@@ -3608,6 +3940,11 @@ function renderRecords(data) {
       : "No season data available."
   );
 
+
+  /* =========================
+     WEEKLY RECORDS
+  ========================= */
+
   const highWeek =
     records.highestWeeklyScore;
 
@@ -3622,6 +3959,7 @@ function renderRecords(data) {
       ? `${highWeek.manager} · Week ${highWeek.week}, ${highWeek.season}`
       : "No weekly data available."
   );
+
 
   const lowWeek =
     records.lowestWeeklyScore;
@@ -3638,6 +3976,7 @@ function renderRecords(data) {
       : "No weekly data available."
   );
 
+
   const blowout =
     biggestRealBlowout();
 
@@ -3653,6 +3992,7 @@ function renderRecords(data) {
       : "No matchup data available."
   );
 
+
   const closest =
     records.closestWin;
 
@@ -3667,6 +4007,11 @@ function renderRecords(data) {
       ? `${closest.winner} def. ${closest.loser} ${fmt1(closest.winnerScore)}-${fmt1(closest.loserScore)} · Week ${closest.week}, ${closest.season}`
       : "No matchup data available."
   );
+
+
+  /* =========================
+     STREAK RECORDS
+  ========================= */
 
   const streaks =
     globalStreakLeaders();
