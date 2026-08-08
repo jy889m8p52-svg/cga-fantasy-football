@@ -263,6 +263,35 @@ function pointsForRanks(teams = []) {
 
 
 
+
+/* =========================
+   MANUAL POWER RANKINGS
+========================= */
+
+/*
+  Add commissioner rankings here after each week.
+
+  Example:
+
+  1: [
+    { manager: "Lleyton Renner", blurb: "Short Week 1 write-up." },
+    { manager: "Zander Briggs", blurb: "Short Week 1 write-up." },
+    ...
+  ],
+
+  Put all 10 managers in the order you want them ranked.
+  Movement arrows are calculated automatically by comparing
+  each week to the previous published power ranking.
+*/
+
+const POWER_RANKINGS = {
+  // 1: [],
+  // 2: [],
+  // 3: []
+};
+
+let selectedWeeklyWeek = null;
+
 /* =========================
    MANAGER PROFILE CLICKING
 ========================= */
@@ -4040,6 +4069,829 @@ function renderRecords(data) {
 }
 
 
+
+/* =========================
+   WEEKLY REPORT
+========================= */
+
+function weeklyAvailableWeeks() {
+  const weeks = new Set();
+
+  for (const match of leagueData?.matchups || []) {
+    const week = Number(match.week || 0);
+
+    if (week) {
+      weeks.add(week);
+    }
+  }
+
+  return [...weeks].sort((a, b) => a - b);
+}
+
+function weeklyGames(week) {
+  return (leagueData?.matchups || [])
+    .filter(
+      (match) =>
+        Number(match.week || 0) ===
+        Number(week)
+    );
+}
+
+function weeklyCompletedGames(week) {
+  return weeklyGames(week)
+    .filter((match) => {
+      const awayScore =
+        Number(match.awayScore || 0);
+
+      const homeScore =
+        Number(match.homeScore || 0);
+
+      return (
+        match.complete ||
+        awayScore > 0 ||
+        homeScore > 0
+      );
+    });
+}
+
+function weeklyGameResult(match) {
+  const awayScore =
+    Number(match.awayScore || 0);
+
+  const homeScore =
+    Number(match.homeScore || 0);
+
+  const awayOwner =
+    match.awayOwner ||
+    match.awayName ||
+    "Away";
+
+  const homeOwner =
+    match.homeOwner ||
+    match.homeName ||
+    "Home";
+
+  let winner = null;
+  let loser = null;
+  let winnerScore = null;
+  let loserScore = null;
+
+  if (awayScore > homeScore) {
+    winner = awayOwner;
+    loser = homeOwner;
+    winnerScore = awayScore;
+    loserScore = homeScore;
+  } else if (homeScore > awayScore) {
+    winner = homeOwner;
+    loser = awayOwner;
+    winnerScore = homeScore;
+    loserScore = awayScore;
+  }
+
+  return {
+    ...match,
+    awayOwner,
+    homeOwner,
+    awayScore,
+    homeScore,
+    winner,
+    loser,
+    winnerScore,
+    loserScore,
+    margin:
+      Math.abs(
+        awayScore -
+        homeScore
+      ),
+    highScore:
+      Math.max(
+        awayScore,
+        homeScore
+      )
+  };
+}
+
+function weeklySuperlatives(week) {
+  const results =
+    weeklyCompletedGames(week)
+      .map(weeklyGameResult);
+
+  const decided =
+    results.filter(
+      (game) =>
+        game.winner
+    );
+
+  const biggest =
+    decided.length
+      ? [...decided].sort(
+          (a, b) =>
+            b.margin - a.margin
+        )[0]
+      : null;
+
+  const closest =
+    decided.length
+      ? [...decided].sort(
+          (a, b) =>
+            a.margin - b.margin
+        )[0]
+      : null;
+
+  let high = null;
+
+  for (const game of results) {
+    const scores = [
+      {
+        manager:
+          game.awayOwner,
+        team:
+          game.awayName,
+        score:
+          game.awayScore
+      },
+      {
+        manager:
+          game.homeOwner,
+        team:
+          game.homeName,
+        score:
+          game.homeScore
+      }
+    ];
+
+    for (const entry of scores) {
+      if (
+        !high ||
+        entry.score > high.score
+      ) {
+        high = entry;
+      }
+    }
+  }
+
+  return {
+    biggest,
+    closest,
+    high
+  };
+}
+
+function publishedRanking(week) {
+  const rows =
+    POWER_RANKINGS[
+      Number(week)
+    ];
+
+  return Array.isArray(rows)
+    ? rows
+    : [];
+}
+
+function powerRankingMovement(
+  managerName,
+  week
+) {
+  const current =
+    publishedRanking(week);
+
+  const previousWeeks =
+    Object.keys(POWER_RANKINGS)
+      .map(Number)
+      .filter(
+        (yearWeek) =>
+          yearWeek < Number(week) &&
+          publishedRanking(yearWeek).length
+      )
+      .sort(
+        (a, b) =>
+          b - a
+      );
+
+  const previousWeek =
+    previousWeeks[0];
+
+  if (!previousWeek) {
+    return {
+      label: "NEW",
+      className: "new"
+    };
+  }
+
+  const currentIndex =
+    current.findIndex(
+      (entry) =>
+        entry.manager === managerName
+    );
+
+  const previous =
+    publishedRanking(
+      previousWeek
+    );
+
+  const previousIndex =
+    previous.findIndex(
+      (entry) =>
+        entry.manager === managerName
+    );
+
+  if (
+    currentIndex < 0 ||
+    previousIndex < 0
+  ) {
+    return {
+      label: "NEW",
+      className: "new"
+    };
+  }
+
+  const movement =
+    previousIndex -
+    currentIndex;
+
+  if (movement > 0) {
+    return {
+      label: `▲${movement}`,
+      className: "up"
+    };
+  }
+
+  if (movement < 0) {
+    return {
+      label: `▼${Math.abs(movement)}`,
+      className: "down"
+    };
+  }
+
+  return {
+    label: "—",
+    className: "same"
+  };
+}
+
+function weeklyTeamForManager(
+  managerName
+) {
+  return (leagueData?.teams || [])
+    .find(
+      (team) =>
+        team.owner === managerName
+    );
+}
+
+function weeklyResultsMarkup(week) {
+  const games =
+    weeklyGames(week);
+
+  if (!games.length) {
+    return `
+      <div class="empty">
+        ESPN has not returned Week ${week} matchups yet.
+      </div>
+    `;
+  }
+
+  return `
+    <div class="weekly-results-grid">
+
+      ${games
+        .map((match) => {
+          const result =
+            weeklyGameResult(match);
+
+          const played =
+            match.complete ||
+            result.awayScore > 0 ||
+            result.homeScore > 0;
+
+          const awayWon =
+            result.winner ===
+            result.awayOwner;
+
+          const homeWon =
+            result.winner ===
+            result.homeOwner;
+
+          return `
+            <article class="weekly-game-card">
+
+              <div class="weekly-game-top">
+                <span>
+                  Week ${week}
+                </span>
+
+                <strong>
+                  ${played ? "FINAL" : "UPCOMING"}
+                </strong>
+              </div>
+
+              <div class="weekly-game-side ${awayWon ? "winner" : ""}">
+
+                <div>
+                  <strong>
+                    ${esc(result.awayOwner)}
+                  </strong>
+
+                  <small>
+                    ${esc(match.awayName || "")}
+                  </small>
+                </div>
+
+                <span>
+                  ${
+                    played
+                      ? fmt1(result.awayScore)
+                      : "—"
+                  }
+                </span>
+
+              </div>
+
+              <div class="weekly-game-side ${homeWon ? "winner" : ""}">
+
+                <div>
+                  <strong>
+                    ${esc(result.homeOwner)}
+                  </strong>
+
+                  <small>
+                    ${esc(match.homeName || "")}
+                  </small>
+                </div>
+
+                <span>
+                  ${
+                    played
+                      ? fmt1(result.homeScore)
+                      : "—"
+                  }
+                </span>
+
+              </div>
+
+            </article>
+          `;
+        })
+        .join("")}
+
+    </div>
+  `;
+}
+
+function weeklyPowerRankingsMarkup(
+  week
+) {
+  const rankings =
+    publishedRanking(week);
+
+  if (!rankings.length) {
+    return `
+      <div class="weekly-ranking-empty">
+
+        <span class="eyebrow">
+          Commissioner Rankings
+        </span>
+
+        <h3>
+          Power Rankings Not Published Yet
+        </h3>
+
+        <p>
+          Week ${week} results can load automatically from ESPN.
+          The power rankings are entered manually so they can reflect
+          commissioner opinion instead of simply copying the standings.
+        </p>
+
+      </div>
+    `;
+  }
+
+  return `
+    <div class="power-ranking-list">
+
+      ${rankings
+        .map((entry, index) => {
+          const movement =
+            powerRankingMovement(
+              entry.manager,
+              week
+            );
+
+          const team =
+            weeklyTeamForManager(
+              entry.manager
+            );
+
+          return `
+            <article class="power-ranking-row rank-${index + 1}">
+
+              <div class="power-ranking-number">
+                ${index + 1}
+              </div>
+
+              <div class="power-ranking-movement ${movement.className}">
+                ${movement.label}
+              </div>
+
+              <div class="power-ranking-copy">
+
+                <div class="power-ranking-manager-line">
+
+                  <h3>
+                    ${esc(entry.manager)}
+                  </h3>
+
+                  <span>
+                    ${
+                      team
+                        ? record(team)
+                        : ""
+                    }
+                  </span>
+
+                </div>
+
+                ${
+                  team
+                    ? `
+                      <small>
+                        ${esc(team.name)}
+                      </small>
+                    `
+                    : ""
+                }
+
+                <p>
+                  ${esc(
+                    entry.blurb ||
+                    "No write-up entered."
+                  )}
+                </p>
+
+              </div>
+
+            </article>
+          `;
+        })
+        .join("")}
+
+    </div>
+  `;
+}
+
+function renderWeeklyReport(
+  week
+) {
+  const content =
+    document.getElementById(
+      "weekly-report-content"
+    );
+
+  if (
+    !content ||
+    !leagueData
+  ) {
+    return;
+  }
+
+  selectedWeeklyWeek =
+    Number(week);
+
+  document
+    .querySelectorAll(
+      ".weekly-week-button"
+    )
+    .forEach((button) => {
+      const active =
+        Number(
+          button.dataset.week
+        ) ===
+        selectedWeeklyWeek;
+
+      button.classList.toggle(
+        "active",
+        active
+      );
+
+      button.setAttribute(
+        "aria-pressed",
+        active
+          ? "true"
+          : "false"
+      );
+    });
+
+  const completed =
+    weeklyCompletedGames(
+      selectedWeeklyWeek
+    );
+
+  const allGames =
+    weeklyGames(
+      selectedWeeklyWeek
+    );
+
+  const superlatives =
+    weeklySuperlatives(
+      selectedWeeklyWeek
+    );
+
+  const completeWeek =
+    allGames.length &&
+    completed.length ===
+      allGames.length;
+
+  content.innerHTML = `
+
+    <section class="weekly-report-hero">
+
+      <div>
+
+        <span class="eyebrow">
+          CGA Weekly Report
+        </span>
+
+        <div class="weekly-report-week">
+          WEEK ${selectedWeeklyWeek}
+        </div>
+
+        <p>
+          ${
+            completeWeek
+              ? "Official weekly results and commissioner power rankings."
+              : "Current matchup slate and commissioner power rankings."
+          }
+        </p>
+
+      </div>
+
+      <div class="weekly-report-status">
+        <span>
+          ${completeWeek ? "FINAL" : "LIVE"}
+        </span>
+
+        <strong>
+          ${leagueData.season}
+        </strong>
+      </div>
+
+    </section>
+
+
+    <section class="weekly-section">
+
+      <div class="weekly-section-heading">
+
+        <div>
+          <span class="eyebrow">
+            Official ESPN Results
+          </span>
+
+          <h2>
+            Week ${selectedWeeklyWeek} Results
+          </h2>
+        </div>
+
+        <span class="weekly-section-count">
+          ${completed.length}/${allGames.length}
+          Final
+        </span>
+
+      </div>
+
+      ${weeklyResultsMarkup(
+        selectedWeeklyWeek
+      )}
+
+    </section>
+
+
+    <section class="weekly-superlative-grid">
+
+      <article class="panel">
+
+        <span class="eyebrow">
+          Biggest Win
+        </span>
+
+        <div class="weekly-superlative-value">
+          ${
+            superlatives.biggest
+              ? `+${fmt1(
+                  superlatives.biggest.margin
+                )}`
+              : "—"
+          }
+        </div>
+
+        <p>
+          ${
+            superlatives.biggest
+              ? `${esc(superlatives.biggest.winner)} over ${esc(superlatives.biggest.loser)}`
+              : "No final result yet"
+          }
+        </p>
+
+      </article>
+
+
+      <article class="panel">
+
+        <span class="eyebrow">
+          Closest Game
+        </span>
+
+        <div class="weekly-superlative-value">
+          ${
+            superlatives.closest
+              ? fmt1(
+                  superlatives.closest.margin
+                )
+              : "—"
+          }
+        </div>
+
+        <p>
+          ${
+            superlatives.closest
+              ? `${esc(superlatives.closest.winner)} over ${esc(superlatives.closest.loser)}`
+              : "No final result yet"
+          }
+        </p>
+
+      </article>
+
+
+      <article class="panel">
+
+        <span class="eyebrow">
+          High Score
+        </span>
+
+        <div class="weekly-superlative-value">
+          ${
+            superlatives.high
+              ? fmt1(
+                  superlatives.high.score
+                )
+              : "—"
+          }
+        </div>
+
+        <p>
+          ${
+            superlatives.high
+              ? esc(
+                  superlatives.high.manager
+                )
+              : "No completed score yet"
+          }
+        </p>
+
+      </article>
+
+    </section>
+
+
+    <section class="weekly-section power-rankings-section">
+
+      <div class="weekly-section-heading">
+
+        <div>
+          <span class="eyebrow">
+            Commissioner Board
+          </span>
+
+          <h2>
+            Week ${selectedWeeklyWeek} Power Rankings
+          </h2>
+        </div>
+
+        <span class="weekly-section-count">
+          1–10
+        </span>
+
+      </div>
+
+      ${weeklyPowerRankingsMarkup(
+        selectedWeeklyWeek
+      )}
+
+    </section>
+  `;
+}
+
+function renderWeeklyPage() {
+  if (!leagueData) {
+    return;
+  }
+
+  const buttons =
+    document.getElementById(
+      "weekly-week-buttons"
+    );
+
+  if (!buttons) {
+    return;
+  }
+
+  const weeks =
+    weeklyAvailableWeeks();
+
+  if (!weeks.length) {
+    buttons.innerHTML = `
+      <span class="status">
+        No weekly data
+      </span>
+    `;
+
+    return;
+  }
+
+  const completedWeeks =
+    weeks.filter(
+      (week) =>
+        weeklyCompletedGames(week).length
+    );
+
+  if (
+    !selectedWeeklyWeek ||
+    !weeks.includes(
+      selectedWeeklyWeek
+    )
+  ) {
+    selectedWeeklyWeek =
+      completedWeeks.length
+        ? Math.max(
+            ...completedWeeks
+          )
+        : weeks[0];
+  }
+
+  buttons.innerHTML =
+    weeks
+      .map(
+        (week) => `
+          <button
+            type="button"
+            class="weekly-week-button ${
+              week === selectedWeeklyWeek
+                ? "active"
+                : ""
+            }"
+            data-week="${week}"
+            aria-pressed="${
+              week === selectedWeeklyWeek
+                ? "true"
+                : "false"
+            }"
+          >
+            <span>
+              ${week}
+            </span>
+
+            <small>
+              WEEK
+            </small>
+          </button>
+        `
+      )
+      .join("");
+
+  renderWeeklyReport(
+    selectedWeeklyWeek
+  );
+}
+
+document.addEventListener(
+  "click",
+  (event) => {
+    const button =
+      event.target.closest(
+        ".weekly-week-button"
+      );
+
+    if (!button) {
+      return;
+    }
+
+    const week =
+      Number(
+        button.dataset.week
+      );
+
+    if (!week) {
+      return;
+    }
+
+    renderWeeklyReport(
+      week
+    );
+  }
+);
+
+
+
 /* =========================
    SCHEDULE
 ========================= */
@@ -4837,6 +5689,8 @@ function renderLeague(data) {
   renderSchedule(
     matches
   );
+
+  renderWeeklyPage();
 
   renderHome(
     data
