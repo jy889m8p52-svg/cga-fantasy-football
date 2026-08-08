@@ -2477,6 +2477,12 @@ function renderRivalryCard(
     return;
   }
 
+  const historyId =
+    `${containerId}-history`;
+
+  const buttonId =
+    `${containerId}-toggle`;
+
   container.innerHTML = `
     <div class="rivalry-mini-series">
       ${summary.aWins}-${summary.bWins}${
@@ -2549,6 +2555,86 @@ function renderRivalryCard(
         }
       </strong>
     </p>
+
+    <button
+      type="button"
+      class="button ghost rivalry-history-toggle"
+      id="${buttonId}"
+      data-rivalry-history="${historyId}"
+      aria-expanded="false"
+    >
+      View Full Rivalry History
+    </button>
+
+    <div
+      id="${historyId}"
+      class="rivalry-expanded-history"
+      hidden
+    >
+
+      <div class="rivalry-expanded-records">
+
+        <div>
+          <span>
+            Biggest Win
+          </span>
+
+          <strong>
+            ${
+              summary.biggest
+                ? rivalryGameLabel(
+                    summary.biggest
+                  )
+                : "No decided games"
+            }
+          </strong>
+        </div>
+
+        <div>
+          <span>
+            Closest Game
+          </span>
+
+          <strong>
+            ${
+              summary.closest
+                ? rivalryGameLabel(
+                    summary.closest
+                  )
+                : "No decided games"
+            }
+          </strong>
+        </div>
+
+        <div>
+          <span>
+            Highest-Scoring Meeting
+          </span>
+
+          <strong>
+            ${
+              summary.highestScoring
+                ? `${rivalryGameLabel(
+                    summary.highestScoring
+                  )} · ${fmt1(
+                    summary.highestScoring.totalPoints
+                  )} combined`
+                : "No meetings"
+            }
+          </strong>
+        </div>
+
+      </div>
+
+      <div
+        class="rivalry-history-heading"
+      >
+        Complete Meeting History
+      </div>
+
+      ${rivalryHistoryTable(summary)}
+
+    </div>
   `;
 }
 
@@ -2599,6 +2685,69 @@ function renderRivalries() {
     )
   );
 }
+
+
+document.addEventListener(
+  "click",
+  (event) => {
+    const button =
+      event.target.closest(
+        ".rivalry-history-toggle"
+      );
+
+    if (!button) {
+      return;
+    }
+
+    const historyId =
+      button.dataset.rivalryHistory;
+
+    if (!historyId) {
+      return;
+    }
+
+    const history =
+      document.getElementById(
+        historyId
+      );
+
+    if (!history) {
+      return;
+    }
+
+    const isOpen =
+      !history.hasAttribute(
+        "hidden"
+      );
+
+    if (isOpen) {
+      history.setAttribute(
+        "hidden",
+        ""
+      );
+
+      button.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+      button.textContent =
+        "View Full Rivalry History";
+    } else {
+      history.removeAttribute(
+        "hidden"
+      );
+
+      button.setAttribute(
+        "aria-expanded",
+        "true"
+      );
+
+      button.textContent =
+        "Hide Rivalry History";
+    }
+  }
+);
 
 
 /* =========================
