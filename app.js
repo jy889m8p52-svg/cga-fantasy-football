@@ -107,6 +107,42 @@ function record(team) {
 }
 
 
+function normalizeManagerName(name) {
+  const value = String(name ?? "");
+  const lower = value.trim().toLowerCase();
+
+  if (
+    lower.includes("palmer") ||
+    lower === "palmer3337"
+  ) {
+    return "Palmer McCarthy";
+  }
+
+  return value;
+}
+
+function normalizeManagerNamesInData(value) {
+  if (Array.isArray(value)) {
+    return value.map(normalizeManagerNamesInData);
+  }
+
+  if (value && typeof value === "object") {
+    const normalized = {};
+
+    for (const [key, child] of Object.entries(value)) {
+      normalized[key] = normalizeManagerNamesInData(child);
+    }
+
+    return normalized;
+  }
+
+  if (typeof value === "string") {
+    return normalizeManagerName(value);
+  }
+
+  return value;
+}
+
 function totalGames(stats) {
   return (
     Number(stats?.wins || 0) +
@@ -584,7 +620,7 @@ function renderManagers(teams) {
     <a
       href="#manager-profile"
       class="manager-profile-link"
-      data-manager="Palmer McCarthey"
+      data-manager="Palmer McCarthy"
       style="
         color:inherit;
         text-decoration:none;
@@ -605,7 +641,7 @@ function renderManagers(teams) {
         </span>
 
         <h2>
-          Palmer McCarthey
+          Palmer McCarthy
         </h2>
 
         <strong>
@@ -1186,7 +1222,7 @@ function renderPalmerProfile() {
       </span>
 
       <h1>
-        Palmer McCarthey
+        Palmer McCarthy
       </h1>
 
       <p>
@@ -1321,7 +1357,7 @@ function renderManagerProfile(
 
   if (
     managerName ===
-    "Palmer McCarthey"
+    "Palmer McCarthy"
   ) {
     renderPalmerProfile();
     return;
@@ -5639,6 +5675,7 @@ function renderHome(data) {
 ========================= */
 
 function renderLeague(data) {
+  data = normalizeManagerNamesInData(data);
   leagueData = data;
 
   const teams =
