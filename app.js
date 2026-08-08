@@ -3597,6 +3597,87 @@ document.addEventListener(
    ALL-TIME RECORD BOOK
 ========================= */
 
+
+function lowestRegularSeasonWeeklyScore() {
+  const scores =
+    allHistoricalMatchups()
+      .filter((game) => {
+        const week =
+          Number(game.week || 0);
+
+        const homeScore =
+          Number(game.homeScore || 0);
+
+        const awayScore =
+          Number(game.awayScore || 0);
+
+        return (
+          week >= 1 &&
+          week <= 14 &&
+          game.homeOwner &&
+          game.awayOwner &&
+          game.homeOwner !== "TBD" &&
+          game.awayOwner !== "TBD" &&
+          game.homeOwner !==
+            game.awayOwner &&
+          (
+            homeScore > 0 ||
+            awayScore > 0
+          )
+        );
+      })
+      .flatMap((game) => [
+        {
+          manager:
+            game.homeOwner,
+          team:
+            game.homeName,
+          score:
+            Number(
+              game.homeScore || 0
+            ),
+          season:
+            Number(
+              game.season || 0
+            ),
+          week:
+            Number(
+              game.week || 0
+            )
+        },
+        {
+          manager:
+            game.awayOwner,
+          team:
+            game.awayName,
+          score:
+            Number(
+              game.awayScore || 0
+            ),
+          season:
+            Number(
+              game.season || 0
+            ),
+          week:
+            Number(
+              game.week || 0
+            )
+        }
+      ])
+      .filter(
+        (row) =>
+          row.manager &&
+          row.manager !== "TBD" &&
+          row.score > 0
+      )
+      .sort(
+        (a, b) =>
+          a.score - b.score
+      );
+
+  return scores[0] || null;
+}
+
 function setRecordCard(id, value, detail) {
   const valueEl =
     document.getElementById(id);
@@ -4027,7 +4108,7 @@ function renderRecords(data) {
 
 
   const lowWeek =
-    records.lowestWeeklyScore;
+    lowestRegularSeasonWeeklyScore();
 
   setRecordCard(
     "record-low-week",
@@ -4038,7 +4119,7 @@ function renderRecords(data) {
       : "—",
     lowWeek
       ? `${lowWeek.manager} · Week ${lowWeek.week}, ${lowWeek.season}`
-      : "No weekly data available."
+      : "No regular-season weekly data available."
   );
 
 
