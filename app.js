@@ -667,11 +667,21 @@ function completedManagerGames(
   managerName
 ) {
   return allHistoricalMatchups()
-    .filter(
-      (game) =>
-        Number(game.homeScore || 0) > 0 ||
-        Number(game.awayScore || 0) > 0
-    )
+    .filter((game) => {
+      const homeOwner = game.homeOwner;
+      const awayOwner = game.awayOwner;
+      const homeScore = Number(game.homeScore || 0);
+      const awayScore = Number(game.awayScore || 0);
+
+      return (
+        homeOwner &&
+        awayOwner &&
+        homeOwner !== "TBD" &&
+        awayOwner !== "TBD" &&
+        homeOwner !== awayOwner &&
+        (homeScore > 0 || awayScore > 0)
+      );
+    })
     .filter(
       (game) =>
         game.homeOwner === managerName ||
@@ -679,8 +689,7 @@ function completedManagerGames(
     )
     .map((game) => {
       const isHome =
-        game.homeOwner ===
-        managerName;
+        game.homeOwner === managerName;
 
       const managerScore =
         Number(
@@ -2091,6 +2100,107 @@ function managerListText(names) {
   return names.join(", ");
 }
 
+function biggestRealBlowout() {
+  const games =
+    allHistoricalMatchups()
+      .filter((game) => {
+        const homeOwner =
+          game.homeOwner;
+
+        const awayOwner =
+          game.awayOwner;
+
+        const homeScore =
+          Number(
+            game.homeScore || 0
+          );
+
+        const awayScore =
+          Number(
+            game.awayScore || 0
+          );
+
+        return (
+          homeOwner &&
+          awayOwner &&
+          homeOwner !== "TBD" &&
+          awayOwner !== "TBD" &&
+          homeOwner !== awayOwner &&
+          (homeScore > 0 ||
+            awayScore > 0)
+        );
+      })
+
+      .map((game) => {
+        const homeScore =
+          Number(
+            game.homeScore || 0
+          );
+
+        const awayScore =
+          Number(
+            game.awayScore || 0
+          );
+
+        if (
+          homeScore ===
+          awayScore
+        ) {
+          return null;
+        }
+
+        const homeWon =
+          homeScore >
+          awayScore;
+
+        return {
+          season:
+            Number(game.season),
+
+          week:
+            Number(game.week),
+
+          winner:
+            homeWon
+              ? game.homeOwner
+              : game.awayOwner,
+
+          loser:
+            homeWon
+              ? game.awayOwner
+              : game.homeOwner,
+
+          winnerScore:
+            homeWon
+              ? homeScore
+              : awayScore,
+
+          loserScore:
+            homeWon
+              ? awayScore
+              : homeScore,
+
+          margin:
+            Math.abs(
+              homeScore -
+              awayScore
+            )
+        };
+      })
+      .filter(Boolean);
+
+  if (!games.length) {
+    return null;
+  }
+
+  games.sort(
+    (a, b) =>
+      b.margin - a.margin
+  );
+
+  return games[0];
+}
+
 function renderRecords(data) {
   const records =
     data?.records || {};
@@ -2298,7 +2408,7 @@ function renderRecords(data) {
 
 
   const blowout =
-    records.biggestBlowout;
+    biggestRealBlowout();
 
   setRecordCard(
     "record-biggest-blowout",
