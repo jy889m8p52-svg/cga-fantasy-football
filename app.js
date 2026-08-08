@@ -4171,116 +4171,613 @@ function renderHome(data) {
       "home-matchup"
     );
 
-  const snapshot =
+  const weekStatus =
     document.getElementById(
-      "home-league-snapshot"
+      "home-week-status"
     );
 
-  const firstUpcoming =
-    matches.find(
+  const seasonLine =
+    document.getElementById(
+      "home-season-line"
+    );
+
+  const leaderStrip =
+    document.getElementById(
+      "home-leader-strip"
+    );
+
+  const playoffRace =
+    document.getElementById(
+      "home-playoff-race"
+    );
+
+  const latestResults =
+    document.getElementById(
+      "home-latest-results"
+    );
+
+
+  /* -------------------------
+     CURRENT WEEK
+  ------------------------- */
+
+  const completedWeeks =
+    matches
+      .filter(
+        (match) =>
+          match.complete ||
+          Number(match.homeScore || 0) > 0 ||
+          Number(match.awayScore || 0) > 0
+      )
+      .map(
+        (match) =>
+          Number(match.week || 0)
+      )
+      .filter(Boolean);
+
+  const upcomingWeeks =
+    matches
+      .filter(
+        (match) =>
+          !match.complete &&
+          Number(match.homeScore || 0) === 0 &&
+          Number(match.awayScore || 0) === 0
+      )
+      .map(
+        (match) =>
+          Number(match.week || 0)
+      )
+      .filter(Boolean);
+
+  const currentWeek =
+    upcomingWeeks.length
+      ? Math.min(...upcomingWeeks)
+      : completedWeeks.length
+        ? Math.max(...completedWeeks)
+        : 1;
+
+  if (weekStatus) {
+    weekStatus.textContent =
+      `Week ${currentWeek} · ESPN Live`;
+  }
+
+  if (seasonLine) {
+    seasonLine.textContent =
+      `${data.season} SEASON · WEEK ${currentWeek} · ESPN LIVE`;
+  }
+
+
+  /* -------------------------
+     FEATURED MATCHUP
+  ------------------------- */
+
+  const weekGames =
+    matches.filter(
       (match) =>
-        !match.complete
-    ) ||
-    matches[0];
+        Number(match.week || 0) ===
+        Number(currentWeek)
+    );
+
+  const rivalryPriority = [
+    ["Alex Ross", "Porter Roberts"],
+    ["Lleyton Renner", "Zack Middlebrooks"],
+    ["Sam Ransome", "Zander Briggs"],
+    ["Cado Keller", "Jackson O'Bleness"],
+    ["Brayden Mccuen", "Luka Draganic"]
+  ];
+
+  function gameOwners(match) {
+    return [
+      match.homeOwner,
+      match.awayOwner
+    ].filter(Boolean);
+  }
+
+  function isRivalryGame(match) {
+    const owners =
+      gameOwners(match);
+
+    return rivalryPriority.findIndex(
+      ([a, b]) =>
+        owners.includes(a) &&
+        owners.includes(b)
+    );
+  }
+
+  let featured =
+    weekGames
+      .map((game) => ({
+        game,
+        rivalryIndex:
+          isRivalryGame(game)
+      }))
+      .filter(
+        (entry) =>
+          entry.rivalryIndex >= 0
+      )
+      .sort(
+        (a, b) =>
+          a.rivalryIndex -
+          b.rivalryIndex
+      )[0]?.game;
+
+  if (!featured && weekGames.length) {
+    const rankMap = new Map();
+
+    teams.forEach(
+      (team, index) => {
+        rankMap.set(
+          team.owner,
+          index + 1
+        );
+      }
+    );
+
+    featured =
+      [...weekGames].sort(
+        (a, b) => {
+          const aRank =
+            (rankMap.get(a.homeOwner) || 99) +
+            (rankMap.get(a.awayOwner) || 99);
+
+          const bRank =
+            (rankMap.get(b.homeOwner) || 99) +
+            (rankMap.get(b.awayOwner) || 99);
+
+          return aRank - bRank;
+        }
+      )[0];
+  }
+
+  if (!featured) {
+    featured =
+      matches.find(
+        (match) =>
+          !match.complete
+      ) ||
+      matches[0];
+  }
 
   if (matchup) {
-    if (firstUpcoming) {
+    if (featured) {
+      const rivalryIndex =
+        isRivalryGame(featured);
+
+      const rivalryLabel =
+        rivalryIndex === 0
+          ? "🔥 PREMIER RIVALRY"
+          : rivalryIndex > 0
+            ? "OFFICIAL RIVALRY"
+            : "FEATURED MATCHUP";
+
+      const complete =
+        featured.complete ||
+        Number(featured.homeScore || 0) > 0 ||
+        Number(featured.awayScore || 0) > 0;
+
       matchup.innerHTML = `
-        <span class="eyebrow">
-          Week ${firstUpcoming.week}
-          · ESPN
-        </span>
+        <div class="panel-head">
 
-        <h2>
-          ${esc(
-            firstUpcoming.awayName
-          )}
-          vs
-          ${esc(
-            firstUpcoming.homeName
-          )}
-        </h2>
+          <div>
+            <span class="eyebrow">
+              ${rivalryLabel}
+            </span>
 
-        <p>
-          ${
-            firstUpcoming.complete
-              ? `${fmt(
-                  firstUpcoming.awayScore
-                )} — ${fmt(
-                  firstUpcoming.homeScore
-                )}`
-              : "Scheduled"
-          }
-        </p>
+            <h2>
+              ${esc(featured.awayName)}
+              <span class="home-featured-vs">
+                vs
+              </span>
+              ${esc(featured.homeName)}
+            </h2>
+          </div>
+
+          <span class="status">
+            Week ${featured.week}
+          </span>
+
+        </div>
+
+        <div class="home-featured-details">
+
+          <div>
+            <span>
+              ${
+                featured.awayOwner
+                  ? esc(featured.awayOwner)
+                  : "Away"
+              }
+            </span>
+
+            <strong>
+              ${
+                complete
+                  ? fmt1(featured.awayScore)
+                  : "—"
+              }
+            </strong>
+          </div>
+
+          <div class="home-featured-center">
+            ${
+              complete
+                ? "FINAL"
+                : "UPCOMING"
+            }
+          </div>
+
+          <div>
+            <span>
+              ${
+                featured.homeOwner
+                  ? esc(featured.homeOwner)
+                  : "Home"
+              }
+            </span>
+
+            <strong>
+              ${
+                complete
+                  ? fmt1(featured.homeScore)
+                  : "—"
+              }
+            </strong>
+          </div>
+
+        </div>
 
         <a
           href="#schedule"
           data-route="schedule"
           class="text-link"
         >
-          Full schedule →
+          View Full Schedule →
         </a>
       `;
     } else {
       matchup.innerHTML = `
         <span class="eyebrow">
-          Live Schedule
+          Featured Matchup
         </span>
 
         <h2>
-          Featured Matchup
+          No matchup available
         </h2>
 
         <p>
-          No matchup data yet.
+          ESPN has not returned a current matchup yet.
         </p>
       `;
     }
   }
 
-  if (snapshot) {
-    const leader =
-      teams[0];
 
-    snapshot.innerHTML = `
-      <span class="eyebrow">
-        Live ESPN Feed
-      </span>
+  /* -------------------------
+     LEAGUE LEADERS
+  ------------------------- */
 
-      <h2>
-        ${teams.length}
-        Active Teams
-      </h2>
+  const standingsLeader =
+    teams[0] || null;
 
-      <p>
-        ${
-          leader
-            ? `Current table leader:
-               <strong>
-                 ${esc(
-                   leader.name
-                 )}
-               </strong>
-               (${record(
-                 leader
-               )}).`
-            : ""
-        }
-      </p>
+  const scoringLeader =
+    teams.length
+      ? [...teams].sort(
+          (a, b) =>
+            Number(b.pointsFor || 0) -
+            Number(a.pointsFor || 0)
+        )[0]
+      : null;
 
-      <p>
-        11 managers are preserved
-        in the CGA archive.
-      </p>
+  const weeklyScores = [];
 
-      <a
-        href="#managers"
-        data-route="managers"
-        class="text-link"
-      >
-        Meet the managers →
-      </a>
+  for (const game of matches) {
+    const week =
+      Number(game.week || 0);
+
+    const homeScore =
+      Number(game.homeScore || 0);
+
+    const awayScore =
+      Number(game.awayScore || 0);
+
+    if (homeScore > 0) {
+      weeklyScores.push({
+        manager:
+          game.homeOwner ||
+          game.homeName,
+        team:
+          game.homeName,
+        score:
+          homeScore,
+        week
+      });
+    }
+
+    if (awayScore > 0) {
+      weeklyScores.push({
+        manager:
+          game.awayOwner ||
+          game.awayName,
+        team:
+          game.awayName,
+        score:
+          awayScore,
+        week
+      });
+    }
+  }
+
+  const weeklyHigh =
+    weeklyScores.length
+      ? [...weeklyScores].sort(
+          (a, b) =>
+            b.score - a.score
+        )[0]
+      : null;
+
+  if (leaderStrip) {
+    leaderStrip.innerHTML = `
+
+      <article class="panel home-leader-card">
+        <span class="eyebrow">
+          1st Place
+        </span>
+
+        <div class="home-leader-value">
+          ${
+            standingsLeader
+              ? esc(standingsLeader.owner)
+              : "—"
+          }
+        </div>
+
+        <p>
+          ${
+            standingsLeader
+              ? `${record(standingsLeader)} · ${esc(standingsLeader.name)}`
+              : "No standings data yet"
+          }
+        </p>
+      </article>
+
+
+      <article class="panel home-leader-card">
+        <span class="eyebrow">
+          Scoring Leader
+        </span>
+
+        <div class="home-leader-value">
+          ${
+            scoringLeader
+              ? esc(scoringLeader.owner)
+              : "—"
+          }
+        </div>
+
+        <p>
+          ${
+            scoringLeader
+              ? `${fmt(scoringLeader.pointsFor)} PF`
+              : "No scoring data yet"
+          }
+        </p>
+      </article>
+
+
+      <article class="panel home-leader-card">
+        <span class="eyebrow">
+          Highest Weekly Score
+        </span>
+
+        <div class="home-leader-value">
+          ${
+            weeklyHigh
+              ? fmt1(weeklyHigh.score)
+              : "—"
+          }
+        </div>
+
+        <p>
+          ${
+            weeklyHigh
+              ? `${esc(weeklyHigh.manager)} · Week ${weeklyHigh.week}`
+              : "No completed scores yet"
+          }
+        </p>
+      </article>
     `;
+  }
+
+
+  /* -------------------------
+     PLAYOFF RACE
+  ------------------------- */
+
+  if (playoffRace) {
+    if (teams.length) {
+      const leader =
+        teams[0];
+
+      const topSeven =
+        teams.slice(
+          0,
+          Math.min(7, teams.length)
+        );
+
+      playoffRace.innerHTML = `
+        <div class="home-playoff-table">
+
+          ${topSeven
+            .map((team, index) => {
+              const isIn =
+                index < PLAYOFF_TEAMS;
+
+              const isCut =
+                index === PLAYOFF_TEAMS - 1;
+
+              return `
+                <div class="home-playoff-row ${isIn ? "in" : "out"}">
+
+                  <span class="home-playoff-rank">
+                    ${index + 1}
+                  </span>
+
+                  <div class="home-playoff-team">
+                    <strong>
+                      ${esc(team.owner)}
+                    </strong>
+
+                    <small>
+                      ${esc(team.name)}
+                    </small>
+                  </div>
+
+                  <span class="home-playoff-record">
+                    ${record(team)}
+                  </span>
+
+                  <span class="home-playoff-gb">
+                    ${
+                      index === 0
+                        ? "LEADER"
+                        : `${gamesBack(team, leader)} GB`
+                    }
+                  </span>
+
+                </div>
+
+                ${
+                  isCut
+                    ? `
+                      <div class="home-playoff-cut">
+                        PLAYOFF CUT LINE
+                      </div>
+                    `
+                    : ""
+                }
+              `;
+            })
+            .join("")}
+
+        </div>
+      `;
+    } else {
+      playoffRace.innerHTML = `
+        <div class="empty">
+          No standings data yet.
+        </div>
+      `;
+    }
+  }
+
+
+  /* -------------------------
+     LATEST RESULTS
+  ------------------------- */
+
+  if (latestResults) {
+    const completed =
+      matches.filter(
+        (match) =>
+          match.complete ||
+          Number(match.homeScore || 0) > 0 ||
+          Number(match.awayScore || 0) > 0
+      );
+
+    const latestWeek =
+      completed.length
+        ? Math.max(
+            ...completed.map(
+              (match) =>
+                Number(match.week || 0)
+            )
+          )
+        : null;
+
+    const latestWeekGames =
+      latestWeek
+        ? completed
+            .filter(
+              (match) =>
+                Number(match.week || 0) === latestWeek
+            )
+            .sort(
+              (a, b) =>
+                Math.abs(
+                  Number(b.homeScore || 0) -
+                  Number(b.awayScore || 0)
+                ) -
+                Math.abs(
+                  Number(a.homeScore || 0) -
+                  Number(a.awayScore || 0)
+                )
+            )
+            .slice(0, 3)
+        : [];
+
+    if (latestWeekGames.length) {
+      latestResults.innerHTML = `
+        <div class="home-results-week">
+          Week ${latestWeek} Finals
+        </div>
+
+        <div class="home-results-grid">
+
+          ${latestWeekGames
+            .map((game) => {
+              const homeScore =
+                Number(game.homeScore || 0);
+
+              const awayScore =
+                Number(game.awayScore || 0);
+
+              const homeWon =
+                homeScore > awayScore;
+
+              const awayWon =
+                awayScore > homeScore;
+
+              return `
+                <article class="home-result-card">
+
+                  <div class="${awayWon ? "winner" : ""}">
+                    <span>
+                      ${esc(game.awayOwner || game.awayName)}
+                    </span>
+
+                    <strong>
+                      ${fmt1(awayScore)}
+                    </strong>
+                  </div>
+
+                  <div class="home-result-divider">
+                    —
+                  </div>
+
+                  <div class="${homeWon ? "winner" : ""}">
+                    <span>
+                      ${esc(game.homeOwner || game.homeName)}
+                    </span>
+
+                    <strong>
+                      ${fmt1(homeScore)}
+                    </strong>
+                  </div>
+
+                </article>
+              `;
+            })
+            .join("")}
+
+        </div>
+      `;
+    } else {
+      latestResults.innerHTML = `
+        <div class="empty">
+          No completed results yet.
+        </div>
+      `;
+    }
   }
 }
 
