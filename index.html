@@ -982,81 +982,276 @@
       <div class="page-title">
 
         <span class="eyebrow">
-          League Book
+          Official CGA Archive
         </span>
 
         <h1>
-          Records
+          Record Book
         </h1>
 
         <p>
-          All-time achievements calculated
-          from CGA historical ESPN seasons.
+          All-time CGA records calculated from the historical ESPN archive
+          and the official Hall of Fame results.
         </p>
 
       </div>
 
+
+      <div class="panel" style="margin-bottom:24px">
+
+        <div class="panel-head">
+
+          <div>
+            <span class="eyebrow">
+              Historical Database
+            </span>
+
+            <h2>
+              CGA All-Time Records
+            </h2>
+          </div>
+
+          <span
+            id="records-status"
+            class="status"
+          >
+            Loading…
+          </span>
+
+        </div>
+
+        <p>
+          Records update automatically as new ESPN results become available.
+          Championship and podium records use the official CGA Hall of Fame archive.
+        </p>
+
+      </div>
+
+
+      <div class="page-title" style="margin-top:45px">
+
+        <span class="eyebrow">
+          Trophy Case
+        </span>
+
+        <h1 style="font-size:clamp(42px,5vw,68px)">
+          League Records
+        </h1>
+
+      </div>
+
+
       <div class="record-grid">
 
         <article class="panel">
-          <span class="eyebrow">
-            Single Week
-          </span>
-
-          <h2>
-            Highest Score
-          </h2>
-
-          <div class="record-value">
-            —
-          </div>
+          <span class="eyebrow">Championships</span>
+          <h2>Most Titles</h2>
+          <div class="record-value" id="record-most-championships">—</div>
+          <p id="record-most-championships-detail">Loading…</p>
         </article>
 
         <article class="panel">
-          <span class="eyebrow">
-            Career
-          </span>
-
-          <h2>
-            Most Wins
-          </h2>
-
-          <div class="record-value">
-            —
-          </div>
+          <span class="eyebrow">Podiums</span>
+          <h2>Most Top-3 Finishes</h2>
+          <div class="record-value" id="record-most-podiums">—</div>
+          <p id="record-most-podiums-detail">Loading…</p>
         </article>
 
         <article class="panel">
-          <span class="eyebrow">
-            Streak
-          </span>
-
-          <h2>
-            Longest Win Streak
-          </h2>
-
-          <div class="record-value">
-            —
-          </div>
+          <span class="eyebrow">Second Place</span>
+          <h2>Most Runner-Ups</h2>
+          <div class="record-value" id="record-most-runnerups">—</div>
+          <p id="record-most-runnerups-detail">Loading…</p>
         </article>
 
         <article class="panel">
-          <span class="eyebrow">
-            History
-          </span>
-
-          <h2>
-            Most Championships
-          </h2>
-
-          <div class="record-value">
-            2
-          </div>
-
-          <p>
-            Zander Briggs
-          </p>
+          <span class="eyebrow">Third Place</span>
+          <h2>Most Bronze Finishes</h2>
+          <div class="record-value" id="record-most-thirds">—</div>
+          <p id="record-most-thirds-detail">Loading…</p>
         </article>
+
+        <article class="panel">
+          <span class="eyebrow">The Bottom</span>
+          <h2>Most Last Places</h2>
+          <div class="record-value" id="record-most-lastplaces">—</div>
+          <p id="record-most-lastplaces-detail">Loading…</p>
+        </article>
+
+      </div>
+
+
+      <div class="page-title" style="margin-top:55px">
+
+        <span class="eyebrow">
+          Career Leaders
+        </span>
+
+        <h1 style="font-size:clamp(42px,5vw,68px)">
+          Career Records
+        </h1>
+
+      </div>
+
+
+      <div class="record-grid">
+
+        <article class="panel">
+          <span class="eyebrow">Career</span>
+          <h2>Most Wins</h2>
+          <div class="record-value" id="record-career-wins">—</div>
+          <p id="record-career-wins-detail">Loading…</p>
+        </article>
+
+        <article class="panel">
+          <span class="eyebrow">Career</span>
+          <h2>Most Points</h2>
+          <div class="record-value" id="record-career-points" style="font-size:48px">—</div>
+          <p id="record-career-points-detail">Loading…</p>
+        </article>
+
+        <article class="panel">
+          <span class="eyebrow">Career</span>
+          <h2>Best Win Percentage</h2>
+          <div class="record-value" id="record-career-winpct" style="font-size:52px">—</div>
+          <p id="record-career-winpct-detail">Loading…</p>
+        </article>
+
+      </div>
+
+
+      <div class="page-title" style="margin-top:55px">
+
+        <span class="eyebrow">
+          Single Season
+        </span>
+
+        <h1 style="font-size:clamp(42px,5vw,68px)">
+          Season Records
+        </h1>
+
+      </div>
+
+
+      <div class="record-grid">
+
+        <article class="panel">
+          <span class="eyebrow">Season</span>
+          <h2>Most Wins</h2>
+          <div class="record-value" id="record-season-wins">—</div>
+          <p id="record-season-wins-detail">Loading…</p>
+        </article>
+
+        <article class="panel">
+          <span class="eyebrow">Season</span>
+          <h2>Most Points</h2>
+          <div class="record-value" id="record-season-points" style="font-size:48px">—</div>
+          <p id="record-season-points-detail">Loading…</p>
+        </article>
+
+      </div>
+
+
+      <div class="page-title" style="margin-top:55px">
+
+        <span class="eyebrow">
+          Any Given Sunday
+        </span>
+
+        <h1 style="font-size:clamp(42px,5vw,68px)">
+          Weekly Records
+        </h1>
+
+      </div>
+
+
+      <div class="record-grid">
+
+        <article class="panel">
+          <span class="eyebrow">Single Week</span>
+          <h2>Highest Score</h2>
+          <div class="record-value" id="record-high-week" style="font-size:48px">—</div>
+          <p id="record-high-week-detail">Loading…</p>
+        </article>
+
+        <article class="panel">
+          <span class="eyebrow">Single Week</span>
+          <h2>Lowest Score</h2>
+          <div class="record-value" id="record-low-week" style="font-size:48px">—</div>
+          <p id="record-low-week-detail">Loading…</p>
+        </article>
+
+        <article class="panel">
+          <span class="eyebrow">Margin</span>
+          <h2>Biggest Blowout</h2>
+          <div class="record-value" id="record-biggest-blowout" style="font-size:48px">—</div>
+          <p id="record-biggest-blowout-detail">Loading…</p>
+        </article>
+
+        <article class="panel">
+          <span class="eyebrow">Margin</span>
+          <h2>Closest Victory</h2>
+          <div class="record-value" id="record-closest-win" style="font-size:48px">—</div>
+          <p id="record-closest-win-detail">Loading…</p>
+        </article>
+
+      </div>
+
+
+      <div class="page-title" style="margin-top:55px">
+
+        <span class="eyebrow">
+          Momentum
+        </span>
+
+        <h1 style="font-size:clamp(42px,5vw,68px)">
+          Streak Records
+        </h1>
+
+      </div>
+
+
+      <div class="record-grid">
+
+        <article class="panel">
+          <span class="eyebrow">Winning</span>
+          <h2>Longest Win Streak</h2>
+          <div class="record-value" id="record-longest-win-streak">—</div>
+          <p id="record-longest-win-streak-detail">Loading…</p>
+        </article>
+
+        <article class="panel">
+          <span class="eyebrow">Losing</span>
+          <h2>Longest Losing Streak</h2>
+          <div class="record-value" id="record-longest-loss-streak">—</div>
+          <p id="record-longest-loss-streak-detail">Loading…</p>
+        </article>
+
+      </div>
+
+
+      <div
+        class="panel"
+        style="margin-top:35px"
+      >
+
+        <span class="eyebrow">
+          Record Book Note
+        </span>
+
+        <h2>
+          Living History
+        </h2>
+
+        <p>
+          The record book is powered by CGA's historical ESPN data.
+          As the 2026 season progresses, eligible records can change automatically.
+        </p>
+
+        <p>
+          Historical championship, runner-up, third-place and last-place totals
+          follow the official CGA Hall of Fame archive.
+        </p>
 
       </div>
 
