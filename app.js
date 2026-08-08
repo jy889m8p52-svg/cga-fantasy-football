@@ -1959,6 +1959,649 @@ function renderManagerProfile(
 
 
 /* =========================
+   OFFICIAL RIVALRIES
+========================= */
+
+const OFFICIAL_RIVALRIES = [
+  {
+    id: "premier",
+    a: "Alex Ross",
+    b: "Porter Roberts",
+    featured: true
+  },
+  {
+    id: "lleyton-zack",
+    a: "Lleyton Renner",
+    b: "Zack Middlebrooks"
+  },
+  {
+    id: "sam-zander",
+    a: "Sam Ransome",
+    b: "Zander Briggs"
+  },
+  {
+    id: "cado-jackson",
+    a: "Cado Keller",
+    b: "Jackson O'Bleness"
+  },
+  {
+    id: "brayden-luka",
+    a: "Brayden Mccuen",
+    b: "Luka Draganic"
+  }
+];
+
+function rivalryGames(managerA, managerB) {
+  return allHistoricalMatchups()
+    .filter((game) => {
+      const homeOwner = game.homeOwner;
+      const awayOwner = game.awayOwner;
+      const homeScore = Number(game.homeScore || 0);
+      const awayScore = Number(game.awayScore || 0);
+
+      const realGame =
+        homeOwner &&
+        awayOwner &&
+        homeOwner !== "TBD" &&
+        awayOwner !== "TBD" &&
+        homeOwner !== awayOwner &&
+        (homeScore > 0 || awayScore > 0);
+
+      const isPair =
+        (homeOwner === managerA && awayOwner === managerB) ||
+        (homeOwner === managerB && awayOwner === managerA);
+
+      return realGame && isPair;
+    })
+    .map((game) => {
+      const homeScore = Number(game.homeScore || 0);
+      const awayScore = Number(game.awayScore || 0);
+
+      let winner = null;
+      let loser = null;
+
+      if (homeScore > awayScore) {
+        winner = game.homeOwner;
+        loser = game.awayOwner;
+      } else if (awayScore > homeScore) {
+        winner = game.awayOwner;
+        loser = game.homeOwner;
+      }
+
+      return {
+        season: Number(game.season),
+        week: Number(game.week),
+        homeOwner: game.homeOwner,
+        awayOwner: game.awayOwner,
+        homeScore,
+        awayScore,
+        winner,
+        loser,
+        margin: Math.abs(homeScore - awayScore),
+        totalPoints: homeScore + awayScore
+      };
+    })
+    .sort(
+      (a, b) =>
+        a.season - b.season ||
+        a.week - b.week
+    );
+}
+
+function rivalrySummary(managerA, managerB) {
+  const games = rivalryGames(managerA, managerB);
+
+  let aWins = 0;
+  let bWins = 0;
+  let ties = 0;
+  let aPoints = 0;
+  let bPoints = 0;
+
+  for (const game of games) {
+    const aIsHome = game.homeOwner === managerA;
+
+    aPoints +=
+      aIsHome
+        ? game.homeScore
+        : game.awayScore;
+
+    bPoints +=
+      aIsHome
+        ? game.awayScore
+        : game.homeScore;
+
+    if (!game.winner) {
+      ties += 1;
+    } else if (game.winner === managerA) {
+      aWins += 1;
+    } else if (game.winner === managerB) {
+      bWins += 1;
+    }
+  }
+
+  const decidedGames = games.filter(
+    (game) => game.winner
+  );
+
+  const biggest =
+    decidedGames.length
+      ? [...decidedGames].sort(
+          (a, b) =>
+            b.margin - a.margin
+        )[0]
+      : null;
+
+  const closest =
+    decidedGames.length
+      ? [...decidedGames].sort(
+          (a, b) =>
+            a.margin - b.margin
+        )[0]
+      : null;
+
+  const highestScoring =
+    games.length
+      ? [...games].sort(
+          (a, b) =>
+            b.totalPoints - a.totalPoints
+        )[0]
+      : null;
+
+  let currentStreak = {
+    manager: null,
+    count: 0
+  };
+
+  const nonTies =
+    [...games]
+      .reverse()
+      .filter(
+        (game) => game.winner
+      );
+
+  if (nonTies.length) {
+    currentStreak.manager =
+      nonTies[0].winner;
+
+    currentStreak.count = 1;
+
+    for (
+      let i = 1;
+      i < nonTies.length;
+      i += 1
+    ) {
+      if (
+        nonTies[i].winner ===
+        currentStreak.manager
+      ) {
+        currentStreak.count += 1;
+      } else {
+        break;
+      }
+    }
+  }
+
+  let leader = "Series Tied";
+
+  if (aWins > bWins) {
+    leader = managerA;
+  } else if (bWins > aWins) {
+    leader = managerB;
+  }
+
+  return {
+    managerA,
+    managerB,
+    games,
+    meetings: games.length,
+    aWins,
+    bWins,
+    ties,
+    aPoints,
+    bPoints,
+    avgCombined:
+      games.length
+        ? (aPoints + bPoints) /
+          games.length
+        : 0,
+    biggest,
+    closest,
+    highestScoring,
+    currentStreak,
+    leader
+  };
+}
+
+function rivalryGameLabel(game) {
+  if (!game) {
+    return "No data";
+  }
+
+  if (!game.winner) {
+    return `${game.homeOwner} ${fmt1(game.homeScore)}-${fmt1(game.awayScore)} ${game.awayOwner} · Week ${game.week}, ${game.season}`;
+  }
+
+  return `${game.winner} def. ${game.loser} ${fmt1(
+    Math.max(game.homeScore, game.awayScore)
+  )}-${fmt1(
+    Math.min(game.homeScore, game.awayScore)
+  )} · Week ${game.week}, ${game.season}`;
+}
+
+function rivalryHistoryTable(summary) {
+  if (!summary.games.length) {
+    return `
+      <div class="empty">
+        No historical meetings found yet.
+      </div>
+    `;
+  }
+
+  const rows =
+    [...summary.games]
+      .reverse()
+      .map((game) => {
+        let result = "Tie";
+
+        if (game.winner) {
+          result =
+            `${esc(game.winner)} won`;
+        }
+
+        return `
+          <tr>
+            <td>${game.season}</td>
+            <td>Week ${game.week}</td>
+            <td>
+              ${esc(game.awayOwner)}
+              ${fmt1(game.awayScore)}
+              —
+              ${fmt1(game.homeScore)}
+              ${esc(game.homeOwner)}
+            </td>
+            <td>${result}</td>
+          </tr>
+        `;
+      })
+      .join("");
+
+  return `
+    <div class="table-wrap">
+      <table class="standings-table">
+        <thead>
+          <tr>
+            <th>Season</th>
+            <th>Week</th>
+            <th>Matchup</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          ${rows}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function renderPremierRivalry(summary) {
+  const container =
+    document.getElementById(
+      "rivalry-premier-content"
+    );
+
+  if (!container) {
+    return;
+  }
+
+  const seriesText =
+    `${summary.aWins}-${summary.bWins}${
+      summary.ties
+        ? `-${summary.ties}`
+        : ""
+    }`;
+
+  container.innerHTML = `
+    <div class="rivalry-stat-grid">
+
+      <article class="panel">
+        <span class="eyebrow">
+          All-Time Series
+        </span>
+
+        <div class="record-value">
+          ${seriesText}
+        </div>
+
+        <p>
+          ${esc(summary.managerA)}
+          leads with ${summary.aWins} wins;
+          ${esc(summary.managerB)}
+          has ${summary.bWins}.
+        </p>
+      </article>
+
+
+      <article class="panel">
+        <span class="eyebrow">
+          Meetings
+        </span>
+
+        <div class="record-value">
+          ${summary.meetings}
+        </div>
+
+        <p>
+          Recorded head-to-head games
+        </p>
+      </article>
+
+
+      <article class="panel">
+        <span class="eyebrow">
+          Series Leader
+        </span>
+
+        <div
+          class="record-value"
+          style="font-size:38px"
+        >
+          ${esc(summary.leader)}
+        </div>
+
+        <p>
+          Current all-time edge
+        </p>
+      </article>
+
+
+      <article class="panel">
+        <span class="eyebrow">
+          Current Streak
+        </span>
+
+        <div
+          class="record-value"
+          style="font-size:38px"
+        >
+          ${
+            summary.currentStreak.manager
+              ? `${esc(
+                  summary.currentStreak.manager
+                )} ${summary.currentStreak.count}`
+              : "—"
+          }
+        </div>
+
+        <p>
+          Consecutive rivalry wins
+        </p>
+      </article>
+
+    </div>
+
+
+    <div class="rivalry-stat-grid rivalry-stat-grid-secondary">
+
+      <article class="panel">
+        <span class="eyebrow">
+          Total Points
+        </span>
+
+        <h2>
+          ${esc(summary.managerA)}
+        </h2>
+
+        <div
+          class="record-value"
+          style="font-size:44px"
+        >
+          ${fmt(summary.aPoints)}
+        </div>
+
+        <p>
+          vs ${fmt(summary.bPoints)}
+          by ${esc(summary.managerB)}
+        </p>
+      </article>
+
+
+      <article class="panel">
+        <span class="eyebrow">
+          Avg. Combined Score
+        </span>
+
+        <div
+          class="record-value"
+          style="font-size:44px"
+        >
+          ${fmt1(summary.avgCombined)}
+        </div>
+
+        <p>
+          Points per meeting
+        </p>
+      </article>
+
+
+      <article class="panel">
+        <span class="eyebrow">
+          Biggest Rivalry Win
+        </span>
+
+        <div
+          class="record-value"
+          style="font-size:44px"
+        >
+          ${
+            summary.biggest
+              ? fmt1(
+                  summary.biggest.margin
+                )
+              : "—"
+          }
+        </div>
+
+        <p>
+          ${
+            summary.biggest
+              ? rivalryGameLabel(
+                  summary.biggest
+                )
+              : "No decided games"
+          }
+        </p>
+      </article>
+
+
+      <article class="panel">
+        <span class="eyebrow">
+          Closest Meeting
+        </span>
+
+        <div
+          class="record-value"
+          style="font-size:44px"
+        >
+          ${
+            summary.closest
+              ? fmt1(
+                  summary.closest.margin
+                )
+              : "—"
+          }
+        </div>
+
+        <p>
+          ${
+            summary.closest
+              ? rivalryGameLabel(
+                  summary.closest
+                )
+              : "No decided games"
+          }
+        </p>
+      </article>
+
+    </div>
+
+
+    <div
+      class="panel"
+      style="margin-top:18px"
+    >
+      <span class="eyebrow">
+        Complete Rivalry History
+      </span>
+
+      <h2>
+        Every Alex vs Porter Meeting
+      </h2>
+
+      ${rivalryHistoryTable(summary)}
+    </div>
+  `;
+}
+
+function renderRivalryCard(
+  containerId,
+  summary
+) {
+  const container =
+    document.getElementById(
+      containerId
+    );
+
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="rivalry-mini-series">
+      ${summary.aWins}-${summary.bWins}${
+        summary.ties
+          ? `-${summary.ties}`
+          : ""
+      }
+    </div>
+
+    <p>
+      <strong>
+        ${summary.meetings}
+      </strong>
+      meetings ·
+      <strong>
+        ${esc(summary.leader)}
+      </strong>
+      series leader
+    </p>
+
+    <p>
+      ${esc(summary.managerA)}:
+      <strong>
+        ${fmt(summary.aPoints)}
+      </strong>
+      PF
+      ·
+      ${esc(summary.managerB)}:
+      <strong>
+        ${fmt(summary.bPoints)}
+      </strong>
+      PF
+    </p>
+
+    <p>
+      Biggest win:
+      <strong>
+        ${
+          summary.biggest
+            ? `${fmt1(
+                summary.biggest.margin
+              )} pts`
+            : "—"
+        }
+      </strong>
+    </p>
+
+    <p>
+      Closest meeting:
+      <strong>
+        ${
+          summary.closest
+            ? `${fmt1(
+                summary.closest.margin
+              )} pts`
+            : "—"
+        }
+      </strong>
+    </p>
+
+    <p>
+      Current streak:
+      <strong>
+        ${
+          summary.currentStreak.manager
+            ? `${esc(
+                summary.currentStreak.manager
+              )} ${summary.currentStreak.count}`
+            : "—"
+        }
+      </strong>
+    </p>
+  `;
+}
+
+function renderRivalries() {
+  if (!leagueData) {
+    return;
+  }
+
+  const premier =
+    rivalrySummary(
+      "Alex Ross",
+      "Porter Roberts"
+    );
+
+  renderPremierRivalry(
+    premier
+  );
+
+  renderRivalryCard(
+    "rivalry-lleyton-zack",
+    rivalrySummary(
+      "Lleyton Renner",
+      "Zack Middlebrooks"
+    )
+  );
+
+  renderRivalryCard(
+    "rivalry-sam-zander",
+    rivalrySummary(
+      "Sam Ransome",
+      "Zander Briggs"
+    )
+  );
+
+  renderRivalryCard(
+    "rivalry-cado-jackson",
+    rivalrySummary(
+      "Cado Keller",
+      "Jackson O'Bleness"
+    )
+  );
+
+  renderRivalryCard(
+    "rivalry-brayden-luka",
+    rivalrySummary(
+      "Brayden Mccuen",
+      "Luka Draganic"
+    )
+  );
+}
+
+
+/* =========================
    ALL-TIME RECORD BOOK
 ========================= */
 
@@ -2778,6 +3421,8 @@ function renderLeague(data) {
   renderRecords(
     data
   );
+
+  renderRivalries();
 
   if (selectedManager) {
     renderManagerProfile(
