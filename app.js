@@ -1948,6 +1948,418 @@ function renderManagerProfile(
 }
 
 
+
+/* =========================
+   ALL-TIME RECORD BOOK
+========================= */
+
+function setRecordCard(id, value, detail) {
+  const valueEl =
+    document.getElementById(id);
+
+  const detailEl =
+    document.getElementById(
+      `${id}-detail`
+    );
+
+  if (valueEl) {
+    valueEl.textContent =
+      value ?? "—";
+  }
+
+  if (detailEl) {
+    detailEl.textContent =
+      detail || "No data available.";
+  }
+}
+
+function medalLeaders(field) {
+  const rows =
+    leagueData?.medalLeaderboard || [];
+
+  if (!rows.length) {
+    return {
+      value: 0,
+      names: []
+    };
+  }
+
+  const highest =
+    Math.max(
+      ...rows.map(
+        (row) =>
+          Number(row?.[field] || 0)
+      )
+    );
+
+  return {
+    value: highest,
+    names: rows
+      .filter(
+        (row) =>
+          Number(row?.[field] || 0) ===
+          highest
+      )
+      .map(
+        (row) =>
+          row.manager
+      )
+  };
+}
+
+function globalStreakLeaders() {
+  const managers =
+    (
+      leagueData?.careerLeaderboard ||
+      []
+    )
+      .map(
+        (row) =>
+          row.manager
+      )
+      .filter(Boolean);
+
+  let winValue = 0;
+  let lossValue = 0;
+
+  let winNames = [];
+  let lossNames = [];
+
+  for (
+    const managerName
+    of managers
+  ) {
+    const streaks =
+      managerStreaks(
+        managerName
+      );
+
+    if (
+      streaks.longestWins >
+      winValue
+    ) {
+      winValue =
+        streaks.longestWins;
+
+      winNames = [
+        managerName
+      ];
+    } else if (
+      streaks.longestWins ===
+        winValue &&
+      winValue > 0
+    ) {
+      winNames.push(
+        managerName
+      );
+    }
+
+    if (
+      streaks.longestLosses >
+      lossValue
+    ) {
+      lossValue =
+        streaks.longestLosses;
+
+      lossNames = [
+        managerName
+      ];
+    } else if (
+      streaks.longestLosses ===
+        lossValue &&
+      lossValue > 0
+    ) {
+      lossNames.push(
+        managerName
+      );
+    }
+  }
+
+  return {
+    winValue,
+    winNames,
+    lossValue,
+    lossNames
+  };
+}
+
+function managerListText(names) {
+  if (!names?.length) {
+    return "No data";
+  }
+
+  return names.join(", ");
+}
+
+function renderRecords(data) {
+  const records =
+    data?.records || {};
+
+  const status =
+    document.getElementById(
+      "records-status"
+    );
+
+  if (status) {
+    status.textContent =
+      `Live · ${data.season}`;
+  }
+
+
+  /* =========================
+     LEAGUE / MEDAL RECORDS
+  ========================= */
+
+  const championships =
+    medalLeaders(
+      "championships"
+    );
+
+  const podiums =
+    medalLeaders(
+      "podiums"
+    );
+
+  const runnerUps =
+    medalLeaders(
+      "runnerUps"
+    );
+
+  const thirds =
+    medalLeaders(
+      "thirds"
+    );
+
+  const lastPlaces =
+    medalLeaders(
+      "lastPlaces"
+    );
+
+
+  setRecordCard(
+    "record-most-championships",
+    championships.value,
+    managerListText(
+      championships.names
+    )
+  );
+
+  setRecordCard(
+    "record-most-podiums",
+    podiums.value,
+    managerListText(
+      podiums.names
+    )
+  );
+
+  setRecordCard(
+    "record-most-runnerups",
+    runnerUps.value,
+    managerListText(
+      runnerUps.names
+    )
+  );
+
+  setRecordCard(
+    "record-most-thirds",
+    thirds.value,
+    managerListText(
+      thirds.names
+    )
+  );
+
+  setRecordCard(
+    "record-most-lastplaces",
+    lastPlaces.value,
+    managerListText(
+      lastPlaces.names
+    )
+  );
+
+
+  /* =========================
+     CAREER RECORDS
+  ========================= */
+
+  const careerWins =
+    records.careerWins;
+
+  setRecordCard(
+    "record-career-wins",
+    careerWins
+      ? careerWins.wins
+      : "—",
+    careerWins
+      ? `${careerWins.manager} · ${careerWins.wins}-${careerWins.losses}${careerWins.ties ? `-${careerWins.ties}` : ""}`
+      : "No career data available."
+  );
+
+
+  const careerPoints =
+    records.careerPoints;
+
+  setRecordCard(
+    "record-career-points",
+    careerPoints
+      ? fmt(
+          careerPoints.pointsFor
+        )
+      : "—",
+    careerPoints
+      ? careerPoints.manager
+      : "No career data available."
+  );
+
+
+  const bestPct =
+    records.bestWinningPercentage;
+
+  setRecordCard(
+    "record-career-winpct",
+    bestPct
+      ? pct(
+          bestPct.winningPercentage
+        )
+      : "—",
+    bestPct
+      ? `${bestPct.manager} · ${bestPct.wins}-${bestPct.losses}${bestPct.ties ? `-${bestPct.ties}` : ""}`
+      : "No career data available."
+  );
+
+
+  /* =========================
+     SEASON RECORDS
+  ========================= */
+
+  const mostWinsSeason =
+    records.mostWinsSeason;
+
+  setRecordCard(
+    "record-season-wins",
+    mostWinsSeason
+      ? mostWinsSeason.wins
+      : "—",
+    mostWinsSeason
+      ? `${mostWinsSeason.manager} · ${mostWinsSeason.season} · ${mostWinsSeason.team}`
+      : "No season data available."
+  );
+
+
+  const mostPointsSeason =
+    records.mostPointsSeason;
+
+  setRecordCard(
+    "record-season-points",
+    mostPointsSeason
+      ? fmt(
+          mostPointsSeason.pointsFor
+        )
+      : "—",
+    mostPointsSeason
+      ? `${mostPointsSeason.manager} · ${mostPointsSeason.season} · ${mostPointsSeason.team}`
+      : "No season data available."
+  );
+
+
+  /* =========================
+     WEEKLY RECORDS
+  ========================= */
+
+  const highWeek =
+    records.highestWeeklyScore;
+
+  setRecordCard(
+    "record-high-week",
+    highWeek
+      ? fmt(
+          highWeek.score
+        )
+      : "—",
+    highWeek
+      ? `${highWeek.manager} · Week ${highWeek.week}, ${highWeek.season}`
+      : "No weekly data available."
+  );
+
+
+  const lowWeek =
+    records.lowestWeeklyScore;
+
+  setRecordCard(
+    "record-low-week",
+    lowWeek
+      ? fmt(
+          lowWeek.score
+        )
+      : "—",
+    lowWeek
+      ? `${lowWeek.manager} · Week ${lowWeek.week}, ${lowWeek.season}`
+      : "No weekly data available."
+  );
+
+
+  const blowout =
+    records.biggestBlowout;
+
+  setRecordCard(
+    "record-biggest-blowout",
+    blowout
+      ? fmt1(
+          blowout.margin
+        )
+      : "—",
+    blowout
+      ? `${blowout.winner} def. ${blowout.loser} ${fmt1(blowout.winnerScore)}-${fmt1(blowout.loserScore)} · Week ${blowout.week}, ${blowout.season}`
+      : "No matchup data available."
+  );
+
+
+  const closest =
+    records.closestWin;
+
+  setRecordCard(
+    "record-closest-win",
+    closest
+      ? fmt1(
+          closest.margin
+        )
+      : "—",
+    closest
+      ? `${closest.winner} def. ${closest.loser} ${fmt1(closest.winnerScore)}-${fmt1(closest.loserScore)} · Week ${closest.week}, ${closest.season}`
+      : "No matchup data available."
+  );
+
+
+  /* =========================
+     STREAK RECORDS
+  ========================= */
+
+  const streaks =
+    globalStreakLeaders();
+
+  setRecordCard(
+    "record-longest-win-streak",
+    streaks.winValue ||
+      "—",
+    streaks.winValue
+      ? managerListText(
+          streaks.winNames
+        )
+      : "No streak data available."
+  );
+
+  setRecordCard(
+    "record-longest-loss-streak",
+    streaks.lossValue ||
+      "—",
+    streaks.lossValue
+      ? managerListText(
+          streaks.lossNames
+        )
+      : "No streak data available."
+  );
+}
+
+
 /* =========================
    SCHEDULE
 ========================= */
@@ -2250,6 +2662,10 @@ function renderLeague(data) {
   );
 
   renderHome(
+    data
+  );
+
+  renderRecords(
     data
   );
 
