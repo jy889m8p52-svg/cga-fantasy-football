@@ -47,19 +47,12 @@ function route() {
   });
 }
 
-window.addEventListener(
-  "hashchange",
-  route
-);
-
+window.addEventListener("hashchange", route);
 route();
 
-menu?.addEventListener(
-  "click",
-  () => {
-    nav?.classList.toggle("open");
-  }
-);
+menu?.addEventListener("click", () => {
+  nav?.classList.toggle("open");
+});
 
 
 /* =========================
@@ -72,6 +65,16 @@ function fmt(n) {
     {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
+    }
+  );
+}
+
+function fmt1(n) {
+  return Number(n || 0).toLocaleString(
+    undefined,
+    {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1
     }
   );
 }
@@ -99,23 +102,11 @@ function esc(s = "") {
 
 function record(team) {
   return `${team.wins}-${team.losses}${
-    team.ties
-      ? `-${team.ties}`
-      : ""
+    team.ties ? `-${team.ties}` : ""
   }`;
 }
 
-function slug(name) {
-  return String(name || "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-}
-
-function teamImage(
-  team,
-  className
-) {
+function teamImage(team, className) {
   if (!team?.logo) {
     return "";
   }
@@ -124,9 +115,7 @@ function teamImage(
     <img
       class="${className}"
       src="${esc(team.logo)}"
-      alt="${esc(
-        team.owner || team.name
-      )}"
+      alt="${esc(team.owner || team.name)}"
       loading="lazy"
       referrerpolicy="no-referrer"
       onerror="this.style.display='none'"
@@ -134,9 +123,17 @@ function teamImage(
   `;
 }
 
+function totalGames(stats) {
+  return (
+    Number(stats?.wins || 0) +
+    Number(stats?.losses || 0) +
+    Number(stats?.ties || 0)
+  );
+}
+
 
 /* =========================
-   MANAGER CLICK HANDLING
+   MANAGER PROFILE CLICKING
 ========================= */
 
 document.addEventListener(
@@ -158,8 +155,7 @@ document.addEventListener(
       return;
     }
 
-    selectedManager =
-      managerName;
+    selectedManager = managerName;
 
     renderManagerProfile(
       managerName
@@ -172,10 +168,7 @@ document.addEventListener(
    STANDINGS
 ========================= */
 
-function standingsTable(
-  teams,
-  limit
-) {
+function standingsTable(teams, limit) {
   const displayedTeams =
     limit
       ? teams.slice(0, limit)
@@ -209,18 +202,13 @@ function standingsTable(
                   <a
                     href="#manager-profile"
                     class="manager-profile-link"
-                    data-manager="${esc(
-                      team.owner
-                    )}"
+                    data-manager="${esc(team.owner)}"
                     style="
                       color:inherit;
                       text-decoration:none;
                     "
                   >
-                    ${esc(
-                      team.owner ||
-                      "Manager"
-                    )}
+                    ${esc(team.owner || "Manager")}
                   </a>
 
                 </div>
@@ -235,15 +223,11 @@ function standingsTable(
           </td>
 
           <td class="pf">
-            ${fmt(
-              team.pointsFor
-            )}
+            ${fmt(team.pointsFor)}
           </td>
 
           <td>
-            ${fmt(
-              team.pointsAgainst
-            )}
+            ${fmt(team.pointsAgainst)}
           </td>
 
         </tr>
@@ -277,9 +261,7 @@ function standingsTable(
    MANAGER CARDS
 ========================= */
 
-function renderManagers(
-  teams
-) {
+function renderManagers(teams) {
   const managerGrid =
     document.getElementById(
       "manager-grid"
@@ -296,9 +278,7 @@ function renderManagers(
           <a
             href="#manager-profile"
             class="manager-profile-link"
-            data-manager="${esc(
-              team.owner
-            )}"
+            data-manager="${esc(team.owner)}"
             style="
               color:inherit;
               text-decoration:none;
@@ -324,17 +304,11 @@ function renderManagers(
                   index + 1
                 ).padStart(2, "0")}
                 ·
-                ${esc(
-                  team.abbrev ||
-                  "CGA"
-                )}
+                ${esc(team.abbrev || "CGA")}
               </span>
 
               <h2>
-                ${esc(
-                  team.owner ||
-                  "Manager"
-                )}
+                ${esc(team.owner || "Manager")}
               </h2>
 
               <strong>
@@ -344,13 +318,9 @@ function renderManagers(
               <p>
                 ${record(team)}
                 ·
-                ${fmt(
-                  team.pointsFor
-                )} PF
+                ${fmt(team.pointsFor)} PF
                 ·
-                ${fmt(
-                  team.pointsAgainst
-                )} PA
+                ${fmt(team.pointsAgainst)} PA
               </p>
 
               <span class="text-link">
@@ -421,12 +391,10 @@ function renderManagers(
 
 
 /* =========================
-   MANAGER PROFILE
+   MANAGER DATA HELPERS
 ========================= */
 
-function findCurrentTeam(
-  managerName
-) {
+function findCurrentTeam(managerName) {
   return (
     leagueData?.teams || []
   ).find(
@@ -435,35 +403,25 @@ function findCurrentTeam(
   );
 }
 
-function findCareer(
-  managerName
-) {
+function findCareer(managerName) {
   return (
-    leagueData
-      ?.careerLeaderboard || []
+    leagueData?.careerLeaderboard || []
   ).find(
     (manager) =>
-      manager.manager ===
-      managerName
+      manager.manager === managerName
   );
 }
 
-function findMedals(
-  managerName
-) {
+function findMedals(managerName) {
   return (
-    leagueData
-      ?.medalLeaderboard || []
+    leagueData?.medalLeaderboard || []
   ).find(
     (manager) =>
-      manager.manager ===
-      managerName
+      manager.manager === managerName
   );
 }
 
-function managerSeasonHistory(
-  managerName
-) {
+function managerSeasonHistory(managerName) {
   const seasons =
     leagueData?.history || [];
 
@@ -473,8 +431,7 @@ function managerSeasonHistory(
         (season.teams || [])
           .find(
             (team) =>
-              team.owner ===
-              managerName
+              team.owner === managerName
           );
 
       if (!team) {
@@ -482,26 +439,14 @@ function managerSeasonHistory(
       }
 
       return {
-        season:
-          season.season,
-
-        team:
-          team.name,
-
-        wins:
-          team.wins,
-
-        losses:
-          team.losses,
-
-        ties:
-          team.ties,
-
-        pointsFor:
-          team.pointsFor,
-
+        season: Number(season.season),
+        team: team.name,
+        wins: Number(team.wins || 0),
+        losses: Number(team.losses || 0),
+        ties: Number(team.ties || 0),
+        pointsFor: Number(team.pointsFor || 0),
         pointsAgainst:
-          team.pointsAgainst
+          Number(team.pointsAgainst || 0)
       };
     })
     .filter(Boolean)
@@ -524,9 +469,7 @@ function finishForSeason(
   if (!hall) {
     if (
       Number(season) ===
-      Number(
-        leagueData?.season
-      )
+      Number(leagueData?.season)
     ) {
       return "Season In Progress";
     }
@@ -566,6 +509,409 @@ function finishForSeason(
 
   return "—";
 }
+
+
+/* =========================
+   BEST / WORST SEASONS
+========================= */
+
+function bestSeason(managerName) {
+  const seasons =
+    managerSeasonHistory(
+      managerName
+    );
+
+  if (!seasons.length) {
+    return null;
+  }
+
+  return [...seasons].sort(
+    (a, b) => {
+      const aGames =
+        a.wins +
+        a.losses +
+        a.ties;
+
+      const bGames =
+        b.wins +
+        b.losses +
+        b.ties;
+
+      const aPct =
+        aGames
+          ? a.wins / aGames
+          : 0;
+
+      const bPct =
+        bGames
+          ? b.wins / bGames
+          : 0;
+
+      return (
+        bPct - aPct ||
+        b.wins - a.wins ||
+        b.pointsFor - a.pointsFor
+      );
+    }
+  )[0];
+}
+
+function worstSeason(managerName) {
+  const seasons =
+    managerSeasonHistory(
+      managerName
+    );
+
+  if (!seasons.length) {
+    return null;
+  }
+
+  return [...seasons].sort(
+    (a, b) => {
+      const aGames =
+        a.wins +
+        a.losses +
+        a.ties;
+
+      const bGames =
+        b.wins +
+        b.losses +
+        b.ties;
+
+      const aPct =
+        aGames
+          ? a.wins / aGames
+          : 0;
+
+      const bPct =
+        bGames
+          ? b.wins / bGames
+          : 0;
+
+      return (
+        aPct - bPct ||
+        a.wins - b.wins ||
+        a.pointsFor - b.pointsFor
+      );
+    }
+  )[0];
+}
+
+function highestScoringSeason(
+  managerName
+) {
+  const seasons =
+    managerSeasonHistory(
+      managerName
+    );
+
+  if (!seasons.length) {
+    return null;
+  }
+
+  return [...seasons].sort(
+    (a, b) =>
+      b.pointsFor -
+      a.pointsFor
+  )[0];
+}
+
+function averageSeasonPoints(
+  managerName
+) {
+  const seasons =
+    managerSeasonHistory(
+      managerName
+    );
+
+  if (!seasons.length) {
+    return 0;
+  }
+
+  const total =
+    seasons.reduce(
+      (sum, season) =>
+        sum +
+        season.pointsFor,
+      0
+    );
+
+  return total /
+    seasons.length;
+}
+
+
+/* =========================
+   ALL MANAGER GAMES
+========================= */
+
+function allHistoricalMatchups() {
+  return (
+    leagueData?.history || []
+  ).flatMap(
+    (season) =>
+      (season.matchups || []).map(
+        (game) => ({
+          ...game,
+          season:
+            Number(
+              game.season ||
+              season.season
+            )
+        })
+      )
+  );
+}
+
+function completedManagerGames(
+  managerName
+) {
+  return allHistoricalMatchups()
+    .filter(
+      (game) =>
+        Number(game.homeScore || 0) > 0 ||
+        Number(game.awayScore || 0) > 0
+    )
+    .filter(
+      (game) =>
+        game.homeOwner === managerName ||
+        game.awayOwner === managerName
+    )
+    .map((game) => {
+      const isHome =
+        game.homeOwner ===
+        managerName;
+
+      const managerScore =
+        Number(
+          isHome
+            ? game.homeScore
+            : game.awayScore
+        );
+
+      const opponentScore =
+        Number(
+          isHome
+            ? game.awayScore
+            : game.homeScore
+        );
+
+      const opponent =
+        isHome
+          ? game.awayOwner
+          : game.homeOwner;
+
+      let result = "T";
+
+      if (
+        managerScore >
+        opponentScore
+      ) {
+        result = "W";
+      } else if (
+        managerScore <
+        opponentScore
+      ) {
+        result = "L";
+      }
+
+      return {
+        season:
+          Number(game.season),
+        week:
+          Number(game.week),
+        opponent,
+        managerScore,
+        opponentScore,
+        margin:
+          Math.abs(
+            managerScore -
+            opponentScore
+          ),
+        result
+      };
+    })
+    .sort(
+      (a, b) =>
+        a.season - b.season ||
+        a.week - b.week
+    );
+}
+
+
+/* =========================
+   HEAD TO HEAD
+========================= */
+
+function headToHeadRecords(
+  managerName
+) {
+  const games =
+    completedManagerGames(
+      managerName
+    );
+
+  const opponents = {};
+
+  for (const game of games) {
+    if (
+      !game.opponent ||
+      game.opponent === "TBD"
+    ) {
+      continue;
+    }
+
+    if (!opponents[game.opponent]) {
+      opponents[game.opponent] = {
+        opponent:
+          game.opponent,
+        wins: 0,
+        losses: 0,
+        ties: 0,
+        pointsFor: 0,
+        pointsAgainst: 0,
+        games: 0
+      };
+    }
+
+    const row =
+      opponents[game.opponent];
+
+    row.games += 1;
+
+    row.pointsFor +=
+      game.managerScore;
+
+    row.pointsAgainst +=
+      game.opponentScore;
+
+    if (game.result === "W") {
+      row.wins += 1;
+    }
+
+    if (game.result === "L") {
+      row.losses += 1;
+    }
+
+    if (game.result === "T") {
+      row.ties += 1;
+    }
+  }
+
+  return Object.values(
+    opponents
+  ).sort(
+    (a, b) =>
+      b.games - a.games ||
+      b.wins - a.wins
+  );
+}
+
+
+/* =========================
+   BIGGEST / CLOSEST WIN
+========================= */
+
+function biggestWin(
+  managerName
+) {
+  const wins =
+    completedManagerGames(
+      managerName
+    ).filter(
+      (game) =>
+        game.result === "W"
+    );
+
+  if (!wins.length) {
+    return null;
+  }
+
+  return [...wins].sort(
+    (a, b) =>
+      b.margin -
+      a.margin
+  )[0];
+}
+
+function closestWin(
+  managerName
+) {
+  const wins =
+    completedManagerGames(
+      managerName
+    ).filter(
+      (game) =>
+        game.result === "W"
+    );
+
+  if (!wins.length) {
+    return null;
+  }
+
+  return [...wins].sort(
+    (a, b) =>
+      a.margin -
+      b.margin
+  )[0];
+}
+
+
+/* =========================
+   STREAKS
+========================= */
+
+function managerStreaks(
+  managerName
+) {
+  const games =
+    completedManagerGames(
+      managerName
+    );
+
+  let longestWins = 0;
+  let longestLosses = 0;
+
+  let currentWins = 0;
+  let currentLosses = 0;
+
+  for (const game of games) {
+    if (game.result === "W") {
+      currentWins += 1;
+      currentLosses = 0;
+
+      longestWins =
+        Math.max(
+          longestWins,
+          currentWins
+        );
+    } else if (
+      game.result === "L"
+    ) {
+      currentLosses += 1;
+      currentWins = 0;
+
+      longestLosses =
+        Math.max(
+          longestLosses,
+          currentLosses
+        );
+    } else {
+      currentWins = 0;
+      currentLosses = 0;
+    }
+  }
+
+  return {
+    longestWins,
+    longestLosses
+  };
+}
+
+
+/* =========================
+   PALMER PROFILE
+========================= */
 
 function renderPalmerProfile() {
   const container =
@@ -637,9 +983,7 @@ function renderPalmerProfile() {
           Status
         </span>
 
-        <div
-          class="memorial-stat alive"
-        >
+        <div class="memorial-stat alive">
           ALIVE
         </div>
 
@@ -666,9 +1010,9 @@ function renderPalmerProfile() {
       </h2>
 
       <p>
-        Palmer was part of CGA from
-        the league's founding season
-        in 2021 through 2024.
+        Palmer was part of CGA
+        from the league's founding
+        season in 2021 through 2024.
       </p>
 
       <p>
@@ -702,6 +1046,11 @@ function renderPalmerProfile() {
     </div>
   `;
 }
+
+
+/* =========================
+   MANAGER PROFILE
+========================= */
 
 function renderManagerProfile(
   managerName
@@ -767,6 +1116,51 @@ function renderManagerProfile(
       managerName
     );
 
+  const best =
+    bestSeason(
+      managerName
+    );
+
+  const worst =
+    worstSeason(
+      managerName
+    );
+
+  const highScoring =
+    highestScoringSeason(
+      managerName
+    );
+
+  const avgSeasonPoints =
+    averageSeasonPoints(
+      managerName
+    );
+
+  const h2h =
+    headToHeadRecords(
+      managerName
+    );
+
+  const biggest =
+    biggestWin(
+      managerName
+    );
+
+  const closest =
+    closestWin(
+      managerName
+    );
+
+  const streaks =
+    managerStreaks(
+      managerName
+    );
+
+
+  /* =========================
+     SEASON TABLE
+  ========================= */
+
   const seasonRows =
     seasonHistory.length
       ? seasonHistory
@@ -805,6 +1199,12 @@ function renderManagerProfile(
                 </td>
 
                 <td>
+                  ${fmt(
+                    season.pointsAgainst
+                  )}
+                </td>
+
+                <td>
                   ${finishForSeason(
                     managerName,
                     season.season
@@ -818,14 +1218,77 @@ function renderManagerProfile(
       : `
           <tr>
             <td
-              colspan="5"
+              colspan="6"
               class="empty"
             >
-              No historical season
-              data available yet.
+              No historical season data available yet.
             </td>
           </tr>
         `;
+
+
+  /* =========================
+     HEAD TO HEAD TABLE
+  ========================= */
+
+  const h2hRows =
+    h2h.length
+      ? h2h
+          .map(
+            (row) => `
+              <tr>
+
+                <td>
+                  <strong>
+                    ${esc(
+                      row.opponent
+                    )}
+                  </strong>
+                </td>
+
+                <td class="record">
+                  ${row.wins}-${row.losses}${
+                    row.ties
+                      ? `-${row.ties}`
+                      : ""
+                  }
+                </td>
+
+                <td>
+                  ${row.games}
+                </td>
+
+                <td class="pf">
+                  ${fmt(
+                    row.pointsFor
+                  )}
+                </td>
+
+                <td>
+                  ${fmt(
+                    row.pointsAgainst
+                  )}
+                </td>
+
+              </tr>
+            `
+          )
+          .join("")
+      : `
+          <tr>
+            <td
+              colspan="5"
+              class="empty"
+            >
+              No head-to-head data available yet.
+            </td>
+          </tr>
+        `;
+
+
+  /* =========================
+     PROFILE HTML
+  ========================= */
 
   container.innerHTML = `
 
@@ -851,6 +1314,8 @@ function renderManagerProfile(
 
     </div>
 
+
+    <!-- PRIMARY CAREER STATS -->
 
     <div
       style="
@@ -897,7 +1362,8 @@ function renderManagerProfile(
         </div>
 
         <p>
-          Career winning rate
+          ${totalGames(career)}
+          career games
         </p>
 
       </article>
@@ -906,12 +1372,12 @@ function renderManagerProfile(
       <article class="panel">
 
         <span class="eyebrow">
-          Career Points
+          Career Points For
         </span>
 
         <div
           class="record-value"
-          style="font-size:48px"
+          style="font-size:45px"
         >
           ${fmt(
             career.pointsFor
@@ -919,7 +1385,7 @@ function renderManagerProfile(
         </div>
 
         <p>
-          Total points scored
+          Total PF
         </p>
 
       </article>
@@ -928,15 +1394,20 @@ function renderManagerProfile(
       <article class="panel">
 
         <span class="eyebrow">
-          Championships
+          Career Points Against
         </span>
 
-        <div class="record-value">
-          ${medals.championships}
+        <div
+          class="record-value"
+          style="font-size:45px"
+        >
+          ${fmt(
+            career.pointsAgainst
+          )}
         </div>
 
         <p>
-          🏆 CGA titles
+          Total PA
         </p>
 
       </article>
@@ -944,15 +1415,34 @@ function renderManagerProfile(
     </div>
 
 
+    <!-- MEDALS -->
+
     <div
       style="
         display:grid;
         grid-template-columns:
-        repeat(auto-fit,minmax(180px,1fr));
+        repeat(auto-fit,minmax(170px,1fr));
         gap:18px;
         margin-bottom:24px;
       "
     >
+
+      <article class="panel">
+
+        <span class="eyebrow">
+          Championships
+        </span>
+
+        <div class="memorial-stat">
+          ${medals.championships}
+        </div>
+
+        <p>
+          🥇 CGA titles
+        </p>
+
+      </article>
+
 
       <article class="panel">
 
@@ -965,7 +1455,7 @@ function renderManagerProfile(
         </div>
 
         <p>
-          🥈 Second-place finishes
+          🥈 Second place
         </p>
 
       </article>
@@ -982,7 +1472,7 @@ function renderManagerProfile(
         </div>
 
         <p>
-          🥉 Third-place finishes
+          🥉 Third place
         </p>
 
       </article>
@@ -991,7 +1481,7 @@ function renderManagerProfile(
       <article class="panel">
 
         <span class="eyebrow">
-          Total Podiums
+          Podiums
         </span>
 
         <div class="memorial-stat">
@@ -1024,9 +1514,273 @@ function renderManagerProfile(
     </div>
 
 
+    <!-- ADVANCED CAREER -->
+
+    <div
+      style="
+        display:grid;
+        grid-template-columns:
+        repeat(auto-fit,minmax(200px,1fr));
+        gap:18px;
+        margin-bottom:24px;
+      "
+    >
+
+      <article class="panel">
+
+        <span class="eyebrow">
+          Avg. Points / Season
+        </span>
+
+        <div
+          class="record-value"
+          style="font-size:44px"
+        >
+          ${fmt(
+            avgSeasonPoints
+          )}
+        </div>
+
+        <p>
+          Across recorded seasons
+        </p>
+
+      </article>
+
+
+      <article class="panel">
+
+        <span class="eyebrow">
+          Best Season
+        </span>
+
+        <div
+          class="record-value"
+          style="font-size:42px"
+        >
+          ${
+            best
+              ? best.season
+              : "—"
+          }
+        </div>
+
+        <p>
+          ${
+            best
+              ? `${best.wins}-${best.losses}${
+                  best.ties
+                    ? `-${best.ties}`
+                    : ""
+                } · ${fmt(
+                  best.pointsFor
+                )} PF`
+              : "No data"
+          }
+        </p>
+
+      </article>
+
+
+      <article class="panel">
+
+        <span class="eyebrow">
+          Worst Season
+        </span>
+
+        <div
+          class="record-value"
+          style="font-size:42px"
+        >
+          ${
+            worst
+              ? worst.season
+              : "—"
+          }
+        </div>
+
+        <p>
+          ${
+            worst
+              ? `${worst.wins}-${worst.losses}${
+                  worst.ties
+                    ? `-${worst.ties}`
+                    : ""
+                } · ${fmt(
+                  worst.pointsFor
+                )} PF`
+              : "No data"
+          }
+        </p>
+
+      </article>
+
+
+      <article class="panel">
+
+        <span class="eyebrow">
+          Highest Scoring Season
+        </span>
+
+        <div
+          class="record-value"
+          style="font-size:42px"
+        >
+          ${
+            highScoring
+              ? highScoring.season
+              : "—"
+          }
+        </div>
+
+        <p>
+          ${
+            highScoring
+              ? `${fmt(
+                  highScoring.pointsFor
+                )} PF`
+              : "No data"
+          }
+        </p>
+
+      </article>
+
+    </div>
+
+
+    <!-- STREAKS / GAME RECORDS -->
+
+    <div
+      style="
+        display:grid;
+        grid-template-columns:
+        repeat(auto-fit,minmax(210px,1fr));
+        gap:18px;
+        margin-bottom:24px;
+      "
+    >
+
+      <article class="panel">
+
+        <span class="eyebrow">
+          Longest Win Streak
+        </span>
+
+        <div class="record-value">
+          ${streaks.longestWins}
+        </div>
+
+        <p>
+          Consecutive wins
+        </p>
+
+      </article>
+
+
+      <article class="panel">
+
+        <span class="eyebrow">
+          Longest Losing Streak
+        </span>
+
+        <div class="record-value">
+          ${streaks.longestLosses}
+        </div>
+
+        <p>
+          Consecutive losses
+        </p>
+
+      </article>
+
+
+      <article class="panel">
+
+        <span class="eyebrow">
+          Biggest Win
+        </span>
+
+        <div
+          class="record-value"
+          style="font-size:42px"
+        >
+          ${
+            biggest
+              ? fmt1(
+                  biggest.margin
+                )
+              : "—"
+          }
+        </div>
+
+        <p>
+          ${
+            biggest
+              ? `vs ${esc(
+                  biggest.opponent
+                )} · ${fmt1(
+                  biggest.managerScore
+                )}-${fmt1(
+                  biggest.opponentScore
+                )} · Week ${
+                  biggest.week
+                }, ${
+                  biggest.season
+                }`
+              : "No recorded win"
+          }
+        </p>
+
+      </article>
+
+
+      <article class="panel">
+
+        <span class="eyebrow">
+          Closest Win
+        </span>
+
+        <div
+          class="record-value"
+          style="font-size:42px"
+        >
+          ${
+            closest
+              ? fmt1(
+                  closest.margin
+                )
+              : "—"
+          }
+        </div>
+
+        <p>
+          ${
+            closest
+              ? `vs ${esc(
+                  closest.opponent
+                )} · ${fmt1(
+                  closest.managerScore
+                )}-${fmt1(
+                  closest.opponentScore
+                )} · Week ${
+                  closest.week
+                }, ${
+                  closest.season
+                }`
+              : "No recorded win"
+          }
+        </p>
+
+      </article>
+
+    </div>
+
+
     ${
       currentTeam
         ? `
+          <!-- CURRENT TEAM -->
+
           <div
             class="panel"
             style="margin-bottom:24px"
@@ -1086,7 +1840,12 @@ function renderManagerProfile(
     }
 
 
-    <div class="panel">
+    <!-- SEASON HISTORY -->
+
+    <div
+      class="panel"
+      style="margin-bottom:24px"
+    >
 
       <span class="eyebrow">
         Career Timeline
@@ -1106,12 +1865,50 @@ function renderManagerProfile(
               <th>Team</th>
               <th>Record</th>
               <th>PF</th>
+              <th>PA</th>
               <th>Finish</th>
             </tr>
           </thead>
 
           <tbody>
             ${seasonRows}
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+    <!-- HEAD TO HEAD -->
+
+    <div class="panel">
+
+      <span class="eyebrow">
+        Rivalry Database
+      </span>
+
+      <h2>
+        Head-To-Head Records
+      </h2>
+
+      <div class="table-wrap">
+
+        <table class="standings-table">
+
+          <thead>
+            <tr>
+              <th>Opponent</th>
+              <th>Record</th>
+              <th>Games</th>
+              <th>PF</th>
+              <th>PA</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            ${h2hRows}
           </tbody>
 
         </table>
@@ -1155,9 +1952,7 @@ function renderManagerProfile(
    SCHEDULE
 ========================= */
 
-function renderSchedule(
-  matches
-) {
+function renderSchedule(matches) {
   const grid =
     document.getElementById(
       "schedule-grid"
@@ -1197,8 +1992,7 @@ function renderSchedule(
           const games =
             matches.filter(
               (match) =>
-                match.week ===
-                week
+                match.week === week
             );
 
           const cards =
@@ -1273,9 +2067,7 @@ function renderSchedule(
    HOME
 ========================= */
 
-function renderHome(
-  data
-) {
+function renderHome(data) {
   const teams =
     data.teams || [];
 
@@ -1302,7 +2094,6 @@ function renderHome(
   if (matchup) {
     if (firstUpcoming) {
       matchup.innerHTML = `
-
         <span class="eyebrow">
           Week ${firstUpcoming.week}
           · ESPN
@@ -1338,6 +2129,20 @@ function renderHome(
           Full schedule →
         </a>
       `;
+    } else {
+      matchup.innerHTML = `
+        <span class="eyebrow">
+          Live Schedule
+        </span>
+
+        <h2>
+          Featured Matchup
+        </h2>
+
+        <p>
+          No matchup data yet.
+        </p>
+      `;
     }
   }
 
@@ -1346,7 +2151,6 @@ function renderHome(
       teams[0];
 
     snapshot.innerHTML = `
-
       <span class="eyebrow">
         Live ESPN Feed
       </span>
@@ -1393,9 +2197,7 @@ function renderHome(
    LEAGUE RENDER
 ========================= */
 
-function renderLeague(
-  data
-) {
+function renderLeague(data) {
   leagueData = data;
 
   const teams =
@@ -1463,9 +2265,7 @@ function renderLeague(
    OFFLINE
 ========================= */
 
-function renderOffline(
-  message
-) {
+function renderOffline(message) {
   const status =
     document.getElementById(
       "data-status"
@@ -1532,9 +2332,7 @@ fetch(
   }
 )
   .then(
-    async (
-      response
-    ) => {
+    async (response) => {
       const data =
         await response.json();
 
